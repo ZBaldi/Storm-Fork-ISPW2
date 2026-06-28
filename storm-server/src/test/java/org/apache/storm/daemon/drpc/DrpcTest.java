@@ -23,7 +23,7 @@ import static org.mockito.Mockito.mock;
 
 /** Test class which runs unit test on DRPC class */
 @RunWith(value = MockitoJUnitRunner.class)
-public class DRPCTest {
+public class DrpcTest {
 
     private final IAuthorizer mockAuthKo = Mockito.mock(IAuthorizer.class);
     private final IAuthorizer mockAuthOk = Mockito.mock(IAuthorizer.class);
@@ -534,7 +534,7 @@ public class DRPCTest {
     public void executeValidFunctionNameValidFuncArgsValidFactoryInvalidStateThrowsNullPointerException() {
 
         Assert.assertThrows(NullPointerException.class, () -> {
-            RequestFactory<OutstandingRequest> factory = mock(RequestFactory.class);
+            RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
             DRPCRequest expectedRequest = new DRPCRequest("args", "1");
             OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest("try", expectedRequest);
             Mockito.lenient().when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
