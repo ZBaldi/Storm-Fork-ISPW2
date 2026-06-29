@@ -435,7 +435,7 @@ public class DrpcTest {
         Assert.assertThrows(AuthorizationException.class, () -> DRPC.checkAuthorization(ReqContext.context(), mockAuthKo, "execute", "try"));
     }
 
-    /** Test checkAuthorization method with valid reqContext, IAuthorizer = null , operation = "execute", function = "try". Expected = false */
+    /** Test checkAuthorization method with not valid reqContext, IAuthorizer = null , operation = "execute", function = "try". Expected = false */
     @Test
     public void checkAuthorizationNotValidContextNullAuthValidOperationValidFunctionShouldPass() {
 
