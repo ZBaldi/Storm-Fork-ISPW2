@@ -132,7 +132,7 @@
         <testcontainers.version>1.21.4</testcontainers.version>
 
         <java.unit.test.exclude.groups>PerformanceTest</java.unit.test.exclude.groups>
-        <skipITs>true</skipITs>
+        <skipITs>false</skipITs>
 
         <maven-resolver.version>1.9.27</maven-resolver.version>
         <maven.version>3.9.16</maven.version>
@@ -1021,6 +1021,11 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>1.17.0</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.15.0</version>
@@ -1052,10 +1057,9 @@
                     <configuration>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
                         <includes>
-                            <include>**/*.java</include>
+                            <include>**/*IT.java</include>
                         </includes>
-                        <groups>IntegrationTest</groups>
-                        <argLine>-Xmx1536m</argLine>
+                        <argLine>@{argLine} -Xmx1536m</argLine>
                     </configuration>
                     <executions>
                         <execution>
@@ -1287,6 +1291,75 @@
 
 
         <plugins>
+            <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.13</version>
+                    <executions>
+<!--                        <execution>-->
+<!--                            <id>prepare-agent</id>-->
+<!--                            <goals>-->
+<!--                                <goal>prepare-agent</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+<!--                        <execution>-->
+<!--                            <id>report</id>-->
+<!--                            <phase>verify</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>report</goal>-->
+<!--                            </goals>-->
+<!--                        </execution>-->
+                        <!-- ✅ UNIT TEST -->
+                        <execution>
+                            <id>prepare-agent</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <!-- ✅ INTEGRATION TEST -->
+                        <execution>
+                            <id>prepare-agent-integration</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                            <configuration>
+                                <destFile>${project.build.directory}/jacoco-it.exec</destFile>
+                            </configuration>
+                        </execution>
+                        <!-- ✅ MERGE FILE -->
+                        <execution>
+                            <id>merge</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>merge</goal>
+                            </goals>
+                            <configuration>
+                                <fileSets>
+                                    <fileSet>
+                                        <directory>${project.build.directory}</directory>
+                                        <includes>
+                                            <include>jacoco.exec</include>
+                                            <include>jacoco-it.exec</include>
+                                        </includes>
+                                    </fileSet>
+                                </fileSets>
+                                <destFile>${project.build.directory}/jacoco-merged.exec</destFile>
+                            </configuration>
+                        </execution>
+                        <!-- ✅ REPORT FINALE -->
+                        <execution>
+                            <id>report</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                            <configuration>
+                                <dataFile>${project.build.directory}/jacoco-merged.exec</dataFile>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

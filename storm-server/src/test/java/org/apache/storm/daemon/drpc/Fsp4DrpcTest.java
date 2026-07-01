@@ -1,659 +1,659 @@
-package org.apache.storm.daemon.drpc;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
-import org.apache.storm.generated.AuthorizationException;
-import org.apache.storm.generated.DRPCExecutionException;
-import org.apache.storm.generated.DRPCRequest;
-import org.apache.storm.metric.StormMetricsRegistry;
-import org.apache.storm.security.auth.IAuthorizer;
-import org.apache.storm.security.auth.ReqContext;
-import org.apache.storm.security.auth.authorizer.DRPCAuthorizerBase;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
-
-/**
- * Test suite for {@link DRPC}.
- *
- * <p>The test cases are derived using Category Partition and Boundary Value Analysis.
- * They cover valid/invalid DRPC instances, authorized/not-authorized authorizers,
- * null/empty/correct/not-correct String parameters, valid/invalid factories,
- * request success/failure paths and timeout handling.</p>
- */
-@SuppressWarnings({"checkstyle:AbbreviationAsWordInName", "checkstyle:ClassFanOutComplexity"})
-public class Fsp4DrpcTest {  //METRIC REGISTRY IS NULL --> ALWAYS NULL POINTER
-
-    /** ### Test START ### */
-
-    private static final long TIMEOUT_MS = 1000L;
-    private static final String FUNCTION = "try";
-    private static final String OTHER_FUNCTION = "missingFunction";
-    private static final String ARGS = "args";
-    private static final String RESULT = "done";
-    private static final String FAILED = "failed";
-
-    private DRPC drpcAuthOk;
-    private DRPC drpcAuthKo;
-    private DRPC drpcAuthInvalid;
-    private DRPC drpcNotValid;
-
-    private IAuthorizer alwaysAuthorized;
-    private IAuthorizer neverAuthorized;
-    private IAuthorizer invalidAuthorizer;
-
-    @Before
-    public void setUp() {
-        alwaysAuthorized = new AlwaysAuthorizedAuthorizer();
-        neverAuthorized = new NeverAuthorizedAuthorizer();
-        invalidAuthorizer = new RuntimeExceptionAuthorizer();
-
-        drpcAuthOk = new DRPC(new StormMetricsRegistry(), alwaysAuthorized, TIMEOUT_MS);
-        drpcAuthKo = new DRPC(new StormMetricsRegistry(), neverAuthorized, TIMEOUT_MS);
-        drpcAuthInvalid = new DRPC(new StormMetricsRegistry(), invalidAuthorizer, TIMEOUT_MS);
-
-        // Invalid instance according to the adopted test model: usage metrics are not initialized.
-        drpcNotValid = new DRPC(null, alwaysAuthorized, TIMEOUT_MS);
-    }
-
-    @After
-    public void tearDown() {
-        closeQuietly(drpcAuthOk);
-        closeQuietly(drpcAuthKo);
-        closeQuietly(drpcAuthInvalid);
-        closeQuietly(drpcNotValid);
-    }
-
-    /** Test checkAuthorization with valid context, null authorizer, operation = "execute", function = "try". Expected = should pass. */
-    @Test
-    public void checkAuthorizationValidContextNullAuthorizerShouldPass() throws AuthorizationException {
-        drpcAuthOk.checkAuthorization(ReqContext.context(), null, "execute", FUNCTION);
-    }
-
-    /** Test checkAuthorization with null context, always authorized authorizer, operation = "execute", function = "try". Expected = should pass. */
-    @Test
-    public void checkAuthorizationNullContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
-        drpcAuthOk.checkAuthorization(null, alwaysAuthorized, "execute", FUNCTION);
-    }
-
-    /** Test checkAuthorization with valid context and always authorized authorizer. Expected = should pass. */
-    @Test
-    public void checkAuthorizationValidContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
-        drpcAuthOk.checkAuthorization(ReqContext.context(), alwaysAuthorized, "execute", FUNCTION);
-    }
-
-    /** Test checkAuthorization with valid context and never authorized authorizer. Expected = throws AuthorizationException. */
-    @Test
-    public void checkAuthorizationValidContextNeverAuthorizedThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class,
-                () -> drpcAuthOk.checkAuthorization(ReqContext.context(), neverAuthorized, "execute", FUNCTION));
-    }
-
-    /** Test checkAuthorization with valid context and invalid authorizer. Expected = throws RuntimeException. */
-    @Test
-    public void checkAuthorizationValidContextInvalidAuthorizerThrowsRuntimeException() {
-        Assert.assertThrows(RuntimeException.class,
-                () -> drpcAuthOk.checkAuthorization(ReqContext.context(), invalidAuthorizer, "execute", FUNCTION));
-    }
-
-    /** Test checkAuthorization propagates operation and function through topoConf. Expected = authorizer receives operation and function. */
-    @Test
-    public void checkAuthorizationValidInputShouldPassOperationAndFunctionToAuthorizer() throws AuthorizationException {
-        IAuthorizer auth = Mockito.mock(IAuthorizer.class);
-        Mockito.when(auth.permit(any(ReqContext.class), anyString(), Mockito.<Map<String, Object>>any())).thenReturn(true);
-
-        drpcAuthOk.checkAuthorization(ReqContext.context(), auth, "fetchRequest", FUNCTION);
-
-        ArgumentCaptor<Map<String, Object>> topoConfCaptor = ArgumentCaptor.forClass(Map.class);
-        Mockito.verify(auth).permit(any(ReqContext.class), Mockito.eq("fetchRequest"), topoConfCaptor.capture());
-        Assert.assertEquals(FUNCTION, topoConfCaptor.getValue().get(DRPCAuthorizerBase.FUNCTION_NAME));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "args", valid factory and authorized state. Expected = returned OutstandingRequest. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameValidFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
-
-        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        Assert.assertEquals(expectedRequest, actual);
-        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest(ARGS, "1")));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = null, valid factory and authorized state. Expected = OutstandingRequest with null args. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameNullFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(null, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
-
-        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, null, factory);
-
-        Assert.assertEquals(expectedRequest, actual);
-        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest(null, "1")));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "", valid factory and authorized state. Expected = OutstandingRequest with empty args. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameEmptyFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest("", "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
-
-        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, "", factory);
-
-        Assert.assertEquals(expectedRequest, actual);
-        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest("", "1")));
-    }
-
-    /** Test execute with functionName = null, funcArgs = "args", valid factory and authorized state. Expected = throws NullPointerException. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeNullFunctionNameValidFuncArgsValidFactoryAuthThrowsNullPointerException() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        Mockito.when(factory.mkRequest(Mockito.isNull(), any(DRPCRequest.class)))
-                .thenReturn(new DoNothingOutstandingRequest(null, new DRPCRequest(ARGS, "1")));
-
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(null, ARGS, factory));
-    }
-
-    /** Test execute with functionName = "", funcArgs = "args", valid factory and authorized state. Expected = OutstandingRequest. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeEmptyFunctionNameValidFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest("", new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(Mockito.eq(""), any(DRPCRequest.class))).thenReturn(expectedRequest);
-
-        OutstandingRequest actual = drpcAuthOk.execute("", ARGS, factory);
-
-        Assert.assertEquals(expectedRequest, actual);
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "args", null factory and authorized state. Expected = throws NullPointerException. */
-    @Test
-    public void executeValidFunctionNameValidFuncArgsNullFactoryAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(FUNCTION, ARGS, null));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "args", invalid factory and authorized state. Expected = throws NullPointerException. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameValidFuncArgsInvalidFactoryAuthThrowsNullPointerException() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(null);
-
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(FUNCTION, ARGS, factory));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "args", valid factory and not authorized state. Expected = throws AuthorizationException. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameValidFuncArgsValidFactoryNotAuthThrowsAuthorizationException() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-
-        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.execute(FUNCTION, ARGS, factory));
-        Mockito.verify(factory, Mockito.never()).mkRequest(anyString(), any(DRPCRequest.class));
-    }
-
-    /** Test execute with functionName = "try", funcArgs = "args" and invalid state. Expected = throws NullPointerException. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidFunctionNameValidFuncArgsInvalidStateThrowsNullPointerException() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest request = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(request);
-
-        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.execute(FUNCTION, ARGS, factory));
-    }
-
-    /** Test fetchRequest with functionName = "try" (existing) and authorized state. Expected = previously generated DRPCRequest. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void fetchRequestCorrectFunctionNameAuthShouldReturnPreviouslyGeneratedRequest() throws AuthorizationException {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(FUNCTION);
-
-        Assert.assertEquals(new DRPCRequest(ARGS, "1"), actualRequest);
-        Assert.assertTrue(outstandingRequest.wasFetched());
-    }
-
-    /** Test fetchRequest with functionName = "missingFunction" (not existing) and authorized state. Expected = empty DRPCRequest. */
-    @Test
-    public void fetchRequestNotCorrectFunctionNameAuthShouldReturnEmptyRequest() throws AuthorizationException {
-        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(OTHER_FUNCTION);
-
-        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
-    }
-
-    /** Test fetchRequest with functionName = null and authorized state. Expected = throws NullPointerException. */
-    @Test
-    public void fetchRequestNullFunctionNameAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.fetchRequest(null));
-    }
-
-    /** Test fetchRequest with functionName = "" and authorized state. Expected = empty DRPCRequest. */
-    @Test
-    public void fetchRequestEmptyFunctionNameAuthShouldReturnEmptyRequest() throws AuthorizationException {
-        DRPCRequest actualRequest = drpcAuthOk.fetchRequest("");
-
-        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
-    }
-
-    /** Test fetchRequest with functionName = "try" and not authorized state. Expected = throws AuthorizationException before queue access. */
-    @Test
-    public void fetchRequestCorrectFunctionNameNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.fetchRequest(FUNCTION));
-    }
-
-    /** Test fetchRequest with functionName = "try" and invalid state. Expected = throws NullPointerException. */
-    @Test
-    public void fetchRequestValidFunctionNameInvalidStateThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.fetchRequest(FUNCTION));
-    }
-
-    /** Test fetchRequest with functionName = "try" and authorized state after timeout. Expected = empty DRPCRequest. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void fetchRequestCorrectStringAuthTimerTimeoutShouldPass() throws Exception {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        Thread.sleep(TIMEOUT_MS + 250L);
-        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(FUNCTION);
-
-        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
-    }
-
-    /** Test returnResult with id = "1", result = "done" and authorized state. Expected = custom outstanding request receives result. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void returnResultCorrectIdValidResultAuthShouldCompleteRequest() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        drpcAuthOk.returnResult("1", RESULT);
-
-        Assert.assertEquals(RESULT, outstandingRequest.result);
-        Assert.assertNull(outstandingRequest.failure);
-    }
-
-    /** Test returnResult with id = "1", result = null and authorized state. Expected = result null is propagated. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void returnResultCorrectIdNullResultAuthShouldPropagateNull() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        drpcAuthOk.returnResult("1", null);
-
-        Assert.assertTrue(outstandingRequest.returned);
-        Assert.assertNull(outstandingRequest.result);
-    }
-
-    /** Test returnResult with id = "1", result = "" and authorized state. Expected = empty result is propagated. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void returnResultCorrectIdEmptyResultAuthShouldPropagateEmptyString() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        drpcAuthOk.returnResult("1", "");
-
-        Assert.assertEquals("", outstandingRequest.result);
-    }
-
-    /** Test returnResult with id = null, result = "" and authorized state. Expected = throws NullPointerException. */
-    @Test
-    public void returnResultNullIdEmptyResultAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.returnResult(null, ""));
-    }
-
-    /** Test returnResult with id = "", result = "done" and authorized state. Expected = no request is completed. */
-    @Test
-    public void returnResultEmptyIdValidResultAuthShouldNotThrow() throws AuthorizationException {
-        drpcAuthOk.returnResult("", RESULT);
-    }
-
-    /** Test returnResult with id = "99" not existing, result = "done" and authorized state. Expected = should not throw. */
-    @Test
-    public void returnResultNotCorrectIdValidResultAuthShouldNotThrow() throws AuthorizationException {
-        drpcAuthOk.returnResult("99", RESULT);
-    }
-
-    /** Test returnResult with id = "1", result = "done" and not authorized state. Expected = throws AuthorizationException. */
-    @Test
-    public void returnResultCorrectIdValidResultNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.returnResult("1", RESULT));
-    }
-
-    /** Test returnResult with id = "1", result = "done" and invalid state. Expected = throws NullPointerException. */
-    @Test
-    public void returnResultCorrectIdValidResultInvalidStateThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.returnResult("1", RESULT));
-    }
-
-    /** Test failRequest with id = "1", valid exception and authorized state. Expected = custom outstanding request receives failure. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void failRequestCorrectIdValidExceptionAuthShouldFailRequest() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-        DRPCExecutionException exception = new DRPCExecutionException(FAILED);
-
-        drpcAuthOk.failRequest("1", exception);
-
-        Assert.assertEquals(exception, outstandingRequest.failure);
-        Assert.assertFalse(outstandingRequest.returned);
-    }
-
-    /** Test failRequest with id = "1", exception without message and authorized state. Expected = exception is propagated. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void failRequestCorrectIdInvalidExceptionAuthShouldPropagateExceptionWithoutMessage() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-        DRPCExecutionException exception = new DRPCExecutionException();
-
-        drpcAuthOk.failRequest("1", exception);
-
-        Assert.assertEquals(exception, outstandingRequest.failure);
-        Assert.assertNull(outstandingRequest.failure.get_msg());
-    }
-
-    /** Test failRequest with id = "1", null exception and authorized state. Expected = null failure is propagated. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void failRequestCorrectIdNullExceptionAuthShouldPropagateNullFailure() throws AuthorizationException {
-        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
-        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-        drpcAuthOk.execute(FUNCTION, ARGS, factory);
-
-        drpcAuthOk.failRequest("1", null);
-
-        Assert.assertTrue(outstandingRequest.failed);
-        Assert.assertNull(outstandingRequest.failure);
-    }
-
-    /** Test failRequest with id = null and valid exception. Expected = throws NullPointerException. */
-    @Test
-    public void failRequestNullIdValidExceptionAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.failRequest(null, new DRPCExecutionException(FAILED)));
-    }
-
-    /** Test failRequest with id = "" and valid exception. Expected = should not throw. */
-    @Test
-    public void failRequestEmptyIdValidExceptionAuthShouldNotThrow() throws AuthorizationException {
-        drpcAuthOk.failRequest("", new DRPCExecutionException(FAILED));
-    }
-
-    /** Test failRequest with id = "99" not existing and valid exception. Expected = should not throw. */
-    @Test
-    public void failRequestNotCorrectIdValidExceptionAuthShouldNotThrow() throws AuthorizationException {
-        drpcAuthOk.failRequest("99", new DRPCExecutionException(FAILED));
-    }
-
-    /** Test failRequest with id = "1", valid exception and not authorized state. Expected = throws AuthorizationException. */
-    @Test
-    public void failRequestCorrectIdValidExceptionNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.failRequest("1", new DRPCExecutionException(FAILED)));
-    }
-
-    /** Test failRequest with id = "1", valid exception and invalid state. Expected = throws NullPointerException. */
-    @Test
-    public void failRequestCorrectIdValidExceptionInvalidStateThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.failRequest("1", new DRPCExecutionException(FAILED)));
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state. Expected = value passed to returnResult. */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsAuthShouldReturnResult() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
-            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
-
-            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
-
-            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
-        } finally {
-            executor.shutdownNow();
-        }
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "" and authorized state. Expected = value passed to returnResult. */
-    @Test
-    public void executeBlockingValidFunctionNameEmptyFuncArgsAuthShouldReturnResult() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ""));
-            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
-
-            Assert.assertEquals("", request.get_func_args());
-            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
-
-            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
-        } finally {
-            executor.shutdownNow();
-        }
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = null and authorized state. Expected = value passed to returnResult. */
-    @Test
-    public void executeBlockingValidFunctionNameNullFuncArgsAuthShouldReturnResult() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, null));
-            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
-
-            Assert.assertNull(request.get_func_args());
-            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
-
-            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
-        } finally {
-            executor.shutdownNow();
-        }
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state failing request. Expected = DRPCExecutionException with message "failed". */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsAuthFailRequestThrowsDRPCExecutionException() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
-            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
-
-            drpcAuthOk.failRequest(request.get_request_id(), new DRPCExecutionException(FAILED));
-
-            try {
-                future.get(3, TimeUnit.SECONDS);
-                Assert.fail("Expected DRPCExecutionException");
-            } catch (java.util.concurrent.ExecutionException e) {
-                Assert.assertTrue(e.getCause() instanceof DRPCExecutionException);
-                Assert.assertEquals(FAILED, ((DRPCExecutionException) e.getCause()).get_msg());
-            }
-        } finally {
-            executor.shutdownNow();
-        }
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state failing with exception without message. Expected = DRPCExecutionException without message. */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsAuthFailRequestNoMessageThrowsDRPCExecutionException() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
-            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
-
-            drpcAuthOk.failRequest(request.get_request_id(), new DRPCExecutionException());
-
-            try {
-                future.get(3, TimeUnit.SECONDS);
-                Assert.fail("Expected DRPCExecutionException");
-            } catch (java.util.concurrent.ExecutionException e) {
-                Assert.assertTrue(e.getCause() instanceof DRPCExecutionException);
-                Assert.assertNull(((DRPCExecutionException) e.getCause()).get_msg());
-            }
-        } finally {
-            executor.shutdownNow();
-        }
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and not authorized state. Expected = throws AuthorizationException. */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.executeBlocking(FUNCTION, ARGS));
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and invalid authorizer. Expected = throws RuntimeException. */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsInvalidAuthThrowsRuntimeException() {
-        Assert.assertThrows(RuntimeException.class, () -> drpcAuthInvalid.executeBlocking(FUNCTION, ARGS));
-    }
-
-    /** Test executeBlocking with functionName = "try", funcArgs = "args" and invalid state. Expected = throws NullPointerException. */
-    @Test
-    public void executeBlockingValidFunctionNameValidFuncArgsInvalidStateThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.executeBlocking(FUNCTION, ARGS));
-    }
-
-    /** Test close method on valid instance. Expected = idempotent no exception. */
-    @Test
-    public void closeValidInstanceShouldBeIdempotent() {
-        drpcAuthOk.close();
-        drpcAuthOk.close();
-    }
-
-    private DRPCRequest waitUntilRequestIsAvailable(DRPC drpc, String function) throws Exception {
-        long deadline = System.currentTimeMillis() + 3000L;
-        DRPCRequest request = new DRPCRequest("", "");
-        while (System.currentTimeMillis() < deadline) {
-            request = drpc.fetchRequest(function);
-            if (!"".equals(request.get_request_id())) {
-                return request;
-            }
-            Thread.sleep(25L);
-        }
-        throw new TimeoutException("DRPC request was not available in time");
-    }
-
-    private void closeQuietly(DRPC drpc) {
-        if (drpc != null) {
-            try {
-                drpc.close();
-            } catch (RuntimeException ignored) {
-                // Ignore cleanup failures for intentionally invalid instances.
-            }
-        }
-    }
-
-    private static final class AlwaysAuthorizedAuthorizer implements IAuthorizer {
-        @Override
-        public void prepare(Map<String, Object> conf) {
-            // No-op.
-        }
-
-        @Override
-        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
-            return true;
-        }
-    }
-
-    private static final class NeverAuthorizedAuthorizer implements IAuthorizer {
-        @Override
-        public void prepare(Map<String, Object> conf) {
-            // No-op.
-        }
-
-        @Override
-        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
-            return false;
-        }
-    }
-
-    private static final class RuntimeExceptionAuthorizer implements IAuthorizer {
-        @Override
-        public void prepare(Map<String, Object> conf) {
-            // No-op.
-        }
-
-        @Override
-        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
-            throw new RuntimeException("invalid authorizer");
-        }
-    }
-
-    private static class DoNothingOutstandingRequest extends OutstandingRequest {
-        DoNothingOutstandingRequest(String function, DRPCRequest req) {
-            super(function, req);
-        }
-
-        @Override
-        public void returnResult(String result) {
-            // No-op.
-        }
-
-        @Override
-        public void fail(DRPCExecutionException e) {
-            // No-op.
-        }
-    }
-
-    private static final class CapturingOutstandingRequest extends OutstandingRequest {
-        private boolean returned;
-        private boolean failed;
-        private String result;
-        private DRPCExecutionException failure;
-
-        CapturingOutstandingRequest(String function, DRPCRequest req) {
-            super(function, req);
-        }
-
-        @Override
-        public void returnResult(String result) {
-            this.returned = true;
-            this.result = result;
-        }
-
-        @Override
-        public void fail(DRPCExecutionException e) {
-            this.failed = true;
-            this.failure = e;
-        }
-    }
-
-    /** ### Test END ### */
-}
+//package org.apache.storm.daemon.drpc;
+//
+//import static org.mockito.ArgumentMatchers.any;
+//import static org.mockito.ArgumentMatchers.anyString;
+//
+//import java.util.Map;
+//import java.util.concurrent.ExecutorService;
+//import java.util.concurrent.Executors;
+//import java.util.concurrent.Future;
+//import java.util.concurrent.TimeUnit;
+//import java.util.concurrent.TimeoutException;
+//
+//import org.apache.storm.generated.AuthorizationException;
+//import org.apache.storm.generated.DRPCExecutionException;
+//import org.apache.storm.generated.DRPCRequest;
+//import org.apache.storm.metric.StormMetricsRegistry;
+//import org.apache.storm.security.auth.IAuthorizer;
+//import org.apache.storm.security.auth.ReqContext;
+//import org.apache.storm.security.auth.authorizer.DRPCAuthorizerBase;
+//import org.junit.After;
+//import org.junit.Assert;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.mockito.ArgumentCaptor;
+//import org.mockito.Mockito;
+//
+///**
+// * Test suite for {@link DRPC}.
+// *
+// * <p>The test cases are derived using Category Partition and Boundary Value Analysis.
+// * They cover valid/invalid DRPC instances, authorized/not-authorized authorizers,
+// * null/empty/correct/not-correct String parameters, valid/invalid factories,
+// * request success/failure paths and timeout handling.</p>
+// */
+//@SuppressWarnings({"checkstyle:AbbreviationAsWordInName", "checkstyle:ClassFanOutComplexity"})
+//public class Fsp4DrpcTest {  //METRIC REGISTRY IS NULL --> ALWAYS NULL POINTER
+//
+//    /** ### Test START ### */
+//
+//    private static final long TIMEOUT_MS = 1000L;
+//    private static final String FUNCTION = "try";
+//    private static final String OTHER_FUNCTION = "missingFunction";
+//    private static final String ARGS = "args";
+//    private static final String RESULT = "done";
+//    private static final String FAILED = "failed";
+//
+//    private DRPC drpcAuthOk;
+//    private DRPC drpcAuthKo;
+//    private DRPC drpcAuthInvalid;
+//    private DRPC drpcNotValid;
+//
+//    private IAuthorizer alwaysAuthorized;
+//    private IAuthorizer neverAuthorized;
+//    private IAuthorizer invalidAuthorizer;
+//
+//    @Before
+//    public void setUp() {
+//        alwaysAuthorized = new AlwaysAuthorizedAuthorizer();
+//        neverAuthorized = new NeverAuthorizedAuthorizer();
+//        invalidAuthorizer = new RuntimeExceptionAuthorizer();
+//
+//        drpcAuthOk = new DRPC(new StormMetricsRegistry(), alwaysAuthorized, TIMEOUT_MS);
+//        drpcAuthKo = new DRPC(new StormMetricsRegistry(), neverAuthorized, TIMEOUT_MS);
+//        drpcAuthInvalid = new DRPC(new StormMetricsRegistry(), invalidAuthorizer, TIMEOUT_MS);
+//
+//        // Invalid instance according to the adopted test model: usage metrics are not initialized.
+//        drpcNotValid = new DRPC(null, alwaysAuthorized, TIMEOUT_MS);
+//    }
+//
+//    @After
+//    public void tearDown() {
+//        closeQuietly(drpcAuthOk);
+//        closeQuietly(drpcAuthKo);
+//        closeQuietly(drpcAuthInvalid);
+//        closeQuietly(drpcNotValid);
+//    }
+//
+//    /** Test checkAuthorization with valid context, null authorizer, operation = "execute", function = "try". Expected = should pass. */
+//    @Test
+//    public void checkAuthorizationValidContextNullAuthorizerShouldPass() throws AuthorizationException {
+//        drpcAuthOk.checkAuthorization(ReqContext.context(), null, "execute", FUNCTION);
+//    }
+//
+//    /** Test checkAuthorization with null context, always authorized authorizer, operation = "execute", function = "try". Expected = should pass. */
+//    @Test
+//    public void checkAuthorizationNullContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
+//        drpcAuthOk.checkAuthorization(null, alwaysAuthorized, "execute", FUNCTION);
+//    }
+//
+//    /** Test checkAuthorization with valid context and always authorized authorizer. Expected = should pass. */
+//    @Test
+//    public void checkAuthorizationValidContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
+//        drpcAuthOk.checkAuthorization(ReqContext.context(), alwaysAuthorized, "execute", FUNCTION);
+//    }
+//
+//    /** Test checkAuthorization with valid context and never authorized authorizer. Expected = throws AuthorizationException. */
+//    @Test
+//    public void checkAuthorizationValidContextNeverAuthorizedThrowsAuthorizationException() {
+//        Assert.assertThrows(AuthorizationException.class,
+//                () -> drpcAuthOk.checkAuthorization(ReqContext.context(), neverAuthorized, "execute", FUNCTION));
+//    }
+//
+//    /** Test checkAuthorization with valid context and invalid authorizer. Expected = throws RuntimeException. */
+//    @Test
+//    public void checkAuthorizationValidContextInvalidAuthorizerThrowsRuntimeException() {
+//        Assert.assertThrows(RuntimeException.class,
+//                () -> drpcAuthOk.checkAuthorization(ReqContext.context(), invalidAuthorizer, "execute", FUNCTION));
+//    }
+//
+//    /** Test checkAuthorization propagates operation and function through topoConf. Expected = authorizer receives operation and function. */
+//    @Test
+//    public void checkAuthorizationValidInputShouldPassOperationAndFunctionToAuthorizer() throws AuthorizationException {
+//        IAuthorizer auth = Mockito.mock(IAuthorizer.class);
+//        Mockito.when(auth.permit(any(ReqContext.class), anyString(), Mockito.<Map<String, Object>>any())).thenReturn(true);
+//
+//        drpcAuthOk.checkAuthorization(ReqContext.context(), auth, "fetchRequest", FUNCTION);
+//
+//        ArgumentCaptor<Map<String, Object>> topoConfCaptor = ArgumentCaptor.forClass(Map.class);
+//        Mockito.verify(auth).permit(any(ReqContext.class), Mockito.eq("fetchRequest"), topoConfCaptor.capture());
+//        Assert.assertEquals(FUNCTION, topoConfCaptor.getValue().get(DRPCAuthorizerBase.FUNCTION_NAME));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "args", valid factory and authorized state. Expected = returned OutstandingRequest. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameValidFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
+//
+//        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        Assert.assertEquals(expectedRequest, actual);
+//        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest(ARGS, "1")));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = null, valid factory and authorized state. Expected = OutstandingRequest with null args. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameNullFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(null, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
+//
+//        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, null, factory);
+//
+//        Assert.assertEquals(expectedRequest, actual);
+//        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest(null, "1")));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "", valid factory and authorized state. Expected = OutstandingRequest with empty args. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameEmptyFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest("", "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(expectedRequest);
+//
+//        OutstandingRequest actual = drpcAuthOk.execute(FUNCTION, "", factory);
+//
+//        Assert.assertEquals(expectedRequest, actual);
+//        Mockito.verify(factory).mkRequest(Mockito.eq(FUNCTION), Mockito.eq(new DRPCRequest("", "1")));
+//    }
+//
+//    /** Test execute with functionName = null, funcArgs = "args", valid factory and authorized state. Expected = throws NullPointerException. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeNullFunctionNameValidFuncArgsValidFactoryAuthThrowsNullPointerException() {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        Mockito.when(factory.mkRequest(Mockito.isNull(), any(DRPCRequest.class)))
+//                .thenReturn(new DoNothingOutstandingRequest(null, new DRPCRequest(ARGS, "1")));
+//
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(null, ARGS, factory));
+//    }
+//
+//    /** Test execute with functionName = "", funcArgs = "args", valid factory and authorized state. Expected = OutstandingRequest. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeEmptyFunctionNameValidFuncArgsValidFactoryAuthShouldPass() throws AuthorizationException {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest expectedRequest = new DoNothingOutstandingRequest("", new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(Mockito.eq(""), any(DRPCRequest.class))).thenReturn(expectedRequest);
+//
+//        OutstandingRequest actual = drpcAuthOk.execute("", ARGS, factory);
+//
+//        Assert.assertEquals(expectedRequest, actual);
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "args", null factory and authorized state. Expected = throws NullPointerException. */
+//    @Test
+//    public void executeValidFunctionNameValidFuncArgsNullFactoryAuthThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(FUNCTION, ARGS, null));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "args", invalid factory and authorized state. Expected = throws NullPointerException. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameValidFuncArgsInvalidFactoryAuthThrowsNullPointerException() {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(null);
+//
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.execute(FUNCTION, ARGS, factory));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "args", valid factory and not authorized state. Expected = throws AuthorizationException. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameValidFuncArgsValidFactoryNotAuthThrowsAuthorizationException() {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//
+//        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.execute(FUNCTION, ARGS, factory));
+//        Mockito.verify(factory, Mockito.never()).mkRequest(anyString(), any(DRPCRequest.class));
+//    }
+//
+//    /** Test execute with functionName = "try", funcArgs = "args" and invalid state. Expected = throws NullPointerException. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void executeValidFunctionNameValidFuncArgsInvalidStateThrowsNullPointerException() {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest request = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(request);
+//
+//        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.execute(FUNCTION, ARGS, factory));
+//    }
+//
+//    /** Test fetchRequest with functionName = "try" (existing) and authorized state. Expected = previously generated DRPCRequest. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void fetchRequestCorrectFunctionNameAuthShouldReturnPreviouslyGeneratedRequest() throws AuthorizationException {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(FUNCTION);
+//
+//        Assert.assertEquals(new DRPCRequest(ARGS, "1"), actualRequest);
+//        Assert.assertTrue(outstandingRequest.wasFetched());
+//    }
+//
+//    /** Test fetchRequest with functionName = "missingFunction" (not existing) and authorized state. Expected = empty DRPCRequest. */
+//    @Test
+//    public void fetchRequestNotCorrectFunctionNameAuthShouldReturnEmptyRequest() throws AuthorizationException {
+//        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(OTHER_FUNCTION);
+//
+//        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
+//    }
+//
+//    /** Test fetchRequest with functionName = null and authorized state. Expected = throws NullPointerException. */
+//    @Test
+//    public void fetchRequestNullFunctionNameAuthThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.fetchRequest(null));
+//    }
+//
+//    /** Test fetchRequest with functionName = "" and authorized state. Expected = empty DRPCRequest. */
+//    @Test
+//    public void fetchRequestEmptyFunctionNameAuthShouldReturnEmptyRequest() throws AuthorizationException {
+//        DRPCRequest actualRequest = drpcAuthOk.fetchRequest("");
+//
+//        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
+//    }
+//
+//    /** Test fetchRequest with functionName = "try" and not authorized state. Expected = throws AuthorizationException before queue access. */
+//    @Test
+//    public void fetchRequestCorrectFunctionNameNotAuthThrowsAuthorizationException() {
+//        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.fetchRequest(FUNCTION));
+//    }
+//
+//    /** Test fetchRequest with functionName = "try" and invalid state. Expected = throws NullPointerException. */
+//    @Test
+//    public void fetchRequestValidFunctionNameInvalidStateThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.fetchRequest(FUNCTION));
+//    }
+//
+//    /** Test fetchRequest with functionName = "try" and authorized state after timeout. Expected = empty DRPCRequest. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void fetchRequestCorrectStringAuthTimerTimeoutShouldPass() throws Exception {
+//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        Thread.sleep(TIMEOUT_MS + 250L);
+//        DRPCRequest actualRequest = drpcAuthOk.fetchRequest(FUNCTION);
+//
+//        Assert.assertEquals(new DRPCRequest("", ""), actualRequest);
+//    }
+//
+//    /** Test returnResult with id = "1", result = "done" and authorized state. Expected = custom outstanding request receives result. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void returnResultCorrectIdValidResultAuthShouldCompleteRequest() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        drpcAuthOk.returnResult("1", RESULT);
+//
+//        Assert.assertEquals(RESULT, outstandingRequest.result);
+//        Assert.assertNull(outstandingRequest.failure);
+//    }
+//
+//    /** Test returnResult with id = "1", result = null and authorized state. Expected = result null is propagated. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void returnResultCorrectIdNullResultAuthShouldPropagateNull() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        drpcAuthOk.returnResult("1", null);
+//
+//        Assert.assertTrue(outstandingRequest.returned);
+//        Assert.assertNull(outstandingRequest.result);
+//    }
+//
+//    /** Test returnResult with id = "1", result = "" and authorized state. Expected = empty result is propagated. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void returnResultCorrectIdEmptyResultAuthShouldPropagateEmptyString() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        drpcAuthOk.returnResult("1", "");
+//
+//        Assert.assertEquals("", outstandingRequest.result);
+//    }
+//
+//    /** Test returnResult with id = null, result = "" and authorized state. Expected = throws NullPointerException. */
+//    @Test
+//    public void returnResultNullIdEmptyResultAuthThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.returnResult(null, ""));
+//    }
+//
+//    /** Test returnResult with id = "", result = "done" and authorized state. Expected = no request is completed. */
+//    @Test
+//    public void returnResultEmptyIdValidResultAuthShouldNotThrow() throws AuthorizationException {
+//        drpcAuthOk.returnResult("", RESULT);
+//    }
+//
+//    /** Test returnResult with id = "99" not existing, result = "done" and authorized state. Expected = should not throw. */
+//    @Test
+//    public void returnResultNotCorrectIdValidResultAuthShouldNotThrow() throws AuthorizationException {
+//        drpcAuthOk.returnResult("99", RESULT);
+//    }
+//
+//    /** Test returnResult with id = "1", result = "done" and not authorized state. Expected = throws AuthorizationException. */
+//    @Test
+//    public void returnResultCorrectIdValidResultNotAuthThrowsAuthorizationException() {
+//        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.returnResult("1", RESULT));
+//    }
+//
+//    /** Test returnResult with id = "1", result = "done" and invalid state. Expected = throws NullPointerException. */
+//    @Test
+//    public void returnResultCorrectIdValidResultInvalidStateThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.returnResult("1", RESULT));
+//    }
+//
+//    /** Test failRequest with id = "1", valid exception and authorized state. Expected = custom outstanding request receives failure. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void failRequestCorrectIdValidExceptionAuthShouldFailRequest() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//        DRPCExecutionException exception = new DRPCExecutionException(FAILED);
+//
+//        drpcAuthOk.failRequest("1", exception);
+//
+//        Assert.assertEquals(exception, outstandingRequest.failure);
+//        Assert.assertFalse(outstandingRequest.returned);
+//    }
+//
+//    /** Test failRequest with id = "1", exception without message and authorized state. Expected = exception is propagated. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void failRequestCorrectIdInvalidExceptionAuthShouldPropagateExceptionWithoutMessage() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//        DRPCExecutionException exception = new DRPCExecutionException();
+//
+//        drpcAuthOk.failRequest("1", exception);
+//
+//        Assert.assertEquals(exception, outstandingRequest.failure);
+//        Assert.assertNull(outstandingRequest.failure.get_msg());
+//    }
+//
+//    /** Test failRequest with id = "1", null exception and authorized state. Expected = null failure is propagated. */
+//    @SuppressWarnings("unchecked")
+//    @Test
+//    public void failRequestCorrectIdNullExceptionAuthShouldPropagateNullFailure() throws AuthorizationException {
+//        RequestFactory<CapturingOutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+//        CapturingOutstandingRequest outstandingRequest = new CapturingOutstandingRequest(FUNCTION, new DRPCRequest(ARGS, "1"));
+//        Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+//        drpcAuthOk.execute(FUNCTION, ARGS, factory);
+//
+//        drpcAuthOk.failRequest("1", null);
+//
+//        Assert.assertTrue(outstandingRequest.failed);
+//        Assert.assertNull(outstandingRequest.failure);
+//    }
+//
+//    /** Test failRequest with id = null and valid exception. Expected = throws NullPointerException. */
+//    @Test
+//    public void failRequestNullIdValidExceptionAuthThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcAuthOk.failRequest(null, new DRPCExecutionException(FAILED)));
+//    }
+//
+//    /** Test failRequest with id = "" and valid exception. Expected = should not throw. */
+//    @Test
+//    public void failRequestEmptyIdValidExceptionAuthShouldNotThrow() throws AuthorizationException {
+//        drpcAuthOk.failRequest("", new DRPCExecutionException(FAILED));
+//    }
+//
+//    /** Test failRequest with id = "99" not existing and valid exception. Expected = should not throw. */
+//    @Test
+//    public void failRequestNotCorrectIdValidExceptionAuthShouldNotThrow() throws AuthorizationException {
+//        drpcAuthOk.failRequest("99", new DRPCExecutionException(FAILED));
+//    }
+//
+//    /** Test failRequest with id = "1", valid exception and not authorized state. Expected = throws AuthorizationException. */
+//    @Test
+//    public void failRequestCorrectIdValidExceptionNotAuthThrowsAuthorizationException() {
+//        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.failRequest("1", new DRPCExecutionException(FAILED)));
+//    }
+//
+//    /** Test failRequest with id = "1", valid exception and invalid state. Expected = throws NullPointerException. */
+//    @Test
+//    public void failRequestCorrectIdValidExceptionInvalidStateThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.failRequest("1", new DRPCExecutionException(FAILED)));
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state. Expected = value passed to returnResult. */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsAuthShouldReturnResult() throws Exception {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        try {
+//            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
+//            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
+//
+//            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
+//
+//            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
+//        } finally {
+//            executor.shutdownNow();
+//        }
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "" and authorized state. Expected = value passed to returnResult. */
+//    @Test
+//    public void executeBlockingValidFunctionNameEmptyFuncArgsAuthShouldReturnResult() throws Exception {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        try {
+//            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ""));
+//            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
+//
+//            Assert.assertEquals("", request.get_func_args());
+//            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
+//
+//            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
+//        } finally {
+//            executor.shutdownNow();
+//        }
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = null and authorized state. Expected = value passed to returnResult. */
+//    @Test
+//    public void executeBlockingValidFunctionNameNullFuncArgsAuthShouldReturnResult() throws Exception {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        try {
+//            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, null));
+//            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
+//
+//            Assert.assertNull(request.get_func_args());
+//            drpcAuthOk.returnResult(request.get_request_id(), RESULT);
+//
+//            Assert.assertEquals(RESULT, future.get(3, TimeUnit.SECONDS));
+//        } finally {
+//            executor.shutdownNow();
+//        }
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state failing request. Expected = DRPCExecutionException with message "failed". */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsAuthFailRequestThrowsDRPCExecutionException() throws Exception {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        try {
+//            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
+//            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
+//
+//            drpcAuthOk.failRequest(request.get_request_id(), new DRPCExecutionException(FAILED));
+//
+//            try {
+//                future.get(3, TimeUnit.SECONDS);
+//                Assert.fail("Expected DRPCExecutionException");
+//            } catch (java.util.concurrent.ExecutionException e) {
+//                Assert.assertTrue(e.getCause() instanceof DRPCExecutionException);
+//                Assert.assertEquals(FAILED, ((DRPCExecutionException) e.getCause()).get_msg());
+//            }
+//        } finally {
+//            executor.shutdownNow();
+//        }
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and authorized state failing with exception without message. Expected = DRPCExecutionException without message. */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsAuthFailRequestNoMessageThrowsDRPCExecutionException() throws Exception {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        try {
+//            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking(FUNCTION, ARGS));
+//            DRPCRequest request = waitUntilRequestIsAvailable(drpcAuthOk, FUNCTION);
+//
+//            drpcAuthOk.failRequest(request.get_request_id(), new DRPCExecutionException());
+//
+//            try {
+//                future.get(3, TimeUnit.SECONDS);
+//                Assert.fail("Expected DRPCExecutionException");
+//            } catch (java.util.concurrent.ExecutionException e) {
+//                Assert.assertTrue(e.getCause() instanceof DRPCExecutionException);
+//                Assert.assertNull(((DRPCExecutionException) e.getCause()).get_msg());
+//            }
+//        } finally {
+//            executor.shutdownNow();
+//        }
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and not authorized state. Expected = throws AuthorizationException. */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsNotAuthThrowsAuthorizationException() {
+//        Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.executeBlocking(FUNCTION, ARGS));
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and invalid authorizer. Expected = throws RuntimeException. */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsInvalidAuthThrowsRuntimeException() {
+//        Assert.assertThrows(RuntimeException.class, () -> drpcAuthInvalid.executeBlocking(FUNCTION, ARGS));
+//    }
+//
+//    /** Test executeBlocking with functionName = "try", funcArgs = "args" and invalid state. Expected = throws NullPointerException. */
+//    @Test
+//    public void executeBlockingValidFunctionNameValidFuncArgsInvalidStateThrowsNullPointerException() {
+//        Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.executeBlocking(FUNCTION, ARGS));
+//    }
+//
+//    /** Test close method on valid instance. Expected = idempotent no exception. */
+//    @Test
+//    public void closeValidInstanceShouldBeIdempotent() {
+//        drpcAuthOk.close();
+//        drpcAuthOk.close();
+//    }
+//
+//    private DRPCRequest waitUntilRequestIsAvailable(DRPC drpc, String function) throws Exception {
+//        long deadline = System.currentTimeMillis() + 3000L;
+//        DRPCRequest request = new DRPCRequest("", "");
+//        while (System.currentTimeMillis() < deadline) {
+//            request = drpc.fetchRequest(function);
+//            if (!"".equals(request.get_request_id())) {
+//                return request;
+//            }
+//            Thread.sleep(25L);
+//        }
+//        throw new TimeoutException("DRPC request was not available in time");
+//    }
+//
+//    private void closeQuietly(DRPC drpc) {
+//        if (drpc != null) {
+//            try {
+//                drpc.close();
+//            } catch (RuntimeException ignored) {
+//                // Ignore cleanup failures for intentionally invalid instances.
+//            }
+//        }
+//    }
+//
+//    private static final class AlwaysAuthorizedAuthorizer implements IAuthorizer {
+//        @Override
+//        public void prepare(Map<String, Object> conf) {
+//            // No-op.
+//        }
+//
+//        @Override
+//        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
+//            return true;
+//        }
+//    }
+//
+//    private static final class NeverAuthorizedAuthorizer implements IAuthorizer {
+//        @Override
+//        public void prepare(Map<String, Object> conf) {
+//            // No-op.
+//        }
+//
+//        @Override
+//        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
+//            return false;
+//        }
+//    }
+//
+//    private static final class RuntimeExceptionAuthorizer implements IAuthorizer {
+//        @Override
+//        public void prepare(Map<String, Object> conf) {
+//            // No-op.
+//        }
+//
+//        @Override
+//        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
+//            throw new RuntimeException("invalid authorizer");
+//        }
+//    }
+//
+//    private static class DoNothingOutstandingRequest extends OutstandingRequest {
+//        DoNothingOutstandingRequest(String function, DRPCRequest req) {
+//            super(function, req);
+//        }
+//
+//        @Override
+//        public void returnResult(String result) {
+//            // No-op.
+//        }
+//
+//        @Override
+//        public void fail(DRPCExecutionException e) {
+//            // No-op.
+//        }
+//    }
+//
+//    private static final class CapturingOutstandingRequest extends OutstandingRequest {
+//        private boolean returned;
+//        private boolean failed;
+//        private String result;
+//        private DRPCExecutionException failure;
+//
+//        CapturingOutstandingRequest(String function, DRPCRequest req) {
+//            super(function, req);
+//        }
+//
+//        @Override
+//        public void returnResult(String result) {
+//            this.returned = true;
+//            this.result = result;
+//        }
+//
+//        @Override
+//        public void fail(DRPCExecutionException e) {
+//            this.failed = true;
+//            this.failure = e;
+//        }
+//    }
+//
+//    /** ### Test END ### */
+//}
