@@ -1,1 +1,2 @@
-org.apache.storm.daemon.drpc.DummyDRPC
+# org.apache.storm.daemon.drpc.DummyDRPC
+org.apache.storm.utils.Utils
