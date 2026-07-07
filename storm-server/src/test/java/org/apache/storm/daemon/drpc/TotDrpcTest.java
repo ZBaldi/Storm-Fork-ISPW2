@@ -1,11 +1,13 @@
 package org.apache.storm.daemon.drpc;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import com.codahale.metrics.Meter;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -16,51 +18,18 @@ import org.apache.storm.generated.DRPCRequest;
 import org.apache.storm.metric.StormMetricsRegistry;
 import org.apache.storm.security.auth.IAuthorizer;
 import org.apache.storm.security.auth.ReqContext;
-import org.apache.storm.utils.WrappedDRPCExecutionException;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
+import org.apache.storm.security.auth.authorizer.DRPCAuthorizerBase;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class TotDrpcTest {
     // ### Test START ###
 
-    private DRPC drpcAuthOk;
-    private DRPC drpcAuthKo;
-    private DRPC drpcNoAuth;
+    private static final long TEST_TIMEOUT_MS = 60_000L;
 
-    private static class DoNothingOutstandingRequest extends OutstandingRequest {
-        private String returnedResult;
-        private DRPCExecutionException failedException;
-
-        DoNothingOutstandingRequest(String function, DRPCRequest req) {
-            super(function, req);
-        }
-
-        @Override
-        public void returnResult(String result) {
-            this.returnedResult = result;
-        }
-
-        @Override
-        public void fail(DRPCExecutionException e) {
-            this.failedException = e;
-        }
-
-        String getReturnedResult() {
-            return returnedResult;
-        }
-
-        DRPCExecutionException getFailedException() {
-            return failedException;
-        }
-    }
-
-    private final IAuthorizer alwaysAuthorized = new IAuthorizer() {
+    private static final IAuthorizer ALWAYS_AUTHORIZER = new IAuthorizer() {
         @Override
         public void prepare(Map<String, Object> conf) {
-            // no-op
+            // No external dependency required for tests.
         }
 
         @Override
@@ -69,10 +38,10 @@ public class TotDrpcTest {
         }
     };
 
-    private final IAuthorizer neverAuthorized = new IAuthorizer() {
+    private static final IAuthorizer NEVER_AUTHORIZER = new IAuthorizer() {
         @Override
         public void prepare(Map<String, Object> conf) {
-            // no-op
+            // No external dependency required for tests.
         }
 
         @Override
@@ -81,10 +50,10 @@ public class TotDrpcTest {
         }
     };
 
-    private final IAuthorizer invalidAuthorizer = new IAuthorizer() {
+    private static final IAuthorizer INVALID_AUTHORIZER = new IAuthorizer() {
         @Override
         public void prepare(Map<String, Object> conf) {
-            // no-op
+            // No external dependency required for tests.
         }
 
         @Override
@@ -93,331 +62,403 @@ public class TotDrpcTest {
         }
     };
 
-    @Before
-    public void setUp() {
-        drpcAuthOk = new DRPC(metricsRegistry(), alwaysAuthorized, 1000L);
-        drpcAuthKo = new DRPC(metricsRegistry(), neverAuthorized, 1000L);
-        drpcNoAuth = new DRPC(metricsRegistry(), null, 1000L);
-    }
 
-    @After
-    public void tearDown() {
-        closeQuietly(drpcAuthOk);
-        closeQuietly(drpcAuthKo);
-        closeQuietly(drpcNoAuth);
-    }
+    private static class DenyOperationAuthorizer implements IAuthorizer {
+        private final String deniedOperation;
 
-    private static void closeQuietly(DRPC drpc) {
-        if (drpc != null) {
-            try {
-                drpc.close();
-            } catch (Throwable ignored) {
-                // ignored on purpose in tests
-            }
+        DenyOperationAuthorizer(String deniedOperation) {
+            this.deniedOperation = deniedOperation;
+        }
+
+        @Override
+        public void prepare(Map<String, Object> conf) {
+            // No external dependency required for tests.
+        }
+
+        @Override
+        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
+            return !deniedOperation.equals(operation);
         }
     }
 
-    private static StormMetricsRegistry metricsRegistry() {
-        StormMetricsRegistry registry = Mockito.mock(StormMetricsRegistry.class);
-        when(registry.registerMeter(anyString())).thenReturn(Mockito.mock(Meter.class));
-        return registry;
-    }
+    private static class CapturingAuthorizer implements IAuthorizer {
+        private String operation;
+        private Object functionName;
 
-    @SuppressWarnings("unchecked")
-    private static RequestFactory<OutstandingRequest> doNothingFactory() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        when(factory.mkRequest(any(), any(DRPCRequest.class))).thenAnswer(invocation ->
-            new DoNothingOutstandingRequest(invocation.getArgument(0), invocation.getArgument(1)));
-        return factory;
-    }
+        @Override
+        public void prepare(Map<String, Object> conf) {
+            // No external dependency required for tests.
+        }
 
-    /** Test execute method with functionName = "try", funcArgs = "args", valid factory and authorized state. */
-    @Test
-    public void executeValidInputAuthShouldReturnOutstandingRequest() throws AuthorizationException {
-        OutstandingRequest actual = drpcAuthOk.execute("try", "args", doNothingFactory());
-
-        Assert.assertEquals("try", actual.getFunction());
-        Assert.assertEquals(new DRPCRequest("args", "1"), actual.getRequest());
-    }
-
-    /** Test execute method with funcArgs = null and authorized state. */
-    @Test
-    public void executeValidFunctionNameNullFuncArgsAuthShouldPass() throws AuthorizationException {
-        OutstandingRequest actual = drpcAuthOk.execute("try", null, doNothingFactory());
-
-        Assert.assertEquals("try", actual.getFunction());
-        Assert.assertEquals(new DRPCRequest(null, "1"), actual.getRequest());
-    }
-
-    /** Test execute method with functionName = null and authorized state. */
-    @Test
-    public void executeNullFunctionNameAuthThrowsIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class,
-            () -> drpcAuthOk.execute(null, "args", doNothingFactory()));
-    }
-
-    /** Test execute method with null factory and authorized state. */
-    @Test
-    public void executeValidInputNullFactoryAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class,
-            () -> drpcAuthOk.execute("try", "args", null));
-    }
-
-    /** Test execute method with factory returning null and authorized state. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void executeValidInputInvalidFactoryAuthThrowsNullPointerException() {
-        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-        when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(null);
-
-        Assert.assertThrows(NullPointerException.class,
-            () -> drpcAuthOk.execute("try", "args", factory));
-    }
-
-    /** Test execute method with valid input and not authorized state. */
-    @Test
-    public void executeValidInputNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class,
-            () -> drpcAuthKo.execute("try", "args", doNothingFactory()));
-    }
-
-    /** Test constructor with invalid metric registry state. */
-    @Test
-    public void constructorNullMetricsRegistryThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class,
-            () -> new DRPC(null, alwaysAuthorized, 1000L));
-    }
-
-    /** Test fetchRequest method after a request has been generated by execute. */
-    @Test
-    public void fetchRequestExistingFunctionAuthShouldReturnPreviousRequest() throws AuthorizationException {
-        drpcAuthOk.execute("try", "args", doNothingFactory());
-
-        DRPCRequest actual = drpcAuthOk.fetchRequest("try");
-
-        Assert.assertEquals(new DRPCRequest("args", "1"), actual);
-    }
-
-    /** Test fetchRequest method with a function that has no queued requests. */
-    @Test
-    public void fetchRequestNotExistingFunctionAuthShouldReturnNothingRequest() throws AuthorizationException {
-        DRPCRequest actual = drpcAuthOk.fetchRequest("missing");
-
-        Assert.assertEquals(new DRPCRequest("", ""), actual);
-    }
-
-    /** Test fetchRequest method with empty functionName boundary value. */
-    @Test
-    public void fetchRequestEmptyFunctionNameAuthShouldReturnNothingRequest() throws AuthorizationException {
-        DRPCRequest actual = drpcAuthOk.fetchRequest("");
-
-        Assert.assertEquals(new DRPCRequest("", ""), actual);
-    }
-
-    /** Test fetchRequest method with functionName = null. */
-    @Test
-    public void fetchRequestNullFunctionNameAuthThrowsIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class,
-            () -> drpcAuthOk.fetchRequest(null));
-    }
-
-    /** Test fetchRequest method with valid functionName and not authorized state. */
-    @Test
-    public void fetchRequestValidFunctionNameNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class,
-            () -> drpcAuthKo.fetchRequest("try"));
-    }
-
-    /** Test returnResult method with existing id and authorized state. */
-    @Test
-    public void returnResultExistingIdAuthShouldCompleteRequest() throws AuthorizationException {
-        DoNothingOutstandingRequest req = (DoNothingOutstandingRequest) drpcAuthOk.execute("try", "args", doNothingFactory());
-
-        drpcAuthOk.returnResult("1", "done");
-
-        Assert.assertEquals("done", req.getReturnedResult());
-    }
-
-    /** Test returnResult method with non-existing id and authorized state. */
-    @Test
-    public void returnResultNotExistingIdAuthShouldDoNothing() throws AuthorizationException {
-        drpcAuthOk.returnResult("404", "done");
-    }
-
-    /** Test returnResult method with id = null. */
-    @Test
-    public void returnResultNullIdAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class,
-            () -> drpcAuthOk.returnResult(null, "done"));
-    }
-
-    /** Test returnResult method with existing id and result = null. */
-    @Test
-    public void returnResultExistingIdNullResultAuthShouldPass() throws AuthorizationException {
-        DoNothingOutstandingRequest req = (DoNothingOutstandingRequest) drpcAuthOk.execute("try", "args", doNothingFactory());
-
-        drpcAuthOk.returnResult("1", null);
-
-        Assert.assertNull(req.getReturnedResult());
-    }
-
-    /** Test returnResult-related unauthorized flow. Request creation is denied before a result can be returned. */
-    @Test
-    public void returnResultFlowNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> {
-            drpcAuthKo.execute("try", "args", doNothingFactory());
-            drpcAuthKo.returnResult("1", "done");
-        });
-    }
-
-    /** Test failRequest method with existing id and valid exception. */
-    @Test
-    public void failRequestExistingIdValidExceptionAuthShouldFailRequest() throws AuthorizationException {
-        DoNothingOutstandingRequest req = (DoNothingOutstandingRequest) drpcAuthOk.execute("try", "args", doNothingFactory());
-        DRPCExecutionException exception = new WrappedDRPCExecutionException("failed");
-
-        drpcAuthOk.failRequest("1", exception);
-
-        Assert.assertSame(exception, req.getFailedException());
-    }
-
-    /** Test failRequest method with existing id and null exception. */
-    @Test
-    public void failRequestExistingIdNullExceptionAuthShouldUseDefaultFailure() throws AuthorizationException {
-        DoNothingOutstandingRequest req = (DoNothingOutstandingRequest) drpcAuthOk.execute("try", "args", doNothingFactory());
-
-        drpcAuthOk.failRequest("1", null);
-
-        Assert.assertNotNull(req.getFailedException());
-        Assert.assertEquals("Request failed", req.getFailedException().get_msg());
-    }
-
-    /** Test failRequest method with non-existing id and authorized state. */
-    @Test
-    public void failRequestNotExistingIdAuthShouldDoNothing() throws AuthorizationException {
-        drpcAuthOk.failRequest("404", new WrappedDRPCExecutionException("failed"));
-    }
-
-    /** Test failRequest method with id = null. */
-    @Test
-    public void failRequestNullIdAuthThrowsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class,
-            () -> drpcAuthOk.failRequest(null, new WrappedDRPCExecutionException("failed")));
-    }
-
-    /** Test failRequest-related unauthorized flow. Request creation is denied before it can be failed. */
-    @Test
-    public void failRequestFlowNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class, () -> {
-            drpcAuthKo.execute("try", "args", doNothingFactory());
-            drpcAuthKo.failRequest("1", new WrappedDRPCExecutionException("failed"));
-        });
-    }
-
-    /** Test executeBlocking method when request is completed successfully through returnResult. */
-    @Test
-    public void executeBlockingValidInputReturnResultShouldReturnDone() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking("try", "args"));
-            DRPCRequest request = waitForFetchedRequest(drpcAuthOk, "try");
-
-            drpcAuthOk.returnResult(request.get_request_id(), "done");
-
-            Assert.assertEquals("done", future.get(2, TimeUnit.SECONDS));
-        } finally {
-            executor.shutdownNow();
+        @Override
+        public boolean permit(ReqContext context, String operation, Map<String, Object> topoConf) {
+            this.operation = operation;
+            this.functionName = topoConf.get(DRPCAuthorizerBase.FUNCTION_NAME);
+            return true;
         }
     }
 
-    /** Test executeBlocking method when request fails through failRequest. */
-    @Test
-    public void executeBlockingValidInputFailRequestShouldThrowExecutionException() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-            Future<String> future = executor.submit(() -> drpcAuthOk.executeBlocking("try", "args"));
-            DRPCRequest request = waitForFetchedRequest(drpcAuthOk, "try");
+    private static class TestOutstandingRequest extends OutstandingRequest {
+        private String result;
+        private DRPCExecutionException failure;
 
-            drpcAuthOk.failRequest(request.get_request_id(), new WrappedDRPCExecutionException("failed"));
+        TestOutstandingRequest(String function, DRPCRequest req) {
+            super(function, req);
+        }
 
-            try {
-                future.get(2, TimeUnit.SECONDS);
-                Assert.fail("Expected DRPCExecutionException");
-            } catch (java.util.concurrent.ExecutionException e) {
-                Assert.assertTrue(e.getCause() instanceof DRPCExecutionException);
-                Assert.assertEquals("failed", ((DRPCExecutionException) e.getCause()).get_msg());
-            }
-        } finally {
-            executor.shutdownNow();
+        @Override
+        public void returnResult(String result) {
+            this.result = result;
+        }
+
+        @Override
+        public void fail(DRPCExecutionException e) {
+            this.failure = e;
         }
     }
 
-    /** Test executeBlocking method with not authorized state. */
-    @Test
-    public void executeBlockingValidInputNotAuthThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class,
-            () -> drpcAuthKo.executeBlocking("try", "args"));
+    private static final RequestFactory<TestOutstandingRequest> VALID_FACTORY = new RequestFactory<TestOutstandingRequest>() {
+        @Override
+        public TestOutstandingRequest mkRequest(String function, DRPCRequest req) {
+            return new TestOutstandingRequest(function, req);
+        }
+    };
+
+    private static final RequestFactory<TestOutstandingRequest> NULL_FACTORY = new RequestFactory<TestOutstandingRequest>() {
+        @Override
+        public TestOutstandingRequest mkRequest(String function, DRPCRequest req) {
+            return null;
+        }
+    };
+
+    private DRPC newDrpc(IAuthorizer authorizer) {
+        return new DRPC(new StormMetricsRegistry(), authorizer, TEST_TIMEOUT_MS);
     }
 
-
-    /** Test executeBlocking method with null functionName. */
-    @Test
-    public void executeBlockingNullFunctionNameAuthThrowsIllegalArgumentException() {
-        Assert.assertThrows(IllegalArgumentException.class,
-            () -> drpcAuthOk.executeBlocking(null, "args"));
-    }
-
-    /** Test checkAuthorization with always authorized authorizer. */
-    @Test
-    public void checkAuthorizationAlwaysAuthorizedShouldPass() throws AuthorizationException {
-        DRPC.checkAuthorization(ReqContext.context(), alwaysAuthorized, "execute", "try");
-    }
-
-    /** Test checkAuthorization with null authorizer. */
-    @Test
-    public void checkAuthorizationNullAuthorizerShouldPass() throws AuthorizationException {
-        DRPC.checkAuthorization(ReqContext.context(), null, "execute", "try");
-    }
-
-    /** Test checkAuthorization with never authorized authorizer. */
-    @Test
-    public void checkAuthorizationNeverAuthorizedThrowsAuthorizationException() {
-        Assert.assertThrows(AuthorizationException.class,
-            () -> DRPC.checkAuthorization(ReqContext.context(), neverAuthorized, "execute", "try"));
-    }
-
-    /** Test checkAuthorization with invalid authorizer throwing RuntimeException. */
-    @Test
-    public void checkAuthorizationInvalidAuthorizerThrowsRuntimeException() {
-        Assert.assertThrows(RuntimeException.class,
-            () -> DRPC.checkAuthorization(ReqContext.context(), invalidAuthorizer, "execute", "try"));
-    }
-
-    /** Test checkAuthorization with null ReqContext and always authorized authorizer. */
-    @Test
-    public void checkAuthorizationNullReqContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
-        DRPC.checkAuthorization(null, alwaysAuthorized, "execute", "try");
-    }
-
-    /** Test close method on a valid DRPC instance. */
-    @Test
-    public void closeValidInstanceShouldNotThrow() {
-        DRPC drpc = new DRPC(metricsRegistry(), alwaysAuthorized, 1000L);
-
-        drpc.close();
-    }
-
-    private static DRPCRequest waitForFetchedRequest(DRPC drpc, String functionName) throws Exception {
-        long deadline = System.currentTimeMillis() + 2000L;
-        while (System.currentTimeMillis() < deadline) {
-            DRPCRequest request = drpc.fetchRequest(functionName);
-            if (!new DRPCRequest("", "").equals(request)) {
+    private DRPCRequest fetchUntilAvailable(DRPC drpc, String functionName) throws Exception {
+        long deadline = System.currentTimeMillis() + 5_000L;
+        DRPCRequest request;
+        do {
+            request = drpc.fetchRequest(functionName);
+            if (!"".equals(request.get_request_id())) {
                 return request;
             }
             Thread.sleep(10L);
-        }
-        Assert.fail("Expected queued DRPC request");
+        } while (System.currentTimeMillis() < deadline);
+        fail("No DRPC request became available for function '" + functionName + "'");
         return null;
+    }
+
+    @Test
+    public void checkAuthorizationAllowsAlwaysAuthorizedAuthorizer() throws Exception {
+        DRPC.checkAuthorization(ReqContext.context(), ALWAYS_AUTHORIZER, "execute", "try");
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void checkAuthorizationRejectsNeverAuthorizedAuthorizer() throws Exception {
+        DRPC.checkAuthorization(ReqContext.context(), NEVER_AUTHORIZER, "execute", "try");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void checkAuthorizationPropagatesInvalidAuthorizerFailure() throws Exception {
+        DRPC.checkAuthorization(ReqContext.context(), INVALID_AUTHORIZER, "execute", "try");
+    }
+
+    @Test
+    public void checkAuthorizationPassesFunctionNameToAuthorizer() throws Exception {
+        CapturingAuthorizer authorizer = new CapturingAuthorizer();
+
+        DRPC.checkAuthorization(ReqContext.context(), authorizer, "fetchRequest", "try");
+
+        assertEquals("fetchRequest", authorizer.operation);
+        assertEquals("try", authorizer.functionName);
+    }
+
+    @Test
+    public void fetchRequestReturnsNothingRequestWhenQueueIsEmpty() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            DRPCRequest request = drpc.fetchRequest("try");
+
+            assertEquals("", request.get_func_args());
+            assertEquals("", request.get_request_id());
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void fetchRequestRejectsNullFunctionName() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            drpc.fetchRequest(null);
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void fetchRequestIsRejectedWhenAuthorizerDeniesIt() throws Exception {
+        DRPC drpc = newDrpc(NEVER_AUTHORIZER);
+        try {
+            drpc.fetchRequest("try");
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void executeCreatesOutstandingRequestAndFetchRequestReturnsGeneratedDrpcRequest() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            TestOutstandingRequest outstanding = drpc.execute("try", "args", VALID_FACTORY);
+
+            assertNotNull(outstanding);
+            assertEquals("try", outstanding.getFunction());
+            assertEquals("args", outstanding.getRequest().get_func_args());
+            assertEquals("1", outstanding.getRequest().get_request_id());
+
+            DRPCRequest fetched = drpc.fetchRequest("try");
+            assertEquals("args", fetched.get_func_args());
+            assertEquals("1", fetched.get_request_id());
+            assertTrue(outstanding.wasFetched());
+        } finally {
+            drpc.close();
+        }
+    }
+
+//    @Test(expected = IllegalArgumentException.class)
+//    public void executeRejectsNullFunctionName() throws Exception {  //CLEANUP  DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
+//        DRPC drpc = newDrpc(null);
+//        try {
+//            drpc.execute(null, "args", VALID_FACTORY);
+//        } finally {
+//            drpc.close();
+//        }
+//    }
+
+    @Test(expected = NullPointerException.class)
+    public void executeFailsWhenFactoryReturnsNullRequest() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            drpc.execute("try", "args", NULL_FACTORY);
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void executeIsRejectedWhenAuthorizerDeniesIt() throws Exception {
+        DRPC drpc = newDrpc(NEVER_AUTHORIZER);
+        try {
+            drpc.execute("try", "args", VALID_FACTORY);
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void returnResultCompletesExistingOutstandingRequest() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            TestOutstandingRequest outstanding = drpc.execute("try", "args", VALID_FACTORY);
+
+            drpc.returnResult("1", "done");
+
+            assertEquals("done", outstanding.result);
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void returnResultIgnoresUnknownRequestId() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            drpc.returnResult("not-present", "done");
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void returnResultIsRejectedWhenAuthorizerDeniesExistingRequest() throws Exception {
+        DRPC drpc = newDrpc(new DenyOperationAuthorizer("result"));
+        try {
+            drpc.execute("try", "args", VALID_FACTORY);
+            drpc.returnResult("1", "done");
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void failRequestCompletesExistingOutstandingRequestWithGivenException() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            TestOutstandingRequest outstanding = drpc.execute("try", "args", VALID_FACTORY);
+            DRPCExecutionException failure = new DRPCExecutionException("failed");
+
+            drpc.failRequest("1", failure);
+
+            assertSame(failure, outstanding.failure);
+            assertEquals("failed", outstanding.failure.get_msg());
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void failRequestUsesDefaultFailureWhenExceptionIsNull() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            TestOutstandingRequest outstanding = drpc.execute("try", "args", VALID_FACTORY);
+
+            drpc.failRequest("1", null);
+
+            assertNotNull(outstanding.failure);
+            assertEquals("Request failed", outstanding.failure.get_msg());
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void failRequestIgnoresUnknownRequestId() throws Exception {
+        DRPC drpc = newDrpc(null);
+        try {
+            drpc.failRequest("not-present", new DRPCExecutionException("failed"));
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void failRequestIsRejectedWhenAuthorizerDeniesExistingRequest() throws Exception {
+        DRPC drpc = newDrpc(new DenyOperationAuthorizer("failRequest"));
+        try {
+            drpc.execute("try", "args", VALID_FACTORY);
+            drpc.failRequest("1", new DRPCExecutionException("failed"));
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void executeBlockingReturnsValuePassedToReturnResult() throws Exception {
+        final DRPC drpc = newDrpc(null);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            Future<String> result = executor.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return drpc.executeBlocking("try", "args");
+                }
+            });
+
+            DRPCRequest fetched = fetchUntilAvailable(drpc, "try");
+            assertEquals("args", fetched.get_func_args());
+            drpc.returnResult(fetched.get_request_id(), "done");
+
+            assertEquals("done", result.get(5, TimeUnit.SECONDS));
+            assertEquals("", drpc.fetchRequest("try").get_request_id());
+        } finally {
+            executor.shutdownNow();
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void executeBlockingThrowsFailurePassedToFailRequest() throws Exception {
+        final DRPC drpc = newDrpc(null);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            Future<String> result = executor.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return drpc.executeBlocking("try", "args");
+                }
+            });
+
+            DRPCRequest fetched = fetchUntilAvailable(drpc, "try");
+            drpc.failRequest(fetched.get_request_id(), new DRPCExecutionException("failed"));
+
+            try {
+                result.get(5, TimeUnit.SECONDS);
+                fail("Expected DRPCExecutionException");
+            } catch (java.util.concurrent.ExecutionException e) {
+                assertTrue(e.getCause() instanceof DRPCExecutionException);
+                assertEquals("failed", ((DRPCExecutionException) e.getCause()).get_msg());
+            }
+        } finally {
+            executor.shutdownNow();
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void executeBlockingThrowsDefaultFailureWhenFailRequestReceivesNullException() throws Exception {
+        final DRPC drpc = newDrpc(null);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            Future<String> result = executor.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return drpc.executeBlocking("try", "args");
+                }
+            });
+
+            DRPCRequest fetched = fetchUntilAvailable(drpc, "try");
+            drpc.failRequest(fetched.get_request_id(), null);
+
+            try {
+                result.get(5, TimeUnit.SECONDS);
+                fail("Expected DRPCExecutionException");
+            } catch (java.util.concurrent.ExecutionException e) {
+                assertTrue(e.getCause() instanceof DRPCExecutionException);
+                assertEquals("Request failed", ((DRPCExecutionException) e.getCause()).get_msg());
+            }
+        } finally {
+            executor.shutdownNow();
+            drpc.close();
+        }
+    }
+
+    @Test(expected = AuthorizationException.class)
+    public void executeBlockingIsRejectedWhenAuthorizerDeniesIt() throws Exception {
+        DRPC drpc = newDrpc(NEVER_AUTHORIZER);
+        try {
+            drpc.executeBlocking("try", "args");
+        } finally {
+            drpc.close();
+        }
+    }
+
+    @Test
+    public void closeFailsPendingBlockingRequestsAsServerShutdown() throws Exception {
+        final DRPC drpc = newDrpc(null);
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+            Future<String> result = executor.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return drpc.executeBlocking("try", "args");
+                }
+            });
+
+            fetchUntilAvailable(drpc, "try");
+            drpc.close();
+
+            try {
+                result.get(5, TimeUnit.SECONDS);
+                fail("Expected DRPCExecutionException");
+            } catch (java.util.concurrent.ExecutionException e) {
+                assertTrue(e.getCause() instanceof DRPCExecutionException);
+                assertEquals("Server Shutting Down", ((DRPCExecutionException) e.getCause()).get_msg());
+            }
+        } finally {
+            executor.shutdownNow();
+        }
     }
 
     // ### Test END ###

@@ -1296,27 +1296,14 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>0.8.13</version>
                     <executions>
-<!--                        <execution>-->
-<!--                            <id>prepare-agent</id>-->
-<!--                            <goals>-->
-<!--                                <goal>prepare-agent</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                        <execution>-->
-<!--                            <id>report</id>-->
-<!--                            <phase>verify</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>report</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-                        <!-- ✅ UNIT TEST -->
+                        <!-- UNIT TEST -->
                         <execution>
                             <id>prepare-agent</id>
                             <goals>
                                 <goal>prepare-agent</goal>
                             </goals>
                         </execution>
-                        <!-- ✅ INTEGRATION TEST -->
+                        <!-- INTEGRATION TEST -->
                         <execution>
                             <id>prepare-agent-integration</id>
                             <phase>pre-integration-test</phase>
@@ -1327,7 +1314,7 @@
                                 <destFile>${project.build.directory}/jacoco-it.exec</destFile>
                             </configuration>
                         </execution>
-                        <!-- ✅ MERGE FILE -->
+                        <!-- MERGE FILE -->
                         <execution>
                             <id>merge</id>
                             <phase>verify</phase>
@@ -1347,7 +1334,7 @@
                                 <destFile>${project.build.directory}/jacoco-merged.exec</destFile>
                             </configuration>
                         </execution>
-                        <!-- ✅ REPORT FINALE -->
+                        <!-- REPORT -->
                         <execution>
                             <id>report</id>
                             <phase>verify</phase>

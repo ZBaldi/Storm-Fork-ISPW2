@@ -189,7 +189,7 @@ public class DrpcIT {
         }
     }
 
-    /** test executeBlocking, fetchRequest and returnResult flow with functionName = "try", funcArgs = "args" 2 times and authorized context. Expected = "true" */
+    /** test executeBlocking, fetchRequest and failRequest flow with functionName = "try", funcArgs = "args" 2 times and authorized context. Expected = "true" */
     @Test
     public void executeBlockingFetchRequestFailRequestFlowValidFunctionNameValidFuncArgs2TimesAuthShouldPass() throws AuthorizationException, ExecutionException, InterruptedException {
 
