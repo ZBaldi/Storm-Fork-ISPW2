@@ -1,11 +1,13 @@
-package org.apache.storm.daemon.drpc;
+package org.apache.storm.daemon.drpc.utils;
 
+import org.apache.storm.daemon.drpc.OutstandingRequest;
+import org.apache.storm.daemon.drpc.RequestFactory;
 import org.apache.storm.generated.DRPCExceptionType;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
 import org.apache.storm.utils.WrappedDRPCExecutionException;
 
-public class NotBlockingOutstandingRequest extends OutstandingRequest{
+public class NotBlockingOutstandingRequest extends OutstandingRequest {
 
     public static final RequestFactory<NotBlockingOutstandingRequest> FACTORY = NotBlockingOutstandingRequest::new;
     private String result = null;

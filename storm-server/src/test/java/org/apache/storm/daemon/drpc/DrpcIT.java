@@ -1,6 +1,8 @@
 package org.apache.storm.daemon.drpc;
 
 import com.codahale.metrics.Meter;
+import org.apache.storm.daemon.drpc.utils.DummyWorkerClass;
+import org.apache.storm.daemon.drpc.utils.NotBlockingOutstandingRequest;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
@@ -16,7 +18,10 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /** Test class which runs integration test on DRPC class with bottom-up strategy*/
 @RunWith(MockitoJUnitRunner.class)

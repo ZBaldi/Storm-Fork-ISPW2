@@ -1,9 +1,10 @@
-package org.apache.storm.daemon.drpc;
+package org.apache.storm.daemon.drpc.utils;
 
+import org.apache.storm.daemon.drpc.OutstandingRequest;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
 
-public class DoNothingOutstandingRequest extends OutstandingRequest{
+public class DoNothingOutstandingRequest extends OutstandingRequest {
 
     public DoNothingOutstandingRequest(String function, DRPCRequest req) {
         super(function, req);

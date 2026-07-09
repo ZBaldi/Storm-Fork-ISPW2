@@ -1,23 +1,5 @@
 package org.apache.storm.daemon.drpc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-
 import org.apache.storm.DaemonConfig;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
@@ -29,6 +11,13 @@ import org.apache.storm.security.auth.authorizer.DRPCAuthorizerBase;
 import org.apache.storm.utils.WrappedDRPCExecutionException;
 import org.junit.After;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static org.junit.Assert.*;
 
 /**
  * Test suite for {@link DRPC}.
@@ -116,12 +105,12 @@ public class Zsp3DrpcTest {
         assertEquals("1", request.getRequest().get_request_id());
     }
 
-//    @Test(expected = IllegalArgumentException.class)  //@AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
-//    public void executeWithNullFunctionIsRejectedByQueueSelection() throws Exception {
-//        drpc = newDrpc(alwaysAuthorized(), LONG_TIMEOUT_MS);
-//
-//        drpc.execute(null, ARGS, testFactory());
-//    }
+    // @Test(expected = IllegalArgumentException.class) (FAILED) @AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
+    public void executeWithNullFunctionIsRejectedByQueueSelection() throws Exception {
+        drpc = newDrpc(alwaysAuthorized(), LONG_TIMEOUT_MS);
+
+        drpc.execute(null, ARGS, testFactory());
+    }
 
     @Test(expected = NullPointerException.class)
     public void executeWithNullFactoryIsInvalidInput() throws Exception {

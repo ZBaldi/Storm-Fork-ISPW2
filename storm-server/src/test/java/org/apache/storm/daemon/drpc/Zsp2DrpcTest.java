@@ -1,18 +1,5 @@
 package org.apache.storm.daemon.drpc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
@@ -24,6 +11,11 @@ import org.apache.storm.utils.WrappedDRPCExecutionException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
+import java.util.concurrent.*;
+
+import static org.junit.Assert.*;
 
 /**
  * Test JUnit4 per DRPC.
@@ -213,10 +205,10 @@ public class Zsp2DrpcTest {
         assertEquals(null, outstanding.getRequest().get_func_args());
     }
 
-//    @Test(expected = IllegalArgumentException.class)
-//    public void executeWithNullFunctionThrowsIllegalArgumentException() throws Exception {  //@AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
-//        drpc.execute(null, ARGS, BlockingOutstandingRequest.FACTORY);
-//    }
+    // @Test(expected = IllegalArgumentException.class) (FAILED) @AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
+    public void executeWithNullFunctionThrowsIllegalArgumentException() throws Exception {
+        drpc.execute(null, ARGS, BlockingOutstandingRequest.FACTORY);
+    }
 
     @Test(expected = NullPointerException.class)
     public void executeWithNullFactoryThrowsNullPointerException() throws Exception {

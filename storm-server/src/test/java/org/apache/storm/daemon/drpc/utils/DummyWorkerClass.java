@@ -1,5 +1,6 @@
-package org.apache.storm.daemon.drpc;
+package org.apache.storm.daemon.drpc.utils;
 
+import org.apache.storm.daemon.drpc.DRPCThrift;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;

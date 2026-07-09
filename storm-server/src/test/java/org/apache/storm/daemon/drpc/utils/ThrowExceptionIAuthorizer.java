@@ -1,4 +1,4 @@
-package org.apache.storm.daemon.drpc;
+package org.apache.storm.daemon.drpc.utils;
 
 import org.apache.storm.security.auth.IAuthorizer;
 import org.apache.storm.security.auth.ReqContext;

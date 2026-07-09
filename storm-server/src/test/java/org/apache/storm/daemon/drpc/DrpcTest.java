@@ -1,13 +1,17 @@
 package org.apache.storm.daemon.drpc;
 
 import com.codahale.metrics.Meter;
+import org.apache.storm.daemon.drpc.utils.DoNothingOutstandingRequest;
+import org.apache.storm.daemon.drpc.utils.ThrowExceptionIAuthorizer;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
 import org.apache.storm.metric.StormMetricsRegistry;
 import org.apache.storm.security.auth.IAuthorizer;
 import org.apache.storm.security.auth.ReqContext;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.MockedStatic;
@@ -101,7 +105,7 @@ public class DrpcTest {
         Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.fetchRequest(null));
     }
 
-    /** Test fetchRequest method with functionName = "try" (not existing) and state authorized. Expected = DRPCRequest with func_Args = "" and request_id = "" */
+    /** Test fetchRequest method with functionName = "try" (not existing) and state authorized. Expected = DRPCRequest with func_args = "" and request_id = "" */
     @Test
     public void fetchRequestNotCorrectFunctionNameAuthShouldPass() throws AuthorizationException {
 
@@ -109,7 +113,7 @@ public class DrpcTest {
         Assert.assertEquals(new DRPCRequest("",""), request);
     }
 
-    /** Test fetchRequest method with functionName = "try" (existing) and state authorized. Expected = DRPCRequest with func_Args = "args" and request_id = "1" */
+    /** Test fetchRequest method with functionName = "try" (existing) and state authorized. Expected = DRPCRequest with func_args = "args" and request_id = "1" */
     @SuppressWarnings("unchecked")
     @Test
     public void fetchRequestCorrectFunctionNameAuthShouldPass() throws AuthorizationException {
@@ -411,14 +415,14 @@ public class DrpcTest {
     @Test
     public void checkAuthorizationNullContextValidAuthNullOperationNullFunctionShouldPass() throws AuthorizationException {
 
-        boolean throwed;
+        boolean thrown;
         try{
-            throwed = false;
+            thrown = false;
             DRPC.checkAuthorization(null, mockAuthOk, null, null);
         }catch (NullPointerException e){
-            throwed = true;
+            thrown = true;
         }
-        Assert.assertFalse(throwed);
+        Assert.assertFalse(thrown);
     }
 
     /** Test checkAuthorization method with reqContext = null, IAuthorizer = valid ko (never permits) , operation = "", function = "". Expected = throws NullPointerException */
@@ -439,31 +443,31 @@ public class DrpcTest {
     @Test
     public void checkAuthorizationNotValidContextNullAuthValidOperationValidFunctionShouldPass() {
 
-        boolean throwed;
+        boolean thrown;
         try(MockedStatic<ReqContext> mockReqContext = Mockito.mockStatic(ReqContext.class)){   //EMULATE NO THREAD LOCAL
-            throwed = false;
+            thrown = false;
             mockReqContext.when(ReqContext::context).thenReturn(null);
             DRPC.checkAuthorization(ReqContext.context(), null, "execute", "try");
 
         }catch (AuthorizationException e){
-            throwed = true;
+            thrown = true;
         }
-        Assert.assertFalse(throwed);
+        Assert.assertFalse(thrown);
     }
 
     /** Test checkAuthorization method with valid reqContext, not valid IAuthorizer (permit throws exception), operation = "execute", function = "try". Expected = false */
     @Test
     public void checkAuthorizationValidContextNotValidAuthValidOperationValidFunctionShouldPass() {
 
-        boolean throwed = false;
+        boolean thrown = false;
         try{
             DRPC.checkAuthorization(ReqContext.context(), new ThrowExceptionIAuthorizer(), "execute", "try");
         }catch (UnsupportedOperationException e){
             //DO NOTHING
         }catch (AuthorizationException e){
-            throwed = true;
+            thrown = true;
         }
-        Assert.assertFalse(throwed);
+        Assert.assertFalse(thrown);
     }
 
     // TIMER TESTS

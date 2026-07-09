@@ -179,7 +179,6 @@
                 <configuration>
                     <targetClasses>
                         <param>org.apache.storm.daemon.drpc.DRPC</param>
-                        <param>org.apache.storm.daemon.drpc.DRPCThrift</param>
                     </targetClasses>
                     <targetTests>
                         <param>org.apache.storm.daemon.drpc.*Test</param>
@@ -193,7 +192,9 @@
                 <configuration>
                     <reuseForks>false</reuseForks>
                     <forkCount>1</forkCount>
-                    <argLine>@{argLine} ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
+                    <!--first for JaCoCo, second for pit-->
+<!--                    <argLine>@{argLine} ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>-->
+                     <argLine> ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
                 </configuration>
             </plugin>
             <plugin>

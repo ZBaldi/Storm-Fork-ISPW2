@@ -1,14 +1,7 @@
 package org.apache.storm.daemon.drpc;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-
 import com.codahale.metrics.Meter;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import org.apache.storm.daemon.drpc.utils.DoNothingOutstandingRequest;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.DRPCExecutionException;
 import org.apache.storm.generated.DRPCRequest;
@@ -21,6 +14,15 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 
 /**
  * Basic JUnit 4 tests for DRPC.
@@ -168,16 +170,16 @@ public class Fsp1DrpcTest {
         Assert.assertEquals(expectedRequest, actual);
     }
 
-//    /** Test execute method with null functionName and state authorized. Expected = throws IllegalArgumentException. */
-//    @SuppressWarnings("unchecked")
-//    @Test
-//    public void executeNullFunctionNameAuthThrowsIllegalArgumentException() {  //@AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
-//        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-//        OutstandingRequest request = new DoNothingOutstandingRequest(null, new DRPCRequest("args", "1"));
-//        Mockito.when(factory.mkRequest(any(), any(DRPCRequest.class))).thenReturn(request);
-//
-//        Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.execute(null, "args", factory));
-//    }
+    /** Test execute method with null functionName and state authorized. Expected = throws IllegalArgumentException. */
+    @SuppressWarnings("unchecked")
+    //@Test (FAILED) @AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
+    public void executeNullFunctionNameAuthThrowsIllegalArgumentException() {
+        RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+        OutstandingRequest request = new DoNothingOutstandingRequest(null, new DRPCRequest("args", "1"));
+        Mockito.when(factory.mkRequest(any(), any(DRPCRequest.class))).thenReturn(request);
+
+        Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.execute(null, "args", factory));
+    }
 
     /** Test execute method with valid strings, valid factory and state not authorized. Expected = throws AuthorizationException. */
     @SuppressWarnings("unchecked")
@@ -409,11 +411,11 @@ public class Fsp1DrpcTest {
         Assert.assertThrows(AuthorizationException.class, () -> drpcAuthKo.executeBlocking("try", "args"));
     }
 
-//    /** Test executeBlocking method with null functionName. Expected = throws IllegalArgumentException. */
-//    @Test
-//    public void executeBlockingNullFunctionNameAuthThrowsIllegalArgumentException() {   //@AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
-//        Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.executeBlocking(null, "args"));
-//    }
+    /** Test executeBlocking method with null functionName. Expected = throws IllegalArgumentException. */
+    // @Test (FAILED) @AFTER STARTS CLEANUP THAT DOES A GET WITH A NULL FUNCTION NAME --> NULL POINTER EXCEPTION
+    public void executeBlockingNullFunctionNameAuthThrowsIllegalArgumentException() {
+        Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.executeBlocking(null, "args"));
+    }
 
     /** Test executeBlocking method with functionName = "try", funcArgs = "args" and state not valid. Expected = throws NullPointerException. */
     @Test
