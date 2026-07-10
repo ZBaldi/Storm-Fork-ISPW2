@@ -2,10 +2,6 @@ package org.apache.storm.utils;
 
 import org.apache.storm.generated.AccessControl;
 import org.apache.storm.generated.AccessControlType;
-import org.apache.storm.thrift.TBase;
-import org.apache.storm.thrift.TDeserializer;
-import org.apache.storm.thrift.TException;
-import org.apache.storm.thrift.TSerializer;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,36 +19,43 @@ import java.util.*;
 @RunWith(MockitoJUnitRunner.class)
 public class UtilsTest {
 
-    //CHECK DIR EXISTS TESTS
-
     /** Setting up the test environment */
     @Before
     public void setUp() throws IOException {
+
         File dir = new File("correctDir");
         dir.mkdir();
         File file = new File("correctFile");
         file.createNewFile();
-
-        File yamlFile = new File("correctYamlFile");
+        File yamlFile = new File("correctYamlFile.yaml");
         yamlFile.createNewFile();
-
+        File propertiesFile = new File("notYamlFile.properties");
+        propertiesFile.createNewFile();
         try (FileWriter writer = new FileWriter(yamlFile)) {
             writer.write("key1: value1\n");
             writer.write("key2: value2\n");
         }
-
+        try (FileWriter writer = new FileWriter(propertiesFile)) {
+            writer.write("key1=value1\n");
+            writer.write("key2=value2\n");
+        }
     }
 
     /** Tearing down the test environment */
     @After
     public void tearDown() {
+
         File dir = new File("correctDir");
         dir.delete();
         File file = new File("correctFile");
         file.delete();
         File yamlFile = new File("correctYamlFile.yaml");
         yamlFile.delete();
+        File propertiesFile = new File("notYamlFile.properties");
+        propertiesFile.delete();
     }
+
+    //CHECK DIR EXISTS TESTS
 
     /** Test checkDirExists method with null directory. Expected = throws NullPointerException */
     @Test
@@ -177,18 +180,22 @@ public class UtilsTest {
 
     /** Test deserialize method with not valid byte array (not valid class), correct class. Expected = throws RuntimeException */
     @Test
-    public void deserializePartialByteArrayThrowsRuntimeException() {  //OBJECT HAS EMPTY VALUES
+    public void deserializePartialByteArrayThrowsRuntimeException() {
 
         Assert.assertThrows(RuntimeException.class, () -> {
             AccessControl expected = new AccessControl();
+            expected.set_type(AccessControlType.USER);
+            expected.set_access(0);
             byte[] serialized = Utils.serialize(expected);
-            Utils.deserialize(serialized, AccessControl.class);
+            byte[] truncated = Arrays.copyOf(serialized, serialized.length - 1);
+            Utils.deserialize(truncated, AccessControl.class);
         });
     }
 
     /** Test deserialize method with valid byte array (valid class), correct class. Expected = returns the deserialized class */
     @Test
     public void deserializeValidByteArrayShouldPass() {
+
         AccessControl expected = new AccessControl();
         expected.set_type(AccessControlType.USER);
         expected.set_access(0);
@@ -219,8 +226,10 @@ public class UtilsTest {
 
         Assert.assertThrows(RuntimeException.class, () -> {
             AccessControl expected = new AccessControl();
+            expected.set_type(AccessControlType.USER);
+            expected.set_access(0);
             String serialized = Utils.serializeToString(expected);
-            Utils.deserializeFromString(serialized, AccessControl.class);
+            Utils.deserializeFromString(serialized.substring(0, serialized.length() - 1), AccessControl.class);
         });
     }
 
@@ -254,20 +263,27 @@ public class UtilsTest {
         Assert.assertThrows(RuntimeException.class, () -> Utils.findAndReadConfigFile("", true));
     }
 
-    /** Test findAndReadConfigFile method with name = "notCorrectYamlFile", mustExists = false. Expected = Empty Map */
+    /** Test findAndReadConfigFile method with name = "notCorrectYamlFile.yaml", mustExists = false. Expected = Empty Map */
     @Test
     public void findAndReadConfigFileNotValidNameFalseMustExistsShouldPass(){
 
-        Map<String, Object> map = Utils.findAndReadConfigFile("notCorrectYamlFile", false);
+        Map<String, Object> map = Utils.findAndReadConfigFile("notCorrectYamlFile.yaml", false);
         Assert.assertEquals(Map.of(), map);
     }
 
-    /** Test findAndReadConfigFile method with name = "correctYamlFile", mustExists = true. Expected = Map containing key-value pairs of file yaml */
+    /** Test findAndReadConfigFile method with name = "correctYamlFile.yaml", mustExists = true. Expected = Map containing key-value pairs of file yaml */
     @Test
     public void findAndReadConfigFileValidNameTrueMustExistsShouldPass(){
 
-        Map<String, Object> map = Utils.findAndReadConfigFile("correctYamlFile", false);
+        Map<String, Object> map = Utils.findAndReadConfigFile("correctYamlFile.yaml", true);
         Assert.assertEquals(Map.of("key1", "value1", "key2", "value2"), map);
+    }
+
+    /** Test findAndReadConfigFile method with name = "notYamlFile.properties", mustExists = true. Expected = throws RuntimeException */
+    @Test
+    public void findAndReadConfigFileNotCorrectNameTrueMustExistsThrowsRuntimeException(){
+
+        Assert.assertThrows(RuntimeException.class, () -> Utils.findAndReadConfigFile("notYamlFile.properties", true));
     }
 
     // FIND ONE TESTS
@@ -315,7 +331,7 @@ public class UtilsTest {
         Assert.assertEquals(integer2, Utils.findOne(mockPredicate, set));
     }
 
-    /** Test findOne method with not correct IPredicate (no element in the collection is coherent with check) , one value Collection. Expected = null*/
+    /** Test findOne method with not correct IPredicate (no element in the collection is coherent with check) , one value Collection. Expected = null */
     @SuppressWarnings("unchecked")
     @Test
     public void findOneNotCorrectIPredicateValidCollectionShouldPass() {
@@ -354,9 +370,9 @@ public class UtilsTest {
         });
     }
 
-    /** Test fromCompressedJsonConf method with valid serialized (json formatted properly). Expected = Map containing ("name", "value") */
+    /** Test fromCompressedJsonConf method with valid serialized (json formatted properly). Expected = Map containing ("name", "pippo") */
     @Test
-    public void fromCompressedJsonConfValidSerializedThrowsRuntimeException(){
+    public void fromCompressedJsonConfValidSerializedShouldPass(){
 
         Map<String, Object> map = new HashMap<>();
         map.put("name", "pippo");
@@ -401,8 +417,7 @@ public class UtilsTest {
             expected.set_type(AccessControlType.USER);
             expected.set_access(0);
             byte[] serialized = Utils.javaSerialize(expected);
-            // Corrupt the serialized data by removing the last byte
-            byte[] truncated = java.util.Arrays.copyOf(serialized, serialized.length - 1);
+            byte[] truncated = Arrays.copyOf(serialized, serialized.length - 1);
             Utils.javaDeserialize(truncated, AccessControl.class);
         });
     }
@@ -415,9 +430,7 @@ public class UtilsTest {
     @Test
     public void joinNullCollectionNullSeparatorThrowsNullPointerException() {
 
-        Assert.assertThrows(NullPointerException.class, () -> {
-            Utils.join(null, null);
-        });
+        Assert.assertThrows(NullPointerException.class, () -> Utils.join(null, null));
     }
 
     /** Test join method with empty collection and valid separator. Expected = returns empty string */
@@ -454,18 +467,14 @@ public class UtilsTest {
     @Test
     public void thriftDeserializeCorrectClassNullByteZeroOffsetLengthOneThrowsRuntimeException() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
-            Utils.thriftDeserialize(AccessControl.class, null, 0, 1);
-        });
+        Assert.assertThrows(RuntimeException.class, () -> Utils.thriftDeserialize(AccessControl.class, null, 0, 1));
     }
 
     /** Test thriftDeserialize method with not correct class, empty byte array, offset 0, length 0. Expected = throws RuntimeException */
     @Test
     public void thriftDeserializeNotCorrectClassEmptyByteZeroOffsetZeroLengthThrowsRuntimeException() {
 
-        Assert.assertThrows(RuntimeException.class, () -> {
-            Utils.thriftDeserialize(String.class, new byte[0], 0, 0);
-        });
+        Assert.assertThrows(RuntimeException.class, () -> Utils.thriftDeserialize(String.class, new byte[0], 0, 0));
     }
 
     /** Test thriftDeserialize method with correct class, partial byte array, offset 0, length partial.length. Expected = throws RuntimeException */
@@ -477,7 +486,7 @@ public class UtilsTest {
             expected.set_type(AccessControlType.USER);
             expected.set_access(0);
             byte[] serialized = Utils.thriftSerialize(expected);
-            byte[] partial = java.util.Arrays.copyOf(serialized, serialized.length - 1);
+            byte[] partial = Arrays.copyOf(serialized, serialized.length - 1);
             Utils.thriftDeserialize(AccessControl.class, partial, 0, partial.length);
         });
     }
@@ -519,7 +528,7 @@ public class UtilsTest {
 
     /** Test reverseMap method with empty map. Expected = returns empty map */
     @Test
-    public void reverseMapEmptyMapShouldShouldPass() {
+    public void reverseMapEmptyMapShouldPass() {
 
         Map<String, Integer> map = Collections.emptyMap();
         HashMap<Integer, List<String>> result = Utils.reverseMap(map);
@@ -540,7 +549,7 @@ public class UtilsTest {
 
     /** Test reverseMap method with two elements having same value. Expected = single key mapping to list of both keys */
     @Test
-    public void reverseMapTwoElementsSameValueShouldPAss() {
+    public void reverseMapTwoElementsSameValueShouldPass() {
 
         Map<String, Integer> map = new LinkedHashMap<>();
         map.put("a", 1);
@@ -557,9 +566,7 @@ public class UtilsTest {
     @Test
     public void tupleNullVarargsThrowsNullPointerException() {
 
-        Assert.assertThrows(NullPointerException.class, () -> {
-            Utils.tuple((Object[]) null);
-        });
+        Assert.assertThrows(NullPointerException.class, () -> Utils.tuple((Object[]) null));
     }
 
     /** Test tuple method with empty varargs. Expected = returns empty list */
@@ -641,9 +648,7 @@ public class UtilsTest {
     @Test
     public void redactValueNullMapEmptyKeyThrowsNullPointerException() {
 
-        Assert.assertThrows(NullPointerException.class, () -> {
-            Utils.redactValue(null, "");
-        });
+        Assert.assertThrows(NullPointerException.class, () -> Utils.redactValue(null, ""));
     }
 
     /** Test redactValue method with empty map and null key. Expected = returns  empty map */
@@ -702,6 +707,17 @@ public class UtilsTest {
     public void integerDividedPositiveSumZeroPiecesThrowsArithmeticException() {
 
         Assert.assertThrows(ArithmeticException.class, () -> Utils.integerDivided(1, 0));
+    }
+
+    /** Test integerDivided method with sum = 1 and numPieces = 2. Expected = {0=1, 1=1} */
+    @Test
+    public void integerDividedPositiveSumPositivePiecesShouldPass() {
+
+        TreeMap<Integer, Integer> result = Utils.integerDivided(1, 2);
+        TreeMap<Integer, Integer> expected = new TreeMap<>();
+        expected.put(0, 1);
+        expected.put(1, 1);
+        Assert.assertEquals(expected, result);
     }
 
     // PARTITION FIXED TESTS
@@ -786,6 +802,4 @@ public class UtilsTest {
         String invalid = "{key: }";
         Assert.assertThrows(RuntimeException.class, () -> Utils.parseJson(invalid));
     }
-
-
 }
