@@ -1,6 +1,12 @@
 package org.apache.storm.utils;
 
+import org.apache.storm.Config;
+import org.apache.storm.blobstore.BlobStore;
+import org.apache.storm.blobstore.NimbusBlobStore;
 import org.apache.storm.generated.*;
+import org.apache.storm.shade.org.apache.zookeeper.ZooDefs;
+import org.apache.storm.shade.org.apache.zookeeper.data.ACL;
+import org.apache.storm.shade.org.apache.zookeeper.data.Id;
 import org.junit.*;
 import org.junit.rules.TemporaryFolder;
 
@@ -29,6 +35,8 @@ import static org.mockito.Mockito.when;
  * NOTE: methods that terminate the JVM or install process-wide hooks/handlers are tested only for safe contracts
  * or explicitly ignored where executing them would make the test suite non-deterministic/destructive.
  */
+
+/** FIXED MANUALLY */
 public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
     /* ### Test START ### */
 
@@ -247,16 +255,16 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertThrows(NullPointerException.class, () -> Utils.isSystemId(null));
     }
 
-//    /** Test asyncLoop full signature with startImmediately false. Expected = returns configured SmartThread */
-//    @Test
-//    public void asyncLoopFullSignatureStartFalseShouldReturnThread() {
-//        Callable<Long> callable = () -> 1000L;
-//        UncaughtExceptionHandler handler = (thread, throwable) -> { };
-//        Utils.SmartThread thread = Utils.asyncLoop(callable, true, handler, Thread.NORM_PRIORITY, false, false, "fsp4");
-//        Assert.assertNotNull(thread);
-//        Assert.assertTrue(thread.isDaemon());
-//        Assert.assertEquals("fsp4", thread.getName());
-//    }
+    /** Test asyncLoop full signature with startImmediately false. Expected = returns configured SmartThread */
+    // @Test
+    public void asyncLoopFullSignatureStartFalseShouldReturnThread() {
+        Callable<Long> callable = () -> 1000L;
+        UncaughtExceptionHandler handler = (thread, throwable) -> { };
+        Utils.SmartThread thread = Utils.asyncLoop(callable, true, handler, Thread.NORM_PRIORITY, false, false, "fsp4");
+        Assert.assertNotNull(thread);
+        Assert.assertTrue(thread.isDaemon());
+        Assert.assertEquals("fsp4", thread.getName());
+    }
 
     /** Test asyncLoop overload with callable and threadName. Expected = returns SmartThread */
     @Test
@@ -439,13 +447,13 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("anullb", Utils.join(Arrays.asList("a", "b"), null));
     }
 
-//    /** Test parseZkId method with valid scheme:id value. Expected = Id */
-//    @Test
-//    public void parseZkIdValidIdShouldPass() {
-//        Id id = Utils.parseZkId("digest:user", "test.config");
-//        Assert.assertEquals("digest", id.getScheme());
-//        Assert.assertEquals("user", id.getId());
-//    }
+    /** Test parseZkId method with valid scheme:id value. Expected = Id */
+    // @Test
+    public void parseZkIdValidIdShouldPass() {
+        Id id = Utils.parseZkId("digest:user", "test.config");
+        Assert.assertEquals("digest", id.getScheme());
+        Assert.assertEquals("user", id.getId());
+    }
 
     /** Test parseZkId method with invalid value. Expected = throws IllegalArgumentException */
     @Test
@@ -453,24 +461,24 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertThrows(IllegalArgumentException.class, () -> Utils.parseZkId("invalid", "test.config"));
     }
 
-//    /** Test getSuperUserAcl method with configured super acl. Expected = ALL permissions ACL */
-//    @Test
-//    public void getSuperUserAclConfiguredShouldPass() {
-//        Map<String, Object> conf = new HashMap<>();
-//        conf.put(Config.STORM_ZOOKEEPER_SUPERACL, "digest:user");
-//        ACL acl = Utils.getSuperUserAcl(conf);
-//        Assert.assertEquals(ZooDefs.Perms.ALL, acl.getPerms());
-//        Assert.assertEquals("digest", acl.getId().getScheme());
-//        Assert.assertEquals("user", acl.getId().getId());
-//    }
+    /** Test getSuperUserAcl method with configured super acl. Expected = ALL permissions ACL */
+    // @Test
+    public void getSuperUserAclConfiguredShouldPass() {
+        Map<String, Object> conf = new HashMap<>();
+        conf.put(Config.STORM_ZOOKEEPER_SUPERACL, "digest:user");
+        ACL acl = Utils.getSuperUserAcl(conf);
+        Assert.assertEquals(ZooDefs.Perms.ALL, acl.getPerms());
+        Assert.assertEquals("digest", acl.getId().getScheme());
+        Assert.assertEquals("user", acl.getId().getId());
+    }
 
-//    /** Test getWorkerACL method with no authentication configured. Expected = null or empty according to configuration */
-//    @Test
-//    public void getWorkerACLNoAuthenticationShouldReturnNullOrList() {
-//        Map<String, Object> conf = new HashMap<>();
-//        List<ACL> acls = Utils.getWorkerACL(conf);
-//        Assert.assertTrue(acls == null || acls.isEmpty() || !acls.isEmpty());
-//    }
+    /** Test getWorkerACL method with no authentication configured. Expected = null or empty according to configuration */
+    // @Test
+    public void getWorkerACLNoAuthenticationShouldReturnNullOrList() {
+        Map<String, Object> conf = new HashMap<>();
+        List<ACL> acls = Utils.getWorkerACL(conf);
+        Assert.assertTrue(acls == null || acls.isEmpty() || !acls.isEmpty());
+    }
 
     /** Test isZkAuthenticationConfiguredTopology method with empty conf. Expected = false */
     @Test
@@ -493,12 +501,12 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertThrows(Throwable.class, () -> Utils.handleUncaughtException(null));
     }
 
-//    /** Test handleWorkerUncaughtException with allowed InterruptedException. Expected = completes or handles consistently */
-//    @Test
-//    public void handleWorkerUncaughtExceptionInterruptedShouldPass() {
-//        Utils.handleWorkerUncaughtException(new RuntimeException(new InterruptedException("ignored")));
-//        Assert.assertTrue(true);
-//    }
+    /** Test handleWorkerUncaughtException with allowed InterruptedException. Expected = completes or handles consistently */
+    // @Test
+    public void handleWorkerUncaughtExceptionInterruptedShouldPass() {
+        Utils.handleWorkerUncaughtException(new RuntimeException(new InterruptedException("ignored")));
+        Assert.assertTrue(true);
+    }
 
     /** Test thriftSerialize/thriftDeserialize methods with valid thrift object. Expected = round trip object */
     @Test
@@ -596,21 +604,21 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertFalse(file.exists());
     }
 
-//    /** Test serialize/deserialize methods with valid object. Expected = round trip object */
-//    @Test
-//    public void serializeAndDeserializeValidObjectShouldPass() {
-//        TestPojo expected = new TestPojo("correct", 2);
-//        byte[] serialized = Utils.serialize(expected);
-//        Assert.assertEquals(expected, Utils.deserialize(serialized, TestPojo.class));
-//    }
+    /** Test serialize/deserialize methods with valid object. Expected = round trip object */
+    // @Test
+    public void serializeAndDeserializeValidObjectShouldPass() {
+        TestPojo expected = new TestPojo("correct", 2);
+        byte[] serialized = Utils.serialize(expected);
+        Assert.assertEquals(expected, Utils.deserialize(serialized, TestPojo.class));
+    }
 
-//    /** Test serializeToString/deserializeFromString methods with valid object. Expected = round trip object */
-//    @Test
-//    public void serializeToStringAndDeserializeFromStringValidObjectShouldPass() {
-//        TestPojo expected = new TestPojo("correct", 3);
-//        String serialized = Utils.serializeToString(expected);
-//        Assert.assertEquals(expected, Utils.deserializeFromString(serialized, TestPojo.class));
-//    }
+    /** Test serializeToString/deserializeFromString methods with valid object. Expected = round trip object */
+    // @Test
+    public void serializeToStringAndDeserializeFromStringValidObjectShouldPass() {
+        TestPojo expected = new TestPojo("correct", 3);
+        String serialized = Utils.serializeToString(expected);
+        Assert.assertEquals(expected, Utils.deserializeFromString(serialized, TestPojo.class));
+    }
 
     /** Test deserialize method with null serialized. Expected = throws NullPointerException */
     @Test
@@ -659,18 +667,18 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertSame(common, Utils.getComponentCommon(topology, "spout"));
     }
 
-//    /** Test getComponentCommon method with bolt id. Expected = bolt common */
-//    @Test
-//    public void getComponentCommonBoltShouldReturnCommon() {
-//        ComponentCommon common = new ComponentCommon();
-//        Bolt bolt = new Bolt();
-//        bolt.set_common(common);
-//        StormTopology topology = new StormTopology();
-//        Map<String, Bolt> bolts = new HashMap<>();
-//        bolts.put("bolt", bolt);
-//        topology.set_bolts(bolts);
-//        Assert.assertSame(common, Utils.getComponentCommon(topology, "bolt"));
-//    }
+    /** Test getComponentCommon method with bolt id. Expected = bolt common */
+    // @Test
+    public void getComponentCommonBoltShouldReturnCommon() {
+        ComponentCommon common = new ComponentCommon();
+        Bolt bolt = new Bolt();
+        bolt.set_common(common);
+        StormTopology topology = new StormTopology();
+        Map<String, Bolt> bolts = new HashMap<>();
+        bolts.put("bolt", bolt);
+        topology.set_bolts(bolts);
+        Assert.assertSame(common, Utils.getComponentCommon(topology, "bolt"));
+    }
 
     /** Test tuple method with values. Expected = list preserving order */
     @Test
@@ -707,14 +715,14 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
 
 //    /** Test getSetComponentObject with java object. Expected = object value */
 //    @Test
-//    public void getSetComponentObjectJavaObjectShouldReturnObject() {
+//    public void getSetComponentObjectJavaObjectShouldReturnObject() { (GENERATED IN A WRONG WAY)
 //        ComponentObject obj = ComponentObject.java_object("value");
 //        Assert.assertEquals("value", Utils.getSetComponentObject(obj));
 //    }
-//
+
 //    /** Test getSetComponentObject with shell object. Expected = shell value */
 //    @Test
-//    public void getSetComponentObjectShellShouldReturnShell() {
+//    public void getSetComponentObjectShellShouldReturnShell() {   (GENERATED IN A WRONG WAY)
 //        ShellComponent shell = new ShellComponent(Arrays.asList("python"), "bolt.py");
 //        ComponentObject obj = ComponentObject.shell(shell);
 //        Assert.assertSame(shell, Utils.getSetComponentObject(obj));
@@ -739,17 +747,17 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertFalse(Utils.processPid().trim().isEmpty());
     }
 
-//    /** Test toCompressedJsonConf/fromCompressedJsonConf methods with valid map. Expected = round trip map */
-//    @Test
-//    public void toCompressedJsonConfAndFromCompressedJsonConfValidMapShouldPass() {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("key", "value");
-//        map.put("num", 1L);
-//        byte[] serialized = Utils.toCompressedJsonConf(map);
-//        Map<String, Object> actual = Utils.fromCompressedJsonConf(serialized);
-//        Assert.assertEquals("value", actual.get("key"));
-//        Assert.assertEquals(1L, actual.get("num"));
-//    }
+    /** Test toCompressedJsonConf/fromCompressedJsonConf methods with valid map. Expected = round trip map */
+    // @Test
+    public void toCompressedJsonConfAndFromCompressedJsonConfValidMapShouldPass() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("key", "value");
+        map.put("num", 1L);
+        byte[] serialized = Utils.toCompressedJsonConf(map);
+        Map<String, Object> actual = Utils.fromCompressedJsonConf(serialized);
+        Assert.assertEquals("value", actual.get("key"));
+        Assert.assertEquals(1L, actual.get("num"));
+    }
 
     /** Test fromCompressedJsonConf method with invalid serialized. Expected = throws RuntimeException */
     @Test
@@ -815,11 +823,11 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals(Double.valueOf(128.0), Utils.parseJvmHeapMemByChildOpts(Collections.<String>emptyList(), 128.0));
     }
 
-//    /** Test isValidConf with null conf. Expected = false */
-//    @Test
-//    public void isValidConfNullShouldReturnFalse() {
-//        Assert.assertFalse(Utils.isValidConf(null));
-//    }
+    /** Test isValidConf with null conf. Expected = false */
+    // @Test
+    public void isValidConfNullShouldReturnFalse() {
+        Assert.assertFalse(Utils.isValidConf(null));
+    }
 
     /** Test isValidConf with empty conf. Expected = boolean, no exception */
     @Test
@@ -836,12 +844,12 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNull(Utils.getTopologyId("missing", client));
     }
 
-//    /** Test validateTopologyBlobStoreMap with empty conf. Expected = completes without exception */
-//    @Test
-//    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
-//        Assert.assertTrue(true);
-//    }
+    /** Test validateTopologyBlobStoreMap with empty conf. Expected = completes without exception */
+    // @Test
+    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
+        Assert.assertTrue(true);
+    }
 
     /** Test threadDump method. Expected = human-readable non-empty dump */
     @Test
@@ -908,22 +916,22 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("b", Utils.OR(null, "b"));
     }
 
-//    /** Test integerDivided with boundary sum = 0. Expected = all pieces zero */
-//    @Test
-//    public void integerDividedZeroSumShouldReturnZeros() {
-//        TreeMap<Integer, Integer> ret = Utils.integerDivided(0, 3);
-//        Assert.assertEquals(3, ret.size());
-//        Assert.assertEquals(Integer.valueOf(0), ret.get(0));
-//    }
+    /** Test integerDivided with boundary sum = 0. Expected = all pieces zero */
+    // @Test
+    public void integerDividedZeroSumShouldReturnZeros() {
+        TreeMap<Integer, Integer> ret = Utils.integerDivided(0, 3);
+        Assert.assertEquals(3, ret.size());
+        Assert.assertEquals(Integer.valueOf(0), ret.get(0));
+    }
 
-//    /** Test integerDivided with valid sum and pieces. Expected = values sum to original */
-//    @Test
-//    public void integerDividedValidValuesShouldSumToOriginal() {
-//        TreeMap<Integer, Integer> ret = Utils.integerDivided(10, 3);
-//        int sum = 0;
-//        for (Integer v : ret.values()) { sum += v; }
-//        Assert.assertEquals(10, sum);
-//    }
+    /** Test integerDivided with valid sum and pieces. Expected = values sum to original */
+    // @Test
+    public void integerDividedValidValuesShouldSumToOriginal() {
+        TreeMap<Integer, Integer> ret = Utils.integerDivided(10, 3);
+        int sum = 0;
+        for (Integer v : ret.values()) { sum += v; }
+        Assert.assertEquals(10, sum);
+    }
 
     /** Test partitionFixed with empty collection. Expected = empty list */
     @Test
@@ -984,14 +992,14 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNull(Utils.findOne(x -> x > 5, Arrays.asList(1, 2, 3)));
     }
 
-//    /** Test findOne map overload with matching predicate. Expected = first matching value */
-//    @Test
-//    public void findOneMapMatchingPredicateShouldReturnMatch() {
-//        Map<String, Integer> map = new HashMap<>();
-//        map.put("a", 1);
-//        map.put("b", 2);
-//        Assert.assertEquals(Integer.valueOf(2), Utils.findOne(x -> x == 2, map));
-//    }
+    /** Test findOne map overload with matching predicate. Expected = first matching value */
+    // @Test
+    public void findOneMapMatchingPredicateShouldReturnMatch() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        Assert.assertEquals(Integer.valueOf(2), Utils.findOne(x -> x == 2, map));
+    }
 
     /** Test parseJson with null json. Expected = empty map */
     @Test
@@ -1050,11 +1058,11 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNotNull(Utils.getConfiguredWorkerLogWriterVersions(new HashMap<String, Object>()));
     }
 
-//    /** Test getCompatibleVersion with empty versioned map. Expected = default value */
-//    @Test
-//    public void getCompatibleVersionEmptyMapShouldReturnDefaultValue() {
-//        Assert.assertEquals("default", Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1,0,0"), "test", "default"));  // CHANGED 1,0,0 TO STRING "1,0,0"
-//    }
+    /** Test getCompatibleVersion with empty versioned map. Expected = default value */
+    // @Test
+    public void getCompatibleVersionEmptyMapShouldReturnDefaultValue() {
+        Assert.assertEquals("default", Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1,0,0"), "test", "default"));  // CHANGED 1,0,0 TO STRING "1,0,0"
+    }
 
     /** Test getConfigFromClasspath with empty classpath. Expected = original conf or defaults-compatible map */
     @Test
@@ -1172,13 +1180,13 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNull(Utils.getTopologyInfo("missing", null, new HashMap<String, Object>()));
     }
 
-//    /** Test validateTopologyBlobStoreMap overloads with concrete clients. Ignored because it requires BlobStore/NimbusBlobStore concrete environment */
-//    @Ignore("Integration-style overloads: require BlobStore/NimbusBlobStore instances configured by the project")
-//    @Test
-//    public void validateTopologyBlobStoreMapOverloadsRequireConcreteBlobStores() {
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), (NimbusBlobStore) null);
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), (BlobStore) null);
-//    }
+    /** Test validateTopologyBlobStoreMap overloads with concrete clients. Ignored because it requires BlobStore/NimbusBlobStore concrete environment */
+    @Ignore("Integration-style overloads: require BlobStore/NimbusBlobStore instances configured by the project")
+    @Test
+    public void validateTopologyBlobStoreMapOverloadsRequireConcreteBlobStores() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), (NimbusBlobStore) null);
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), (BlobStore) null);
+    }
 
     /* ### Test END ### */
 }

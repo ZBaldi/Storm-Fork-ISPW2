@@ -25,6 +25,8 @@ import static org.mockito.Mockito.mock;
  * Some methods touch OS, network, JVM shutdown hooks or external Storm services: those tests are intentionally simple
  * and some dangerous cases are ignored.
  */
+
+/** FIXED MANUALLY */
 public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
 
     // ### Test START ###
@@ -155,13 +157,13 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertFalse(Utils.isSystemId("spout"));
     }
 
-//    /** Test asyncLoop method with full parameters and startImmediately false. Expected = SmartThread */
-//    @Test
-//    public void asyncLoopFullParametersShouldPass() {
-//        Utils.SmartThread thread = Utils.asyncLoop(() -> null, true, null, Thread.NORM_PRIORITY, false, false, "test-thread");
-//        Assert.assertNotNull(thread);
-//        Assert.assertEquals("test-thread", thread.getName());
-//    }
+    /** Test asyncLoop method with full parameters and startImmediately false. Expected = SmartThread */
+    // @Test
+    public void asyncLoopFullParametersShouldPass() {
+        Utils.SmartThread thread = Utils.asyncLoop(() -> null, true, null, Thread.NORM_PRIORITY, false, false, "test-thread");
+        Assert.assertNotNull(thread);
+        Assert.assertEquals("test-thread", thread.getName());
+    }
 
     /** Test asyncLoop method with threadName. Expected = SmartThread */
     @Test
@@ -504,15 +506,15 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.readAndLogStream("prefix", in);
     }
 
-//    /** Test getComponentCommon method with empty topology. Expected = null */
-//    @Test
-//    public void getComponentCommonEmptyTopologyShouldPass() {
-//        StormTopology topology = new StormTopology();
-//        topology.set_spouts(new HashMap<>());
-//        topology.set_bolts(new HashMap<>());
-//        topology.set_state_spouts(new HashMap<>());
-//        Assert.assertNull(Utils.getComponentCommon(topology, "missing"));
-//    }
+    /** Test getComponentCommon method with empty topology. Expected = null */
+    // @Test
+    public void getComponentCommonEmptyTopologyShouldPass() {
+        StormTopology topology = new StormTopology();
+        topology.set_spouts(new HashMap<>());
+        topology.set_bolts(new HashMap<>());
+        topology.set_state_spouts(new HashMap<>());
+        Assert.assertNull(Utils.getComponentCommon(topology, "missing"));
+    }
 
     /** Test tuple method with valid values. Expected = list with same values */
     @Test
@@ -542,7 +544,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("stream1", id.get_streamId());
     }
 
-//    /** Test getSetComponentObject method with java object. Expected = stored object */
+//    /** Test getSetComponentObject method with java object. Expected = stored object */  (GENERATED IN A WRONG WAY)
 //    @Test
 //    public void getSetComponentObjectJavaObjectShouldPass() {
 //        ComponentObject obj = ComponentObject.java_object("hello");
@@ -663,11 +665,11 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNull(Utils.getTopologyId("missing", client));
     }
 
-//    /** Test validateTopologyBlobStoreMap method with empty config. Expected = no exception */
-//    @Test
-//    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
-//    }
+    /** Test validateTopologyBlobStoreMap method with empty config. Expected = no exception */
+    // @Test
+    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
+    }
 
     /** Test validateTopologyBlobStoreMap with NimbusBlobStore. Expected = no exception for empty config */
     @Ignore("Requires NimbusBlobStore dependency")
@@ -676,12 +678,12 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), mock(org.apache.storm.blobstore.NimbusBlobStore.class));
     }
 
-//    /** Test validateTopologyBlobStoreMap with BlobStore. Expected = no exception for empty config */
-//    @Ignore("Requires BlobStore dependency")
-//    @Test
-//    public void validateTopologyBlobStoreMapBlobStoreShouldPass() throws AuthorizationException, InvalidTopologyException { // ADDED THROWS
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), mock(org.apache.storm.blobstore.BlobStore.class));
-//    }
+    /** Test validateTopologyBlobStoreMap with BlobStore. Expected = no exception for empty config */
+    @Ignore("Requires BlobStore dependency")
+    @Test
+    public void validateTopologyBlobStoreMapBlobStoreShouldPass() throws AuthorizationException, InvalidTopologyException { // ADDED THROWS
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>(), mock(org.apache.storm.blobstore.BlobStore.class));
+    }
 
     /** Test threadDump method. Expected = string contains Thread */
     @Test
@@ -739,17 +741,17 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("b", Utils.OR(null, "b"));
     }
 
-//    /** Test integerDivided method with positive values. Expected = sum divided */
-//    @Test
-//    public void integerDividedValidValuesShouldPass() {
-//        TreeMap<Integer, Integer> result = Utils.integerDivided(10, 3);
-//        int total = 0;
-//        for (Integer value : result.values()) {
-//            total += value;
-//        }
-//        Assert.assertEquals(10, total);
-//        Assert.assertEquals(3, result.size());
-//    }
+    /** Test integerDivided method with positive values. Expected = sum divided */
+    // @Test
+    public void integerDividedValidValuesShouldPass() {
+        TreeMap<Integer, Integer> result = Utils.integerDivided(10, 3);
+        int total = 0;
+        for (Integer value : result.values()) {
+            total += value;
+        }
+        Assert.assertEquals(10, total);
+        Assert.assertEquals(3, result.size());
+    }
 
     /** Test partitionFixed method with simple list. Expected = chunks */
     @Test
@@ -801,15 +803,15 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNull(result);
     }
 
-//    /** Test findOne method with map and matching predicate. Expected = first matching value */
-//    @Test
-//    public void findOneMapMatchShouldPass() {
-//        Map<String, Integer> map = new LinkedHashMap<>();
-//        map.put("a", 1);
-//        map.put("b", 2);
-//        Integer result = Utils.findOne(x -> x > 1, map);
-//        Assert.assertEquals(Integer.valueOf(2), result);
-//    }
+    /** Test findOne method with map and matching predicate. Expected = first matching value */
+    // @Test
+    public void findOneMapMatchShouldPass() {
+        Map<String, Integer> map = new LinkedHashMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        Integer result = Utils.findOne(x -> x > 1, map);
+        Assert.assertEquals(Integer.valueOf(2), result);
+    }
 
     /** Test parseJson method with valid json. Expected = map */
     @Test
@@ -818,11 +820,11 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("value", result.get("key"));
     }
 
-//    /** Test parseJson method with empty json. Expected = empty map */
-//    @Test
-//    public void parseJsonEmptyStringShouldPass() {
-//        Assert.assertEquals(new HashMap<String, Object>(), Utils.parseJson(""));
-//    }
+    /** Test parseJson method with empty json. Expected = empty map */
+    // @Test
+    public void parseJsonEmptyStringShouldPass() {
+        Assert.assertEquals(new HashMap<String, Object>(), Utils.parseJson(""));
+    }
 
     /** Test memoizedLocalHostname method. Expected = not empty */
     @Test
@@ -946,11 +948,11 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.validateTopologyName("validTopologyName");
     }
 
-//    /** Test validateTopologyName method with invalid name. Expected = InvalidTopologyException */
-//    @Test
-//    public void validateTopologyNameInvalidThrowsException() {
-//        Assert.assertThrows(InvalidTopologyException.class, () -> Utils.validateTopologyName("bad/name"));
-//    }
+    /** Test validateTopologyName method with invalid name. Expected = InvalidTopologyException */
+    // @Test
+    public void validateTopologyNameInvalidThrowsException() {
+        Assert.assertThrows(InvalidTopologyException.class, () -> Utils.validateTopologyName("bad/name"));
+    }
 
     /** Test findComponentCycles method with empty topology. Expected = empty list */
     @Test

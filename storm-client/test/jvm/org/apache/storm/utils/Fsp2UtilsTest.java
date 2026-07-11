@@ -29,6 +29,8 @@ import static org.mockito.Mockito.when;
  * checks are kept at a middle tester level: representative category-partition cases, boundary
  * values and limited mocking where isolation from external dependencies is useful.
  */
+
+/** FIXED MANUALLY */
 public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 
     /* ### Test START ### */
@@ -137,14 +139,14 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertTrue(Utils.readCommandLineOpts().isEmpty());
     }
 
-//    /** Test readCommandLineOpts with valid encoded values. Expected = parsed map. */
-//    @Test
-//    public void readCommandLineOptsValidPropertyShouldParseValues() {
-//        System.setProperty("storm.options", "a=1,b=" + Utils.urlEncodeUtf8("hello world"));
-//        Map<String, Object> opts = Utils.readCommandLineOpts();
-//        Assert.assertEquals(1L, opts.get("a"));
-//        Assert.assertEquals("hello world", opts.get("b"));
-//    }
+    /** Test readCommandLineOpts with valid encoded values. Expected = parsed map. */
+    // @Test
+    public void readCommandLineOptsValidPropertyShouldParseValues() {
+        System.setProperty("storm.options", "a=1,b=" + Utils.urlEncodeUtf8("hello world"));
+        Map<String, Object> opts = Utils.readCommandLineOpts();
+        Assert.assertEquals(1L, opts.get("a"));
+        Assert.assertEquals("hello world", opts.get("b"));
+    }
 
     /** Test readStormConfig. Expected = non-null configuration map. */
     @Test
@@ -560,7 +562,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 
 //    /** Test getComponentCommon for spout, bolt and state spout. Expected = component common returned. */
 //    @Test
-//    public void getComponentCommonExistingComponentsShouldPass() {
+//    public void getComponentCommonExistingComponentsShouldPass() {  (GENERATED IN A WRONG WAY)
 //        ComponentCommon spoutCommon = new ComponentCommon();
 //        ComponentCommon boltCommon = new ComponentCommon();
 //        ComponentCommon stateCommon = new ComponentCommon();
@@ -606,12 +608,12 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 //        Assert.assertEquals("value", Utils.getSetComponentObject(ComponentObject.java_object("value")));
 //    }
 
-//    /** Test getSetComponentObject with shell object. Expected = shell value. */
-//    @Test
-//    public void getSetComponentObjectShellShouldPass() {
-//        ShellComponent shell = new ShellComponent(Arrays.asList("python"), "component.py");
-//        Assert.assertEquals(shell, Utils.getSetComponentObject(ComponentObject.shell(shell)));
-//    }
+    /** Test getSetComponentObject with shell object. Expected = shell value. */
+    @Test
+    public void getSetComponentObjectShellShouldPass() {
+        ShellComponent shell = new ShellComponent("python", "component.py");  // CHANGED FIRST PARAMETER FROM LIST TO STRING
+        Assert.assertEquals(shell, Utils.getSetComponentObject(ComponentObject.shell(shell)));
+    }
 
     /** Test toPositive with boundary values. Expected = non-negative values. */
     @Test
@@ -628,14 +630,14 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertFalse(Utils.processPid().isEmpty());
     }
 
-//    /** Test toCompressedJsonConf/fromCompressedJsonConf with valid map. Expected = round trip. */
-//    @Test
-//    public void compressedJsonConfValidMapShouldPass() {
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("a", 1L);
-//        byte[] serialized = Utils.toCompressedJsonConf(map);
-//        Assert.assertEquals(map, Utils.fromCompressedJsonConf(serialized));
-//    }
+    /** Test toCompressedJsonConf/fromCompressedJsonConf with valid map. Expected = round trip. */
+    // @Test
+    public void compressedJsonConfValidMapShouldPass() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("a", 1L);
+        byte[] serialized = Utils.toCompressedJsonConf(map);
+        Assert.assertEquals(map, Utils.fromCompressedJsonConf(serialized));
+    }
 
     /** Test fromCompressedJsonConf with invalid bytes. Expected = RuntimeException. */
     @Test
@@ -675,12 +677,12 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         }
     }
 
-//    /** Test isValidConf with valid-like configuration. Expected = boolean result without exception. */
-//    @Test
-//    public void isValidConfSmokeShouldReturnBoolean() {
-//        Assert.assertFalse(Utils.isValidConf(null));
-//        Assert.assertEquals(Utils.isValidConf(new HashMap<String, Object>()), Utils.isValidConf(new HashMap<String, Object>()));
-//    }
+    /** Test isValidConf with valid-like configuration. Expected = boolean result without exception. */
+    // @Test
+    public void isValidConfSmokeShouldReturnBoolean() {
+        Assert.assertFalse(Utils.isValidConf(null));
+        Assert.assertEquals(Utils.isValidConf(new HashMap<String, Object>()), Utils.isValidConf(new HashMap<String, Object>()));
+    }
 
     /** Test getTopologyInfo with null-like unknown name. Expected = null or wrapped exception based on external service availability. */
     @Test
@@ -693,25 +695,25 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         }
     }
 
-//    /** Test getTopologyId with mocked Nimbus client. Expected = matching topology id. */
-//    @Test
-//    public void getTopologyIdMatchingNameShouldReturnId() throws Exception {
-//        Nimbus.Iface client = mock(Nimbus.Iface.class);
-//        TopologySummary summary = new TopologySummary();
-//        summary.set_name("topology-a");
-//        summary.set_id("id-a");
-//        org.apache.storm.generated.ClusterSummary clusterSummary = new org.apache.storm.generated.ClusterSummary();
-//        clusterSummary.set_topologies(Collections.singletonList(summary));
-//        when(client.getClusterInfo()).thenReturn(clusterSummary);
-//
-//        Assert.assertEquals("id-a", Utils.getTopologyId("topology-a", client));
-//    }
+    /** Test getTopologyId with mocked Nimbus client. Expected = matching topology id. */
+    // @Test
+    public void getTopologyIdMatchingNameShouldReturnId() throws Exception {
+        Nimbus.Iface client = mock(Nimbus.Iface.class);
+        TopologySummary summary = new TopologySummary();
+        summary.set_name("topology-a");
+        summary.set_id("id-a");
+        org.apache.storm.generated.ClusterSummary clusterSummary = new org.apache.storm.generated.ClusterSummary();
+        clusterSummary.set_topologies(Collections.singletonList(summary));
+        when(client.getClusterInfo()).thenReturn(clusterSummary);
 
-//    /** Test validateTopologyBlobStoreMap with empty config. Expected = completes. */
-//    @Test
-//    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws Exception {
-//        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
-//    }
+        Assert.assertEquals("id-a", Utils.getTopologyId("topology-a", client));
+    }
+
+    /** Test validateTopologyBlobStoreMap with empty config. Expected = completes. */
+    // @Test
+    public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws Exception {
+        Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
+    }
 
     /** Test validateTopologyBlobStoreMap overload with mocked NimbusBlobStore. Expected = completes for empty config. */
     @Test
@@ -770,14 +772,14 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertEquals("a", Utils.OR("a", "b"));
     }
 
-//    /** Test integerDivided with boundary values. Expected = sum distributed among pieces. */
-//    @Test
-//    public void integerDividedValidValuesShouldPass() {
-//        TreeMap<Integer, Integer> ret = Utils.integerDivided(10, 3);
-//        Assert.assertEquals(Integer.valueOf(4), ret.get(0));
-//        Assert.assertEquals(Integer.valueOf(3), ret.get(1));
-//        Assert.assertEquals(Integer.valueOf(3), ret.get(2));
-//    }
+    /** Test integerDivided with boundary values. Expected = sum distributed among pieces. */
+    // @Test
+    public void integerDividedValidValuesShouldPass() {
+        TreeMap<Integer, Integer> ret = Utils.integerDivided(10, 3);
+        Assert.assertEquals(Integer.valueOf(4), ret.get(0));
+        Assert.assertEquals(Integer.valueOf(3), ret.get(1));
+        Assert.assertEquals(Integer.valueOf(3), ret.get(2));
+    }
 
     /** Test partitionFixed with max chunks lower than collection size. Expected = fixed number of chunks. */
     @Test
@@ -821,7 +823,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 
 //    /** Test findOne with map. Expected = matching map entry object or null if no match. */
 //    @Test
-//    public void findOneMapShouldReturnMatch() {
+//    public void findOneMapShouldReturnMatch() {  (GENERATED IN A WRONG WAY)
 //        Map<String, Integer> map = new LinkedHashMap<>();
 //        map.put("a", 1);
 //        map.put("b", 2);
@@ -831,13 +833,13 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 //        Assert.assertEquals("b", ret.getKey());
 //    }
 
-//    /** Test parseJson with valid and blank json. Expected = parsed map and empty map. */
-//    @Test
-//    public void parseJsonValidAndBlankShouldPass() {
-//        Assert.assertEquals(1L, Utils.parseJson("{\"a\":1}").get("a"));
-//        Assert.assertTrue(Utils.parseJson(null).isEmpty());
-//        Assert.assertTrue(Utils.parseJson("").isEmpty());
-//    }
+    /** Test parseJson with valid and blank json. Expected = parsed map and empty map. */
+    // @Test
+    public void parseJsonValidAndBlankShouldPass() {
+        Assert.assertEquals(1L, Utils.parseJson("{\"a\":1}").get("a"));
+        Assert.assertTrue(Utils.parseJson(null).isEmpty());
+        Assert.assertTrue(Utils.parseJson("").isEmpty());
+    }
 
     /** Test memoizedLocalHostname. Expected = stable non-null value. */
     @Test
@@ -881,12 +883,12 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertNotNull(Utils.getConfiguredWorkerLogWriterVersions(new HashMap<String, Object>()));
     }
 
-//    /** Test getCompatibleVersion with empty versioned map. Expected = default value. */
-//    @Test
-//    public void getCompatibleVersionEmptyMapShouldReturnDefault() {
-//        String def = "default";
-//        Assert.assertSame(def, Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1,0,0"), "test", def));  // CHANGED 1,0,0 TO STRING "1,0,0"
-//    }
+    /** Test getCompatibleVersion with empty versioned map. Expected = default value. */
+    // @Test
+    public void getCompatibleVersionEmptyMapShouldReturnDefault() {
+        String def = "default";
+        Assert.assertSame(def, Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1,0,0"), "test", def));  // CHANGED 1,0,0 TO STRING "1,0,0"
+    }
 
     /** Test getConfigFromClasspath with empty classpath. Expected = provided conf or defaults fallback. */
     @Test
@@ -946,14 +948,14 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Assert.assertFalse(Utils.isValidKey("bad/key"));
     }
 
-//    /** Test validateTopologyName with valid and invalid names. Expected = invalid names throw InvalidTopologyException. */
-//    @Test
-//    public void validateTopologyNameValuesShouldPass() throws Exception {
-//        Utils.validateTopologyName("valid-topology_1");
-//        Assert.assertThrows(InvalidTopologyException.class, new org.junit.function.ThrowingRunnable() {
-//            public void run() throws Throwable { Utils.validateTopologyName("bad/name"); }
-//        });
-//    }
+    /** Test validateTopologyName with valid and invalid names. Expected = invalid names throw InvalidTopologyException. */
+    // @Test
+    public void validateTopologyNameValuesShouldPass() throws Exception {
+        Utils.validateTopologyName("valid-topology_1");
+        Assert.assertThrows(InvalidTopologyException.class, new org.junit.function.ThrowingRunnable() {
+            public void run() throws Throwable { Utils.validateTopologyName("bad/name"); }
+        });
+    }
 
     /** Test findComponentCycles with empty topology. Expected = no cycles. */
     @Test
@@ -967,18 +969,18 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.validateCycleFree(new StormTopology(), "topo");
     }
 
-//    /** Test compression helpers from Utils public API. Expected = compressed data round trip. */
-//    @Test
-//    public void compressDecompressValidBytesShouldPass() {
-//        byte[] data = "hello".getBytes();
-//        byte[] compressed = Utils.compress(data);
-//        Assert.assertTrue(Utils.isGzip(compressed));
-//        Assert.assertArrayEquals(data, Utils.decompress(compressed, 1024));
-//    }
-//
+    /** Test compression helpers from Utils public API. Expected = compressed data round trip. */
+    @Test
+    public void compressDecompressValidBytesShouldPass() {  //SPECIFIED NESTED CLASS
+        byte[] data = "hello".getBytes();
+        byte[] compressed = Utils.GzipUtils.compress(data);
+        Assert.assertTrue(Utils.GzipUtils.isGzip(compressed));
+        Assert.assertArrayEquals(data, Utils.GzipUtils.decompress(compressed, 1024));
+    }
+
 //    /** Test compression helpers with empty input. Expected = empty output. */
 //    @Test
-//    public void compressEmptyBytesShouldReturnEmptyBytes() {
+//    public void compressEmptyBytesShouldReturnEmptyBytes() {   (WHICH COMPRESSION !?)
 //        Assert.assertArrayEquals(new byte[0], Utils.compress(new byte[0]));
 //    }
 

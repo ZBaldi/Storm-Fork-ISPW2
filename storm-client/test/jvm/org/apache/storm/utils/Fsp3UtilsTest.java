@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * effects (System.exit / shutdown hooks) with safe guards or ignored documentation tests.
  */
 
+/** FIXED MANUALLY */
 @SuppressWarnings("removal")  // ADDED SUPPRESS WARNING
 public class Fsp3UtilsTest {
     /* ### Test START ### */
@@ -158,31 +159,31 @@ public class Fsp3UtilsTest {
         Assert.assertThrows(NullPointerException.class, () -> Utils.isSystemId(null));
     }
 
-//    /** Test asyncLoop full signature with startImmediately false. Expected = configured SmartThread returned but not started. */
-//    @Test
-//    public void asyncLoopFullSignatureNotStartedShouldPass() {
-//        Callable<Long> callable = () -> null;
-//        Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.MAX_PRIORITY, false, false, "fsp3-thread");
-//        Assert.assertNotNull(thread);
-//        Assert.assertEquals("fsp3-thread", thread.getName());
-//        Assert.assertTrue(thread.isDaemon());
-//        Assert.assertEquals(Thread.MAX_PRIORITY, thread.getPriority());
-//        Assert.assertFalse(thread.isAlive());
-//    }
+    /** Test asyncLoop full signature with startImmediately false. Expected = configured SmartThread returned but not started. */
+    // @Test
+    public void asyncLoopFullSignatureNotStartedShouldPass() {
+        Callable<Long> callable = () -> null;
+        Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.MAX_PRIORITY, false, false, "fsp3-thread");
+        Assert.assertNotNull(thread);
+        Assert.assertEquals("fsp3-thread", thread.getName());
+        Assert.assertTrue(thread.isDaemon());
+        Assert.assertEquals(Thread.MAX_PRIORITY, thread.getPriority());
+        Assert.assertFalse(thread.isAlive());
+    }
 
-//    /** Test asyncLoop overload with handler. Expected = thread runs callable and stops when null is returned. */
-//    @Test
-//    public void asyncLoopNamedOverloadShouldExecuteOnce() throws Exception {
-//        AtomicInteger calls = new AtomicInteger();
-//        UncaughtExceptionHandler handler = (t, e) -> { };
-//        Utils.SmartThread thread = Utils.asyncLoop((Callable<Long>) () -> {
-//            calls.incrementAndGet();
-//            return null;
-//        }, "named-loop", handler);
-//        thread.join(2000L);
-//        Assert.assertEquals("named-loop", thread.getName());
-//        Assert.assertEquals(1, calls.get());
-//    }
+    /** Test asyncLoop overload with handler. Expected = thread runs callable and stops when null is returned. */
+    // @Test
+    public void asyncLoopNamedOverloadShouldExecuteOnce() throws Exception {
+        AtomicInteger calls = new AtomicInteger();
+        UncaughtExceptionHandler handler = (t, e) -> { };
+        Utils.SmartThread thread = Utils.asyncLoop((Callable<Long>) () -> {
+            calls.incrementAndGet();
+            return null;
+        }, "named-loop", handler);
+        thread.join(2000L);
+        Assert.assertEquals("named-loop", thread.getName());
+        Assert.assertEquals(1, calls.get());
+    }
 
     /** Test asyncLoop simplest overload. Expected = thread executes callable once. */
     @Test
@@ -230,13 +231,13 @@ public class Fsp3UtilsTest {
         Assert.assertEquals(Utils.memoizedLocalHostname(), Utils.memoizedLocalHostname());
     }
 
-//    /** Test exitProcess in an isolated SecurityManager. Expected = attempts requested exit code. */
-//    @Test
-//    public void exitProcessShouldAttemptSystemExit() {
-//        System.setSecurityManager(new NoExitSecurityManager(originalSecurityManager));
-//        ExitException thrown = Assert.assertThrows(ExitException.class, () -> Utils.exitProcess(7, "test"));
-//        Assert.assertEquals(7, thrown.status);
-//    }
+    /** Test exitProcess in an isolated SecurityManager. Expected = attempts requested exit code. */
+    // @Test
+    public void exitProcessShouldAttemptSystemExit() {
+        System.setSecurityManager(new NoExitSecurityManager(originalSecurityManager));
+        ExitException thrown = Assert.assertThrows(ExitException.class, () -> Utils.exitProcess(7, "test"));
+        Assert.assertEquals(7, thrown.status);
+    }
 
     /** Test Java serialization/deserialization valid, null and disabled categories. */
     @Test
@@ -299,18 +300,18 @@ public class Fsp3UtilsTest {
         Assert.assertThrows(IllegalArgumentException.class, () -> Utils.getSuperUserAcl(conf));
     }
 
-//    /** Test uncaught exception handlers with allowed exceptions. Expected = no exception. */
-//    @Test
-//    public void uncaughtExceptionHandlersAllowedExceptionsShouldPass() {
-//        Set<Class<?>> allowed = new HashSet<>();
-//        allowed.add(IllegalArgumentException.class);
-//        Utils.handleUncaughtException(new RuntimeException(new IllegalArgumentException("allowed")), allowed, false);
-//        Utils.handleUncaughtException(new RuntimeException(new IllegalArgumentException("allowed")), allowed, true);
-//        Utils.createDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), null);
-//        Utils.createWorkerUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), null);
-//        Utils.setupDefaultUncaughtExceptionHandler();
-//        Utils.setupWorkerUncaughtExceptionHandler();
-//    }
+    /** Test uncaught exception handlers with allowed exceptions. Expected = no exception. */
+    // @Test
+    public void uncaughtExceptionHandlersAllowedExceptionsShouldPass() {
+        Set<Class<?>> allowed = new HashSet<>();
+        allowed.add(IllegalArgumentException.class);
+        Utils.handleUncaughtException(new RuntimeException(new IllegalArgumentException("allowed")), allowed, false);
+        Utils.handleUncaughtException(new RuntimeException(new IllegalArgumentException("allowed")), allowed, true);
+        Utils.createDefaultUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), null);
+        Utils.createWorkerUncaughtExceptionHandler().uncaughtException(Thread.currentThread(), null);
+        Utils.setupDefaultUncaughtExceptionHandler();
+        Utils.setupWorkerUncaughtExceptionHandler();
+    }
 
     /** Test thrift serialize/deserialize using generated GlobalStreamId. Expected = round trip. */
     @Test
@@ -350,17 +351,17 @@ public class Fsp3UtilsTest {
         Assert.assertEquals(Collections.singletonList("c"), reversed.get(2));
     }
 
-//    /** Test reverseMap(List) with list of sequences. Expected = indexes grouped by object value. */
-//    @Test
-//    public void reverseMapListShouldGroupPositions() {
-//        List<List<Object>> input = Arrays.asList(
-//                Arrays.asList((Object) "a", "b"),
-//                Arrays.asList((Object) "b", "c"));
-//        Map<Object, List<Object>> reversed = Utils.reverseMap(input);
-//        Assert.assertEquals(Collections.singletonList(0), reversed.get("a"));
-//        Assert.assertEquals(Arrays.asList(0, 1), reversed.get("b"));
-//        Assert.assertEquals(Collections.singletonList(1), reversed.get("c"));
-//    }
+    /** Test reverseMap(List) with list of sequences. Expected = indexes grouped by object value. */
+    // @Test
+    public void reverseMapListShouldGroupPositions() {
+        List<List<Object>> input = Arrays.asList(
+                Arrays.asList((Object) "a", "b"),
+                Arrays.asList((Object) "b", "c"));
+        Map<Object, List<Object>> reversed = Utils.reverseMap(input);
+        Assert.assertEquals(Collections.singletonList(0), reversed.get("a"));
+        Assert.assertEquals(Arrays.asList(0, 1), reversed.get("b"));
+        Assert.assertEquals(Collections.singletonList(1), reversed.get("c"));
+    }
 
     /** Test filesystem utilities with file, directory and missing paths. */
     @Test
@@ -400,29 +401,29 @@ public class Fsp3UtilsTest {
         Assert.assertNotNull(Utils.mkSuicideFn());
     }
 
-//    /** Test readAndLogStream valid stream and null stream. Expected = valid stream consumed, null handled internally. */
-//    @Test
-//    public void readAndLogStreamCategoriesShouldPass() {
-//        InputStream in = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8));
-//        Utils.readAndLogStream("prefix", in);
-//        Utils.readAndLogStream("prefix", null);
-//    }
+    /** Test readAndLogStream valid stream and null stream. Expected = valid stream consumed, null handled internally. */
+    // @Test
+    public void readAndLogStreamCategoriesShouldPass() {
+        InputStream in = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8));
+        Utils.readAndLogStream("prefix", in);
+        Utils.readAndLogStream("prefix", null);
+    }
 
-//    /** Test getComponentCommon for spout, bolt, state spout and missing id. */
-//    @Test
-//    public void getComponentCommonCategoriesShouldPass() {
-//        ComponentCommon spoutCommon = new ComponentCommon();
-//        ComponentCommon boltCommon = new ComponentCommon();
-//        ComponentCommon stateCommon = new ComponentCommon();
-//        StormTopology topology = new StormTopology();
-//        topology.put_to_spouts("spout", new SpoutSpec(null, spoutCommon));
-//        topology.put_to_bolts("bolt", new Bolt(null, boltCommon));
-//        topology.put_to_state_spouts("state", new StateSpoutSpec(null, stateCommon));
-//        Assert.assertSame(spoutCommon, Utils.getComponentCommon(topology, "spout"));
-//        Assert.assertSame(boltCommon, Utils.getComponentCommon(topology, "bolt"));
-//        Assert.assertSame(stateCommon, Utils.getComponentCommon(topology, "state"));
-//        Assert.assertNull(Utils.getComponentCommon(topology, "missing"));
-//    }
+    /** Test getComponentCommon for spout, bolt, state spout and missing id. */
+    // @Test
+    public void getComponentCommonCategoriesShouldPass() {
+        ComponentCommon spoutCommon = new ComponentCommon();
+        ComponentCommon boltCommon = new ComponentCommon();
+        ComponentCommon stateCommon = new ComponentCommon();
+        StormTopology topology = new StormTopology();
+        topology.put_to_spouts("spout", new SpoutSpec(null, spoutCommon));
+        topology.put_to_bolts("bolt", new Bolt(null, boltCommon));
+        topology.put_to_state_spouts("state", new StateSpoutSpec(null, stateCommon));
+        Assert.assertSame(spoutCommon, Utils.getComponentCommon(topology, "spout"));
+        Assert.assertSame(boltCommon, Utils.getComponentCommon(topology, "bolt"));
+        Assert.assertSame(stateCommon, Utils.getComponentCommon(topology, "state"));
+        Assert.assertNull(Utils.getComponentCommon(topology, "missing"));
+    }
 
     /** Test tuple and repeat helpers. Expected = created list and duplicate-only list. */
     @Test
@@ -458,17 +459,17 @@ public class Fsp3UtilsTest {
         Assert.assertThrows(RuntimeException.class, () -> Utils.ZstdUtils.decompress(raw, 1024));
     }
 
-//    /** Test GlobalStreamId helper. Expected = default stream for null/empty else provided stream. */
-//    @Test
-//    public void getGlobalStreamIdCategoriesShouldPass() {
-//        Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", null));
-//        Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", ""));
-//        Assert.assertEquals(new GlobalStreamId("component", "stream"), Utils.getGlobalStreamId("component", "stream"));
-//    }
+    /** Test GlobalStreamId helper. Expected = default stream for null/empty else provided stream. */
+    // @Test
+    public void getGlobalStreamIdCategoriesShouldPass() {
+        Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", null));
+        Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", ""));
+        Assert.assertEquals(new GlobalStreamId("component", "stream"), Utils.getGlobalStreamId("component", "stream"));
+    }
 
 //    /** Test ComponentObject helper for java object and serialized java object. */
 //    @Test
-//    public void getSetComponentObjectCategoriesShouldPass() {
+//    public void getSetComponentObjectCategoriesShouldPass() {  (GENERATED IN A WRONG WAY)
 //        ComponentObject javaObject = ComponentObject.java_object("plain");
 //        Assert.assertEquals("plain", Utils.getSetComponentObject(javaObject));
 //        ComponentObject serializedJava = ComponentObject.serialized_java(Utils.javaSerialize("serialized"));
@@ -476,25 +477,25 @@ public class Fsp3UtilsTest {
 //        Assert.assertNull(Utils.getSetComponentObject(new ComponentObject()));
 //    }
 
-//    /** Test toPositive boundary values. Expected = non-negative hash-style transformation. */
-//    @Test
-//    public void toPositiveBoundariesShouldPass() {
-//        Assert.assertEquals(0, Utils.toPositive(0));
-//        Assert.assertEquals(1, Utils.toPositive(1));
-//        Assert.assertEquals(1, Utils.toPositive(-1));
-//        Assert.assertTrue(Utils.toPositive(Integer.MIN_VALUE) >= 0);
-//    }
+    /** Test toPositive boundary values. Expected = non-negative hash-style transformation. */
+    // @Test
+    public void toPositiveBoundariesShouldPass() {
+        Assert.assertEquals(0, Utils.toPositive(0));
+        Assert.assertEquals(1, Utils.toPositive(1));
+        Assert.assertEquals(1, Utils.toPositive(-1));
+        Assert.assertTrue(Utils.toPositive(Integer.MIN_VALUE) >= 0);
+    }
 
-//    /** Test compressed JSON config round trip and invalid serialized payload. */
-//    @Test
-//    public void compressedJsonConfRoundTripShouldPass() {
-//        Map<String, Object> conf = new HashMap<>();
-//        conf.put("key", "value");
-//        conf.put("number", 3L);
-//        byte[] serialized = Utils.toCompressedJsonConf(conf);
-//        Assert.assertEquals(conf, Utils.fromCompressedJsonConf(serialized));
-//        Assert.assertThrows(RuntimeException.class, () -> Utils.fromCompressedJsonConf(new byte[] {1, 2, 3}));
-//    }
+    /** Test compressed JSON config round trip and invalid serialized payload. */
+    // @Test
+    public void compressedJsonConfRoundTripShouldPass() {
+        Map<String, Object> conf = new HashMap<>();
+        conf.put("key", "value");
+        conf.put("number", 3L);
+        byte[] serialized = Utils.toCompressedJsonConf(conf);
+        Assert.assertEquals(conf, Utils.fromCompressedJsonConf(serialized));
+        Assert.assertThrows(RuntimeException.class, () -> Utils.fromCompressedJsonConf(new byte[] {1, 2, 3}));
+    }
 
     /** Test redactValue. Expected = returns copy with only target key redacted and original preserved. */
     @Test
@@ -517,16 +518,16 @@ public class Fsp3UtilsTest {
         Assert.assertEquals(Double.valueOf(64.0), Utils.parseJvmHeapMemByChildOpts(null, 64.0));
     }
 
-//    /** Test isValidConf with valid and invalid topology config. */
-//    @Test
-//    public void isValidConfCategoriesShouldPass() {
-//        Map<String, Object> conf = new HashMap<>();
-//        conf.put("key", "value");
-//        Assert.assertTrue(Utils.isValidConf(conf));
-//        Map<String, Object> invalid = new HashMap<>();
-//        invalid.put(null, "value");
-//        Assert.assertFalse(Utils.isValidConf(invalid));
-//    }
+    /** Test isValidConf with valid and invalid topology config. */
+    // @Test
+    public void isValidConfCategoriesShouldPass() {
+        Map<String, Object> conf = new HashMap<>();
+        conf.put("key", "value");
+        Assert.assertTrue(Utils.isValidConf(conf));
+        Map<String, Object> invalid = new HashMap<>();
+        invalid.put(null, "value");
+        Assert.assertFalse(Utils.isValidConf(invalid));
+    }
 
     /** Test getTopologyId with a Nimbus proxy returning no topology summary. Expected = null. */
     @Test
@@ -539,12 +540,12 @@ public class Fsp3UtilsTest {
         Assert.assertNull(Utils.getTopologyId("definitely-missing", client));
     }
 
-//    /** Documented but ignored: getTopologyInfo builds a real NimbusClient and requires an integration fixture. */
-//    @Ignore("Requires a configured NimbusClient integration fixture; unit test coverage is provided through getTopologyId proxy path.")
-//    @Test
-//    public void getTopologyInfoMissingShouldReturnNullWithNimbusFixture() {
-//        Assert.assertNull(Utils.getTopologyInfo("definitely-missing", null, new HashMap<>()));
-//    }
+    /** Documented but ignored: getTopologyInfo builds a real NimbusClient and requires an integration fixture. */
+    @Ignore("Requires a configured NimbusClient integration fixture; unit test coverage is provided through getTopologyId proxy path.")
+    @Test
+    public void getTopologyInfoMissingShouldReturnNullWithNimbusFixture() {
+        Assert.assertNull(Utils.getTopologyInfo("definitely-missing", null, new HashMap<>()));
+    }
 
     /** Test topology blobstore validation overloads with empty map. Expected = complete without exception. */
     @Test
@@ -600,15 +601,15 @@ public class Fsp3UtilsTest {
         Assert.assertEquals("a", Utils.OR("a", "b"));
     }
 
-//    /** Test integerDivided with boundary values. */
-//    @Test
-//    public void integerDividedBoundariesShouldPass() {
-//        Assert.assertEquals(new TreeMap<Integer, Integer>() {{ put(0, 0); }}, Utils.integerDivided(0, 1));
-//        TreeMap<Integer, Integer> split = Utils.integerDivided(10, 3);
-//        Assert.assertEquals(Integer.valueOf(2), split.get(3));
-//        Assert.assertEquals(Integer.valueOf(1), split.get(4));
-//        Assert.assertThrows(ArithmeticException.class, () -> Utils.integerDivided(1, 0));
-//    }
+    /** Test integerDivided with boundary values. */
+    // @Test
+    public void integerDividedBoundariesShouldPass() {
+        Assert.assertEquals(new TreeMap<Integer, Integer>() {{ put(0, 0); }}, Utils.integerDivided(0, 1));
+        TreeMap<Integer, Integer> split = Utils.integerDivided(10, 3);
+        Assert.assertEquals(Integer.valueOf(2), split.get(3));
+        Assert.assertEquals(Integer.valueOf(1), split.get(4));
+        Assert.assertThrows(ArithmeticException.class, () -> Utils.integerDivided(1, 0));
+    }
 
     /** Test partitionFixed with empty, singleton and multiple partitions. */
     @Test
@@ -640,17 +641,17 @@ public class Fsp3UtilsTest {
         Assert.assertTrue(Utils.getAvailablePort() > 0);
     }
 
-//    /** Test findOne overloads for collection and map. */
-//    @Test
-//    public void findOneCategoriesShouldPass() {
-//        Assert.assertEquals("bb", Utils.findOne(x -> x.length() == 2, Arrays.asList("a", "bb", "cc")));
-//        Assert.assertNull(Utils.findOne(x -> x.startsWith("z"), Arrays.asList("a", "bb")));
-//        Map<String, String> map = new LinkedHashMap<>();
-//        map.put("one", "a");
-//        map.put("two", "bb");
-//        Assert.assertEquals("bb", Utils.findOne(x -> x.length() == 2, map));
-//        Assert.assertNull(Utils.findOne(x -> x.startsWith("z"), map));
-//    }
+    /** Test findOne overloads for collection and map. */
+    // @Test
+    public void findOneCategoriesShouldPass() {
+        Assert.assertEquals("bb", Utils.findOne(x -> x.length() == 2, Arrays.asList("a", "bb", "cc")));
+        Assert.assertNull(Utils.findOne(x -> x.startsWith("z"), Arrays.asList("a", "bb")));
+        Map<String, String> map = new LinkedHashMap<>();
+        map.put("one", "a");
+        map.put("two", "bb");
+        Assert.assertEquals("bb", Utils.findOne(x -> x.length() == 2, map));
+        Assert.assertNull(Utils.findOne(x -> x.startsWith("z"), map));
+    }
 
     /** Test parseJson valid, empty and not valid categories. */
     @Test
@@ -766,12 +767,12 @@ public class Fsp3UtilsTest {
         Utils.addShutdownHookWithDelayedForceKill(() -> { }, 1);
     }
 
-//    /** Documented but ignored: a real BlobStore/NimbusBlobStore integration fixture is required. */
-//    @Ignore("Requires an integration BlobStore/NimbusBlobStore fixture not suitable for a unit-only test class.")
-//    @Test
-//    public void blobStoreClientAndValidationIntegrationMethods() throws Exception {
-//        Assert.assertNotNull(Utils.getClientBlobStore(new HashMap<String, Object>()));
-//    }
+    /** Documented but ignored: a real BlobStore/NimbusBlobStore integration fixture is required. */
+    @Ignore("Requires an integration BlobStore/NimbusBlobStore fixture not suitable for a unit-only test class.")
+    @Test
+    public void blobStoreClientAndValidationIntegrationMethods() throws Exception {
+        Assert.assertNotNull(Utils.getClientBlobStore(new HashMap<String, Object>()));
+    }
 
     private int freePort() throws IOException {
         try (ServerSocket socket = new ServerSocket(0)) {

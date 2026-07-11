@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.junit.Assert.*;
 
-public class CotUtilsTest {  //REMOVED NOT USED IMPORTS
+public class TotWithExamplesUtilsTest {  //REMOVED NOT USED IMPORTS
     // ### Test START ###
 
     private Utils previousInstance;
@@ -309,20 +309,20 @@ public class CotUtilsTest {  //REMOVED NOT USED IMPORTS
         assertFalse(tempDir.exists());
     }
 
-//    @Test
-//    public void configuredSerializationDelegateShouldRoundTripObjectsAndStrings() {
-//        Map<String, Object> input = new HashMap<>();
-//        input.put("key", "value");
-//        input.put("number", 3);
-//
-//        byte[] bytes = Utils.serialize(input);
-//        Map<?, ?> decoded = Utils.deserialize(bytes, Map.class);
-//        String encoded = Utils.serializeToString(input);
-//        Map<?, ?> decodedFromString = Utils.deserializeFromString(encoded, Map.class);
-//
-//        assertEquals(input, decoded);
-//        assertEquals(input, decodedFromString);
-//    }
+    // @Test
+    public void configuredSerializationDelegateShouldRoundTripObjectsAndStrings() {
+        Map<String, Object> input = new HashMap<>();
+        input.put("key", "value");
+        input.put("number", 3);
+
+        byte[] bytes = Utils.serialize(input);
+        Map<?, ?> decoded = Utils.deserialize(bytes, Map.class);
+        String encoded = Utils.serializeToString(input);
+        Map<?, ?> decodedFromString = Utils.deserializeFromString(encoded, Map.class);
+
+        assertEquals(input, decoded);
+        assertEquals(input, decodedFromString);
+    }
 
     @Test
     public void toByteArrayShouldReadOnlyRemainingByteBufferContent() {
@@ -569,16 +569,16 @@ public class CotUtilsTest {  //REMOVED NOT USED IMPORTS
         assertFalse(Utils.isValidKey("../secret"));
     }
 
-//    @Test
-//    public void validateTopologyNameShouldFollowConfiguredTopologyNamePattern() {
-//        Utils.validateTopologyName("/");
-//        try {
-//            Utils.validateTopologyName("invalid-name");
-//            fail("Expected IllegalArgumentException");
-//        } catch (IllegalArgumentException expected) {
-//            assertTrue(expected.getMessage().contains("not valid"));
-//        }
-//    }
+    // @Test
+    public void validateTopologyNameShouldFollowConfiguredTopologyNamePattern() {
+        Utils.validateTopologyName("/");
+        try {
+            Utils.validateTopologyName("invalid-name");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException expected) {
+            assertTrue(expected.getMessage().contains("not valid"));
+        }
+    }
 
     @Test
     public void environmentDependentHelpersShouldReturnBooleansOrObjectsWithoutThrowing() {

@@ -30,6 +30,8 @@ import static org.junit.Assert.*;
  * I test usano casi base, valori null/empty quando sicuri, qualche boundary e qualche controllo
  * di presenza per i metodi che hanno dipendenze esterne o effetti collaterali pesanti.
  */
+
+/** FIXED MANUALLY */
 public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
     /* ### Test START ### */
 
@@ -302,16 +304,16 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertTrue(true);
     }
 
-//    @Test
-//    public void testThriftSerializeDeserialize() {
-//        StormTopology topology = new StormTopology();
-//        byte[] bytes = Utils.thriftSerialize(topology);
-//        assertNotNull(bytes);
-//        StormTopology copy = Utils.thriftDeserialize(StormTopology.class, bytes);
-//        assertNotNull(copy);
-//        StormTopology copy2 = Utils.thriftDeserialize(StormTopology.class, bytes, 0, bytes.length);
-//        assertNotNull(copy2);
-//    }
+    // @Test
+    public void testThriftSerializeDeserialize() {
+        StormTopology topology = new StormTopology();
+        byte[] bytes = Utils.thriftSerialize(topology);
+        assertNotNull(bytes);
+        StormTopology copy = Utils.thriftDeserialize(StormTopology.class, bytes);
+        assertNotNull(copy);
+        StormTopology copy2 = Utils.thriftDeserialize(StormTopology.class, bytes, 0, bytes.length);
+        assertNotNull(copy2);
+    }
 
     @Test
     public void testSleepMethodsWithZero() {
@@ -358,14 +360,14 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertFalse(dir.exists());
     }
 
-//    @Test
-//    public void testSerializeDeserializeDelegate() {
-//        String value = "abc";
-//        byte[] bytes = Utils.serialize(value);
-//        assertEquals(value, Utils.deserialize(bytes, String.class));
-//        String encoded = Utils.serializeToString(value);
-//        assertEquals(value, Utils.deserializeFromString(encoded, String.class));
-//    }
+    // @Test
+    public void testSerializeDeserializeDelegate() {
+        String value = "abc";
+        byte[] bytes = Utils.serialize(value);
+        assertEquals(value, Utils.deserialize(bytes, String.class));
+        String encoded = Utils.serializeToString(value);
+        assertEquals(value, Utils.deserializeFromString(encoded, String.class));
+    }
 
     @Test
     public void testToByteArrayKeepsBufferContent() {
@@ -493,16 +495,16 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertEquals("a", Utils.OR("a", "b"));
     }
 
-//    @Test
-//    public void testIntegerDividedBoundaries() {
-//        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
-//        int sum = 0;
-//        for (Integer value : divided.values()) {
-//            sum += value;
-//        }
-//        assertEquals(10, sum);
-//        assertEquals(0, Utils.integerDivided(0, 3).values().stream().mapToInt(Integer::intValue).sum());
-//    }
+    // @Test
+    public void testIntegerDividedBoundaries() {
+        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
+        int sum = 0;
+        for (Integer value : divided.values()) {
+            sum += value;
+        }
+        assertEquals(10, sum);
+        assertEquals(0, Utils.integerDivided(0, 3).values().stream().mapToInt(Integer::intValue).sum());
+    }
 
     @Test
     public void testPartitionFixed() {

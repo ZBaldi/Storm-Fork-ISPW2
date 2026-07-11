@@ -33,6 +33,8 @@ import static org.junit.Assert.*;
  * <p>If the project uses a package-specific Utils class, this suite attempts the common class names:
  * Utils, org.apache.storm.utils.Utils, backtype.storm.utils.Utils.</p>
  */
+
+/** FIXED MANUALLY */
 public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
 
     /* ### Test START ### */
@@ -131,17 +133,17 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         expectExceptionFromInvocation("isSystemId", new Class<?>[]{String.class}, new Object[]{null});
     }
 
-//    @Test
-//    public void getReturnsMappedValueAndDefaultWhenAbsentOrNullMap() throws Exception {
-//        Map<String, Integer> sample = new HashMap<String, Integer>();
-//        sample.put("present", 10);
-//        sample.put("nullValue", null);
-//
-//        assertEquals(10, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "present", -1));
-//        assertEquals(-1, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "missing", -1));
-//        assertEquals(-1, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "nullValue", -1));
-//        assertEquals("fallback", invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, null, "x", "fallback"));
-//    }
+    // @Test
+    public void getReturnsMappedValueAndDefaultWhenAbsentOrNullMap() throws Exception {
+        Map<String, Integer> sample = new HashMap<String, Integer>();
+        sample.put("present", 10);
+        sample.put("nullValue", null);
+
+        assertEquals(10, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "present", -1));
+        assertEquals(-1, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "missing", -1));
+        assertEquals(-1, invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, sample, "nullValue", -1));
+        assertEquals("fallback", invokeStatic("get", new Class<?>[]{Map.class, Object.class, Object.class}, null, "x", "fallback"));
+    }
 
     @Test
     public void zeroIfNaNOrInfReturnsZeroForNaNAndInfinities() throws Exception {
@@ -192,16 +194,16 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         assertNull(invokeStatic("OR", new Class<?>[]{Object.class, Object.class}, null, null));
     }
 
-//    @Test
-//    public void parseJsonCoversNullEmptyValidAndInvalidJson() throws Exception {
-//        assertEquals(Collections.emptyMap(), invokeStatic("parseJson", new Class<?>[]{String.class}, new Object[]{null}));
-//        assertEquals(Collections.emptyMap(), invokeStatic("parseJson", new Class<?>[]{String.class}, ""));
-//        Object parsed = invokeStatic("parseJson", new Class<?>[]{String.class}, "{\"a\":1,\"b\":\"x\"}");
-//        assertTrue(parsed instanceof Map);
-//        assertEquals(1L, ((Map<?, ?>) parsed).get("a"));
-//        assertEquals("x", ((Map<?, ?>) parsed).get("b"));
-//        expectExceptionFromInvocation("parseJson", new Class<?>[]{String.class}, "{not valid json}");
-//    }
+    // @Test
+    public void parseJsonCoversNullEmptyValidAndInvalidJson() throws Exception {
+        assertEquals(Collections.emptyMap(), invokeStatic("parseJson", new Class<?>[]{String.class}, new Object[]{null}));
+        assertEquals(Collections.emptyMap(), invokeStatic("parseJson", new Class<?>[]{String.class}, ""));
+        Object parsed = invokeStatic("parseJson", new Class<?>[]{String.class}, "{\"a\":1,\"b\":\"x\"}");
+        assertTrue(parsed instanceof Map);
+        assertEquals(1L, ((Map<?, ?>) parsed).get("a"));
+        assertEquals("x", ((Map<?, ?>) parsed).get("b"));
+        expectExceptionFromInvocation("parseJson", new Class<?>[]{String.class}, "{not valid json}");
+    }
 
     @Test
     public void javaSerializeAndJavaDeserializeRoundTripSerializableObjects() throws Exception {
@@ -213,18 +215,18 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         assertEquals(original, restored);
     }
 
-//    @Test
-//    public void serializeDeserializeFacadeRoundTripWhenDelegateIsConfigured() throws Exception {
-//        Object bytes = invokeStatic("serialize", new Class<?>[]{Object.class}, "value");
-//        assertTrue(bytes instanceof byte[]);
-//        Object restored = invokeStatic("deserialize", new Class<?>[]{byte[].class, Class.class}, bytes, String.class);
-//        assertEquals("value", restored);
-//
-//        Object encoded = invokeStatic("serializeToString", new Class<?>[]{Object.class}, "value");
-//        assertTrue(encoded instanceof String);
-//        assertFalse(((String) encoded).isEmpty());
-//        assertEquals("value", invokeStatic("deserializeFromString", new Class<?>[]{String.class, Class.class}, encoded, String.class));
-//    }
+    // @Test
+    public void serializeDeserializeFacadeRoundTripWhenDelegateIsConfigured() throws Exception {
+        Object bytes = invokeStatic("serialize", new Class<?>[]{Object.class}, "value");
+        assertTrue(bytes instanceof byte[]);
+        Object restored = invokeStatic("deserialize", new Class<?>[]{byte[].class, Class.class}, bytes, String.class);
+        assertEquals("value", restored);
+
+        Object encoded = invokeStatic("serializeToString", new Class<?>[]{Object.class}, "value");
+        assertTrue(encoded instanceof String);
+        assertFalse(((String) encoded).isEmpty());
+        assertEquals("value", invokeStatic("deserializeFromString", new Class<?>[]{String.class, Class.class}, encoded, String.class));
+    }
 
     @Test
     public void toByteArrayPreservesBufferContentAndPositionContract() throws Exception {
@@ -267,15 +269,15 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         assertEquals(Collections.singleton("c"), new HashSet<Object>((Collection<?>) reversed.get(2)));
     }
 
-//    @Test
-//    public void integerDividedCoversBoundaryValuesAndConservationOfSum() throws Exception {
-//        assertIntegerDivision(0, 1);
-//        assertIntegerDivision(1, 1);
-//        assertIntegerDivision(1, 2);
-//        assertIntegerDivision(2, 2);
-//        assertIntegerDivision(10, 3);
-//        expectExceptionFromInvocation("integerDivided", new Class<?>[]{int.class, int.class}, 1, 0);
-//    }
+    // @Test
+    public void integerDividedCoversBoundaryValuesAndConservationOfSum() throws Exception {
+        assertIntegerDivision(0, 1);
+        assertIntegerDivision(1, 1);
+        assertIntegerDivision(1, 2);
+        assertIntegerDivision(2, 2);
+        assertIntegerDivision(10, 3);
+        expectExceptionFromInvocation("integerDivided", new Class<?>[]{int.class, int.class}, 1, 0);
+    }
 
     @Test
     public void partitionFixedCoversEmptySingletonBoundariesAndOrdering() throws Exception {
@@ -478,18 +480,18 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         assertEquals(false, invokeStatic("isLocalhostAddress", new Class<?>[]{String.class}, ""));
     }
 
-//    @Test
-//    public void isValidKeyAndValidateTopologyNameCoverStringPartitions() throws Exception {
-//        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, new Object[]{null}));
-//        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, ""));
-//        assertEquals(true, invokeStatic("isValidKey", new Class<?>[]{String.class}, "valid.key-1_2"));
-//        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, "not valid whitespace"));
-//
-//        invokeStatic("validateTopologyName", new Class<?>[]{String.class}, "valid-topology_1");
-//        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, new Object[]{null});
-//        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, "");
-//        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, "not valid whitespace");
-//    }
+    // @Test
+    public void isValidKeyAndValidateTopologyNameCoverStringPartitions() throws Exception {
+        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, new Object[]{null}));
+        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, ""));
+        assertEquals(true, invokeStatic("isValidKey", new Class<?>[]{String.class}, "valid.key-1_2"));
+        assertEquals(false, invokeStatic("isValidKey", new Class<?>[]{String.class}, "not valid whitespace"));
+
+        invokeStatic("validateTopologyName", new Class<?>[]{String.class}, "valid-topology_1");
+        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, new Object[]{null});
+        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, "");
+        expectExceptionFromInvocation("validateTopologyName", new Class<?>[]{String.class}, "not valid whitespace");
+    }
 
     @Test
     public void asyncLoopOverloadsCreateThreadLikeObjectWithoutThrowingForNonStartingCallable() throws Exception {
@@ -567,14 +569,14 @@ public class Zsp4UtilsRetriedTest { // REMOVED NOT USED IMPORTS
         assertHasPublicMethodWithArity("validateCycleFree", 2);
     }
 
-//    @Test
-//    public void methodsDocumentedAsVoidDoNotThrowForMinimalSafeInputs() throws Exception {
-//        invokeStatic("handleUncaughtException", new Class<?>[]{Throwable.class}, new RuntimeException("allowed smoke"));
-//        invokeStatic("handleWorkerUncaughtException", new Class<?>[]{Throwable.class}, new RuntimeException("allowed smoke"));
-//        invokeStatic("handleUncaughtException", new Class<?>[]{Throwable.class, Set.class, boolean.class}, new RuntimeException("allowed smoke"), new HashSet<Class<?>>(), false);
-//        invokeStatic("addShutdownHookWithDelayedForceKill", new Class<?>[]{Runnable.class, int.class}, new Runnable() { public void run() {} }, 1);
-//        invokeStatic("addShutdownHookWithForceKillIn1Sec", new Class<?>[]{Runnable.class}, new Runnable() { public void run() {} });
-//    }
+    // @Test
+    public void methodsDocumentedAsVoidDoNotThrowForMinimalSafeInputs() throws Exception {
+        invokeStatic("handleUncaughtException", new Class<?>[]{Throwable.class}, new RuntimeException("allowed smoke"));
+        invokeStatic("handleWorkerUncaughtException", new Class<?>[]{Throwable.class}, new RuntimeException("allowed smoke"));
+        invokeStatic("handleUncaughtException", new Class<?>[]{Throwable.class, Set.class, boolean.class}, new RuntimeException("allowed smoke"), new HashSet<Class<?>>(), false);
+        invokeStatic("addShutdownHookWithDelayedForceKill", new Class<?>[]{Runnable.class, int.class}, new Runnable() { public void run() {} }, 1);
+        invokeStatic("addShutdownHookWithForceKillIn1Sec", new Class<?>[]{Runnable.class}, new Runnable() { public void run() {} });
+    }
 
     /* ### Test END ### */
 

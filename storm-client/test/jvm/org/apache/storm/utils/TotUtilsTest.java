@@ -183,20 +183,20 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.isSystemId(null);
     }
 
-//    @Test
-//    public void asyncLoopFullSignatureStartImmediatelyFalseShouldReturnConfiguredThread() {
-//        Callable<Object> callable = new Callable<Object>() { public Object call() { return -1; } };
-//        Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.NORM_PRIORITY, false, false, "utils-test-loop");
-//        assertEquals("utils-test-loop", thread.getName());
-//        assertTrue(thread.isDaemon());
-//        assertFalse(thread.isAlive());
-//    }
+    // @Test
+    public void asyncLoopFullSignatureStartImmediatelyFalseShouldReturnConfiguredThread() {
+        Callable<Object> callable = new Callable<Object>() { public Object call() { return -1; } };
+        Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.NORM_PRIORITY, false, false, "utils-test-loop");
+        assertEquals("utils-test-loop", thread.getName());
+        assertTrue(thread.isDaemon());
+        assertFalse(thread.isAlive());
+    }
 
-//    @Test
-//    public void asyncLoopWithThreadNameShouldReturnThread() {
-//        Utils.SmartThread thread = Utils.asyncLoop(new Callable<Object>() { public Object call() { return -1; } }, "named-loop", null);
-//        assertEquals("named-loop", thread.getName());
-//    }
+    // @Test
+    public void asyncLoopWithThreadNameShouldReturnThread() {
+        Utils.SmartThread thread = Utils.asyncLoop(new Callable<Object>() { public Object call() { return -1; } }, "named-loop", null);
+        assertEquals("named-loop", thread.getName());
+    }
 
     @Test
     public void asyncLoopDefaultSignatureShouldReturnThread() {
@@ -248,27 +248,27 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.secureRandomLong();
     }
 
-//    @Test
-//    public void localHostnameDelegatedToInstanceShouldReturnMockedValue() throws Exception {
-//        Utils mock = new Utils() {
-//            @Override
-//            protected String localHostnameImpl() {
-//                return "mock-host";
-//            }
-//        };
-//        Utils previous = Utils.setInstance(mock);
-//        try {
-//            assertEquals("mock-host", Utils.localHostname());
-//        } finally {
-//            Utils.setInstance(previous);
-//        }
-//    }
+    // @Test
+    public void localHostnameDelegatedToInstanceShouldReturnMockedValue() throws Exception {
+        Utils mock = new Utils() {
+            @Override
+            protected String localHostnameImpl() {
+                return "mock-host";
+            }
+        };
+        Utils previous = Utils.setInstance(mock);
+        try {
+            assertEquals("mock-host", Utils.localHostname());
+        } finally {
+            Utils.setInstance(previous);
+        }
+    }
 
-//    @Ignore("exitProcess termina la JVM e non va eseguito in unit test")
-//    @Test
-//    public void exitProcessShouldTerminateJvm() {
-//        Utils.exitProcess(0, "ignored");
-//    }
+    @Ignore("exitProcess termina la JVM e non va eseguito in unit test")
+    @Test
+    public void exitProcessShouldTerminateJvm() {
+        Utils.exitProcess(0, "ignored");
+    }
 
     @Test
     public void javaSerializeAndJavaDeserializeValidSerializableShouldRoundTrip() {
@@ -282,14 +282,14 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.javaDeserialize(new byte[] {1, 2, 3}, String.class);
     }
 
-//    @Test
-//    public void getExistingMissingAndNullMapShouldReturnExpectedValueOrDefault() {
-//        Map<String, Integer> map = new HashMap<String, Integer>();
-//        map.put("a", 1);
-//        assertEquals(Integer.valueOf(1), Utils.get(map, "a", 9));
-//        assertEquals(Integer.valueOf(9), Utils.get(map, "b", 9));
-//        assertEquals(Integer.valueOf(9), Utils.get(null, "a", 9));
-//    }
+    // @Test
+    public void getExistingMissingAndNullMapShouldReturnExpectedValueOrDefault() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("a", 1);
+        assertEquals(Integer.valueOf(1), Utils.get(map, "a", 9));
+        assertEquals(Integer.valueOf(9), Utils.get(map, "b", 9));
+        assertEquals(Integer.valueOf(9), Utils.get(null, "a", 9));
+    }
 
     @Test
     public void zeroIfNaNOrInfShouldReplaceOnlyNaNAndInfinity() {
@@ -442,14 +442,14 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.deserializeFromString(null, String.class);
     }
 
-//    @Test
-//    public void toByteArrayShouldNotMutateOriginalBufferPosition() {
-//        ByteBuffer buffer = ByteBuffer.wrap(new byte[] {0, 1, 2, 3});
-//        buffer.position(1);
-//        byte[] actual = Utils.toByteArray(buffer);
-//        assertArrayEquals(new byte[] {1, 2, 3}, actual);
-//        assertEquals(1, buffer.position());
-//    }
+    // @Test
+    public void toByteArrayShouldNotMutateOriginalBufferPosition() {
+        ByteBuffer buffer = ByteBuffer.wrap(new byte[] {0, 1, 2, 3});
+        buffer.position(1);
+        byte[] actual = Utils.toByteArray(buffer);
+        assertArrayEquals(new byte[] {1, 2, 3}, actual);
+        assertEquals(1, buffer.position());
+    }
 
     @Test
     public void mkSuicideFnShouldReturnRunnableWithoutExecutingIt() {
@@ -472,10 +472,10 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         assertSame(common, Utils.getComponentCommon(topology, "s"));
     }
 
-//    @Test(expected = IllegalArgumentException.class)
-//    public void getComponentCommonMissingIdShouldThrowIllegalArgumentException() {
-//        Utils.getComponentCommon(new StormTopology(), "missing");
-//    }
+    // @Test(expected = IllegalArgumentException.class)
+    public void getComponentCommonMissingIdShouldThrowIllegalArgumentException() {
+        Utils.getComponentCommon(new StormTopology(), "missing");
+    }
 
     @Test
     public void tupleShouldReturnMutableListContainingValues() {
@@ -539,14 +539,14 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.fromCompressedJsonConf(new byte[] {1, 2, 3});
     }
 
-//    @Test
-//    public void redactValueShouldReturnNewMapAndNotModifyOriginal() {
-//        Map<String, Object> input = new HashMap<String, Object>();
-//        input.put("secret", "value");
-//        Map<String, Object> redacted = Utils.redactValue(input, "secret");
-//        assertEquals("value", input.get("secret"));
-//        assertEquals("VALUE REDACTED", redacted.get("secret"));
-//    }
+    // @Test
+    public void redactValueShouldReturnNewMapAndNotModifyOriginal() {
+        Map<String, Object> input = new HashMap<String, Object>();
+        input.put("secret", "value");
+        Map<String, Object> redacted = Utils.redactValue(input, "secret");
+        assertEquals("value", input.get("secret"));
+        assertEquals("VALUE REDACTED", redacted.get("secret"));
+    }
 
     @Test
     public void createAndSetupUncaughtExceptionHandlersShouldReturnHandlers() {
@@ -692,7 +692,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
 //    @Test
-//    public void findOneMapShouldReturnFirstMatchingEntryOrNull() {
+//    public void findOneMapShouldReturnFirstMatchingEntryOrNull() {  (GENERATED IN A WRONG WAY)
 //        IPredicate<Map.Entry<String, Integer>> pred = new IPredicate<Map.Entry<String, Integer>>() {
 //            public boolean test(Map.Entry<String, Integer> input) { return input.getValue() == 2; }
 //        };

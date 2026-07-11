@@ -41,6 +41,8 @@ import static org.mockito.Mockito.when;
  * depend on OS/network/external Storm services are isolated by mocks, temporary files,
  * assumptions or state restoration.
  */
+
+/** FIXED MANUALLY */
 public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
     // ### Test START ###
 
@@ -78,19 +80,19 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertNotNull(Utils.makeUptimeComputer());
     }
 
-//    @Test
-//    public void javaDeserializeUsesCustomClassLoaderWhenConfiguredAndCanBeReset() {
-//        byte[] bytes = Utils.javaSerialize("payload");
-//        ClassLoader markerLoader = new ClassLoader(getClass().getClassLoader()) { };
-//
-//        Utils.setClassLoaderForJavaDeSerialize(markerLoader);
-//        assertEquals("payload", Utils.javaDeserialize(bytes, String.class));
-//        assertSame(markerLoader, getStaticFieldUnchecked(Utils.class, "cl"));
-//
-//        Utils.resetClassLoaderForJavaDeSerialize();
-//        assertNull(getStaticFieldUnchecked(Utils.class, "cl"));
-//        assertEquals("payload", Utils.javaDeserialize(bytes, String.class));
-//    }
+    // @Test
+    public void javaDeserializeUsesCustomClassLoaderWhenConfiguredAndCanBeReset() {
+        byte[] bytes = Utils.javaSerialize("payload");
+        ClassLoader markerLoader = new ClassLoader(getClass().getClassLoader()) { };
+
+        Utils.setClassLoaderForJavaDeSerialize(markerLoader);
+        assertEquals("payload", Utils.javaDeserialize(bytes, String.class));
+        assertSame(markerLoader, getStaticFieldUnchecked(Utils.class, "cl"));
+
+        Utils.resetClassLoaderForJavaDeSerialize();
+        assertNull(getStaticFieldUnchecked(Utils.class, "cl"));
+        assertEquals("payload", Utils.javaDeserialize(bytes, String.class));
+    }
 
     @Test
     public void findResourcesCoversExistingAndMissingClasspathResources() {
@@ -172,29 +174,29 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         } catch (NullPointerException expected) { }
     }
 
-//    @Test
-//    public void asyncLoopCreatesConfigurableSmartThreadAndRunsWhenRequested() throws Exception {
-//        AtomicInteger invocations = new AtomicInteger();
-//        Callable<Long> once = () -> invocations.getAndIncrement() == 0 ? 0L : -1L;
-//        Thread.UncaughtExceptionHandler handler = mock(Thread.UncaughtExceptionHandler.class);
-//
-//        Utils.SmartThread notStarted = Utils.asyncLoop(once, true, handler, Thread.NORM_PRIORITY + 1, false, false, "zsp3-not-started");
-//        assertEquals("zsp3-not-started", notStarted.getName());
-//        assertTrue(notStarted.isDaemon());
-//        assertEquals(Thread.NORM_PRIORITY + 1, notStarted.getPriority());
-//        assertEquals(0, invocations.get());
-//        notStarted.start();
-//        notStarted.join(2000L);
-//        assertEquals(2, invocations.get());
-//
-//        Utils.SmartThread defaultThread = Utils.asyncLoop(() -> -1L);
-//        defaultThread.join(2000L);
-//        assertFalse(defaultThread.isAlive());
-//
-//        Utils.SmartThread namedThread = Utils.asyncLoop(() -> -1L, "zsp3-named", handler);
-//        namedThread.join(2000L);
-//        assertEquals("zsp3-named", namedThread.getName());
-//    }
+    // @Test
+    public void asyncLoopCreatesConfigurableSmartThreadAndRunsWhenRequested() throws Exception {
+        AtomicInteger invocations = new AtomicInteger();
+        Callable<Long> once = () -> invocations.getAndIncrement() == 0 ? 0L : -1L;
+        Thread.UncaughtExceptionHandler handler = mock(Thread.UncaughtExceptionHandler.class);
+
+        Utils.SmartThread notStarted = Utils.asyncLoop(once, true, handler, Thread.NORM_PRIORITY + 1, false, false, "zsp3-not-started");
+        assertEquals("zsp3-not-started", notStarted.getName());
+        assertTrue(notStarted.isDaemon());
+        assertEquals(Thread.NORM_PRIORITY + 1, notStarted.getPriority());
+        assertEquals(0, invocations.get());
+        notStarted.start();
+        notStarted.join(2000L);
+        assertEquals(2, invocations.get());
+
+        Utils.SmartThread defaultThread = Utils.asyncLoop(() -> -1L);
+        defaultThread.join(2000L);
+        assertFalse(defaultThread.isAlive());
+
+        Utils.SmartThread namedThread = Utils.asyncLoop(() -> -1L, "zsp3-named", handler);
+        namedThread.join(2000L);
+        assertEquals("zsp3-named", namedThread.getName());
+    }
 
     @Test
     public void exceptionCauseHelpersNavigateCauseChain() throws Exception {
@@ -248,26 +250,26 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         } catch (RuntimeException expected) { }
     }
 
-//    @Test
-//    public void genericSerializationDelegateIsUsedForSerializeDeserializeAndBase64StringRoundTrip() {
-//        RecordingSerializationDelegate delegate = new RecordingSerializationDelegate();
-//        setStaticFieldUnchecked(Utils.class, "serializationDelegate", delegate);
-//
-//        byte[] encoded = Utils.serialize("abc");
-//        assertArrayEquals("ser:abc".getBytes(StandardCharsets.UTF_8), encoded);
-//        assertEquals("decoded", Utils.deserialize(encoded, String.class));
-//        assertTrue(delegate.serializeCalled);
-//        assertTrue(delegate.deserializeCalled);
-//
-//        setStaticFieldUnchecked(Utils.class, "serializationDelegate", null);
-//        SerializableBox box = new SerializableBox("native", 7);
-//        String asString = Utils.serializeToString(box);
-//        assertEquals(box, Utils.deserializeFromString(asString, SerializableBox.class));
-//        try {
-//            Utils.deserializeFromString("not base64", SerializableBox.class);
-//            fail("Invalid encoded string should fail");
-//        } catch (RuntimeException expected) { } // DELETED CATCH NULL POINTER EXCEPTION
-//    }
+    // @Test
+    public void genericSerializationDelegateIsUsedForSerializeDeserializeAndBase64StringRoundTrip() {
+        RecordingSerializationDelegate delegate = new RecordingSerializationDelegate();
+        setStaticFieldUnchecked(Utils.class, "serializationDelegate", delegate);
+
+        byte[] encoded = Utils.serialize("abc");
+        assertArrayEquals("ser:abc".getBytes(StandardCharsets.UTF_8), encoded);
+        assertEquals("decoded", Utils.deserialize(encoded, String.class));
+        assertTrue(delegate.serializeCalled);
+        assertTrue(delegate.deserializeCalled);
+
+        setStaticFieldUnchecked(Utils.class, "serializationDelegate", null);
+        SerializableBox box = new SerializableBox("native", 7);
+        String asString = Utils.serializeToString(box);
+        assertEquals(box, Utils.deserializeFromString(asString, SerializableBox.class));
+        try {
+            Utils.deserializeFromString("not base64", SerializableBox.class);
+            fail("Invalid encoded string should fail");
+        } catch (RuntimeException expected) { } // DELETED CATCH NULL POINTER EXCEPTION
+    }
 
     @Test
     public void getZeroJoinTupleOrAndNullToZeroCoverBoundaryPartitions() {
@@ -291,23 +293,23 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals("primary", Utils.OR("primary", "fallback"));
     }
 
-//    @Test
-//    public void zookeeperAclHelpersParseIdsAndDetectAuthenticationConfigurations() {
-//        Id id = Utils.parseZkId("digest:user:pass", Config.STORM_ZOOKEEPER_SUPERACL);
-//        assertEquals("digest", id.getScheme());
-//        assertEquals("user:pass", id.getId());
-//
-//        Map<String, Object> conf = new HashMap<>();
-//        conf.put(Config.STORM_ZOOKEEPER_SUPERACL, "digest:super:secret");
-//        ACL acl = Utils.getSuperUserAcl(conf);
-//        assertEquals(ZooDefs.Perms.ALL, acl.getPerms());
-//        assertEquals("digest", acl.getId().getScheme());
-//
-//        assertFalse(Utils.isZkAuthenticationConfiguredTopology(new HashMap<String, Object>()));
-//        conf.put(Config.TOPOLOGY_SUBMITTER_PRINCIPAL, "user@REALM");
-//        assertTrue(Utils.isZkAuthenticationConfiguredTopology(conf));
-//        assertFalse(Utils.isZkAuthenticationConfiguredStormServer(new HashMap<String, Object>()));
-//    }
+    // @Test
+    public void zookeeperAclHelpersParseIdsAndDetectAuthenticationConfigurations() {
+        Id id = Utils.parseZkId("digest:user:pass", Config.STORM_ZOOKEEPER_SUPERACL);
+        assertEquals("digest", id.getScheme());
+        assertEquals("user:pass", id.getId());
+
+        Map<String, Object> conf = new HashMap<>();
+        conf.put(Config.STORM_ZOOKEEPER_SUPERACL, "digest:super:secret");
+        ACL acl = Utils.getSuperUserAcl(conf);
+        assertEquals(ZooDefs.Perms.ALL, acl.getPerms());
+        assertEquals("digest", acl.getId().getScheme());
+
+        assertFalse(Utils.isZkAuthenticationConfiguredTopology(new HashMap<String, Object>()));
+        conf.put(Config.TOPOLOGY_SUBMITTER_PRINCIPAL, "user@REALM");
+        assertTrue(Utils.isZkAuthenticationConfiguredTopology(conf));
+        assertFalse(Utils.isZkAuthenticationConfiguredStormServer(new HashMap<String, Object>()));
+    }
 
     @Test
     public void uncaughtExceptionHandlersAreCreatedAndDoNotThrowForAllowedExceptions() {
@@ -324,17 +326,17 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertNotNull(Thread.getDefaultUncaughtExceptionHandler());
     }
 
-//    @Test
-//    public void sleepMethodsHonorZeroPositiveAndInterruptedPartitions() {
-//        long before = System.currentTimeMillis();
-//        Utils.sleepNoSimulation(0L);
-//        Utils.sleep(1L);
-//        assertTrue(System.currentTimeMillis() - before < 1000L);
-//
-//        Thread.currentThread().interrupt();
-//        Utils.sleepNoSimulation(1L);
-//        assertFalse("sleepNoSimulation should clear interrupted status through InterruptedException", Thread.currentThread().isInterrupted());
-//    }
+    // @Test
+    public void sleepMethodsHonorZeroPositiveAndInterruptedPartitions() {
+        long before = System.currentTimeMillis();
+        Utils.sleepNoSimulation(0L);
+        Utils.sleep(1L);
+        assertTrue(System.currentTimeMillis() - before < 1000L);
+
+        Thread.currentThread().interrupt();
+        Utils.sleepNoSimulation(1L);
+        assertFalse("sleepNoSimulation should clear interrupted status through InterruptedException", Thread.currentThread().isInterrupted());
+    }
 
     @Test
     public void reverseMapVariantsGroupKeysByValueIncludingDuplicates() {
@@ -377,12 +379,12 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertArrayEquals(new byte[0], Utils.toByteArray(ByteBuffer.allocate(0)));
     }
 
-//    @Test
-//    public void readAndLogStreamConsumesInputAndHandlesNullStreamGracefully() {
-//        InputStream in = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8));
-//        Utils.readAndLogStream("prefix", in);
-//        Utils.readAndLogStream("prefix", null);
-//    }
+    // @Test
+    public void readAndLogStreamConsumesInputAndHandlesNullStreamGracefully() {
+        InputStream in = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8));
+        Utils.readAndLogStream("prefix", in);
+        Utils.readAndLogStream("prefix", null);
+    }
 
     @Test
     public void componentTopologyHelpersResolveSpoutsBoltsStateSpoutsAndStreams() {
@@ -406,7 +408,7 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals(new GlobalStreamId("c", "s"), Utils.getGlobalStreamId("c", "s"));
     }
 
-//    @Test
+//    @Test     (THIS METHOD IS GENERATED IN A WRONG WAY)
 //    public void componentObjectHelperReturnsExactlySetRepresentation() {
 //        ComponentObject javaObject = ComponentObject.java_object("plain");
 //        assertEquals("plain", Utils.getSetComponentObject(javaObject));
@@ -419,7 +421,7 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
 //        assertSame(shell, Utils.getSetComponentObject(shellObject));
 //    }
 
-//    @Test
+//    @Test   (THIS METHOD IS GENERATED IN A WRONG WAY)
 //    public void compressionUtilitiesRoundTripAndDetectMagicHeaders() {
 //        byte[] plain = "hello-compression".getBytes(StandardCharsets.UTF_8);
 //        byte[] gzip = Utils.GzipUtils.compress(plain);
@@ -440,33 +442,33 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
 //        } catch (RuntimeException expected) { }
 //    }
 
-//    @Test
-//    public void repeatToPositiveJsonAndRedactionUtilitiesCoverNominalAndBoundaryInputs() {
-//        assertEquals(Arrays.asList("a", "b"), Utils.getRepeat(Arrays.asList("a", "b", "a", "c", "b")));
-//        assertTrue(Utils.getRepeat(Collections.<String>emptyList()).isEmpty());
-//
-//        assertEquals(0, Utils.toPositive(0));
-//        assertEquals(1, Utils.toPositive(1));
-//        assertTrue(Utils.toPositive(-1) >= 0);
-//        assertTrue(Utils.toPositive(Integer.MIN_VALUE) >= 0);
-//
-//        Map<String, Object> parsed = Utils.parseJson("{\"a\":1,\"b\":\"x\"}");
-//        assertEquals("x", parsed.get("b"));
-//        assertTrue(Utils.parseJson(null).isEmpty());
-//        assertTrue(Utils.parseJson("").isEmpty());
-//        try {
-//            Utils.parseJson("not-json");
-//            fail("Invalid JSON should fail");
-//        } catch (RuntimeException expected) { }
-//
-//        Map<String, Object> m = new HashMap<>();
-//        m.put("secret", "value");
-//        m.put("other", "keep");
-//        Map<String, Object> redacted = Utils.redactValue(m, "secret");
-//        assertEquals("value", m.get("secret"));
-//        assertNotEquals("value", redacted.get("secret"));
-//        assertEquals("keep", redacted.get("other"));
-//    }
+    // @Test
+    public void repeatToPositiveJsonAndRedactionUtilitiesCoverNominalAndBoundaryInputs() {
+        assertEquals(Arrays.asList("a", "b"), Utils.getRepeat(Arrays.asList("a", "b", "a", "c", "b")));
+        assertTrue(Utils.getRepeat(Collections.<String>emptyList()).isEmpty());
+
+        assertEquals(0, Utils.toPositive(0));
+        assertEquals(1, Utils.toPositive(1));
+        assertTrue(Utils.toPositive(-1) >= 0);
+        assertTrue(Utils.toPositive(Integer.MIN_VALUE) >= 0);
+
+        Map<String, Object> parsed = Utils.parseJson("{\"a\":1,\"b\":\"x\"}");
+        assertEquals("x", parsed.get("b"));
+        assertTrue(Utils.parseJson(null).isEmpty());
+        assertTrue(Utils.parseJson("").isEmpty());
+        try {
+            Utils.parseJson("not-json");
+            fail("Invalid JSON should fail");
+        } catch (RuntimeException expected) { }
+
+        Map<String, Object> m = new HashMap<>();
+        m.put("secret", "value");
+        m.put("other", "keep");
+        Map<String, Object> redacted = Utils.redactValue(m, "secret");
+        assertEquals("value", m.get("secret"));
+        assertNotEquals("value", redacted.get("secret"));
+        assertEquals("keep", redacted.get("other"));
+    }
 
     @Test
     public void compressedJsonConfRoundTripSupportsNestedMaps() {
@@ -493,20 +495,20 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals(Double.valueOf(99.0), Utils.parseJvmHeapMemByChildOpts(null, 99.0));
     }
 
-//    @Test
-//    public void configurationValidationAndClassLoadingUtilitiesHandleValidAndInvalidPartitions() {
-//        assertTrue(Utils.isValidConf(new HashMap<String, Object>()));
-//        Map<String, Object> conf = new HashMap<>();
-//        conf.put("className", "java.lang.String");
-//        assertEquals(String.class, Utils.getConfiguredClass(conf, "className"));
-//        assertNull(Utils.getConfiguredClass(conf, "missing"));
-//
-//        conf.put("badClass", "no.such.Class");
-//        try {
-//            Utils.getConfiguredClass(conf, "badClass");
-//            fail("Invalid configured class should fail");
-//        } catch (RuntimeException expected) { }
-//    }
+    // @Test
+    public void configurationValidationAndClassLoadingUtilitiesHandleValidAndInvalidPartitions() {
+        assertTrue(Utils.isValidConf(new HashMap<String, Object>()));
+        Map<String, Object> conf = new HashMap<>();
+        conf.put("className", "java.lang.String");
+        assertEquals(String.class, Utils.getConfiguredClass(conf, "className"));
+        assertNull(Utils.getConfiguredClass(conf, "missing"));
+
+        conf.put("badClass", "no.such.Class");
+        try {
+            Utils.getConfiguredClass(conf, "badClass");
+            fail("Invalid configured class should fail");
+        } catch (RuntimeException expected) { }
+    }
 
     @Test
     public void topologyIdUsesNimbusClientAndTranslatesNotAliveToNull() throws Exception {
@@ -528,25 +530,25 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertThat(dump, containsString(Thread.currentThread().getName()));
     }
 
-//    @Test
-//    public void integerDividedAndPartitionFixedCoverBoundaryValues() {
-//        assertEquals(mapOf(0, 3), Utils.integerDivided(3, 1));
-//        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
-//        assertEquals(Integer.valueOf(4), divided.get(0));
-//        assertEquals(Integer.valueOf(3), divided.get(1));
-//        assertEquals(Integer.valueOf(3), divided.get(2));
-//        assertTrue(Utils.integerDivided(0, 3).values().stream().allMatch(v -> v == 0));
-//
-//        List<List<Integer>> partitions = Utils.partitionFixed(2, Arrays.asList(1, 2, 3, 4, 5));
-//        assertEquals(2, partitions.size());
-//        assertEquals(Arrays.asList(1, 2, 3), partitions.get(0));
-//        assertEquals(Arrays.asList(4, 5), partitions.get(1));
-//        assertTrue(Utils.partitionFixed(3, Collections.<Integer>emptyList()).isEmpty());
-//        try {
-//            Utils.partitionFixed(0, Arrays.asList(1));
-//            fail("Zero chunks is invalid");
-//        } catch (IllegalArgumentException | ArithmeticException expected) { }
-//    }
+    // @Test
+    public void integerDividedAndPartitionFixedCoverBoundaryValues() {
+        assertEquals(mapOf(0, 3), Utils.integerDivided(3, 1));
+        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
+        assertEquals(Integer.valueOf(4), divided.get(0));
+        assertEquals(Integer.valueOf(3), divided.get(1));
+        assertEquals(Integer.valueOf(3), divided.get(2));
+        assertTrue(Utils.integerDivided(0, 3).values().stream().allMatch(v -> v == 0));
+
+        List<List<Integer>> partitions = Utils.partitionFixed(2, Arrays.asList(1, 2, 3, 4, 5));
+        assertEquals(2, partitions.size());
+        assertEquals(Arrays.asList(1, 2, 3), partitions.get(0));
+        assertEquals(Arrays.asList(4, 5), partitions.get(1));
+        assertTrue(Utils.partitionFixed(3, Collections.<Integer>emptyList()).isEmpty());
+        try {
+            Utils.partitionFixed(0, Arrays.asList(1));
+            fail("Zero chunks is invalid");
+        } catch (IllegalArgumentException | ArithmeticException expected) { }
+    }
 
     @Test
     public void yamlAndPortHelpersCoverExistingMissingPreferredAndRandomCases() throws Exception {
@@ -566,18 +568,18 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         }
     }
 
-//    @Test
-//    public void findOneCollectionAndMapReturnFirstMatchingValueOrNull() {
-//        List<Integer> values = Arrays.asList(1, 2, 3, 4);
-//        assertEquals(Integer.valueOf(2), Utils.findOne(v -> v % 2 == 0, values));
-//        assertNull(Utils.findOne(v -> v > 10, values));
-//
-//        Map<String, Integer> map = new TreeMap<>();
-//        map.put("a", 1);
-//        map.put("b", 2);
-//        assertEquals(Integer.valueOf(2), Utils.findOne(v -> v == 2, map));
-//        assertNull(Utils.findOne(v -> v == 9, map));
-//    }
+    // @Test
+    public void findOneCollectionAndMapReturnFirstMatchingValueOrNull() {
+        List<Integer> values = Arrays.asList(1, 2, 3, 4);
+        assertEquals(Integer.valueOf(2), Utils.findOne(v -> v % 2 == 0, values));
+        assertNull(Utils.findOne(v -> v > 10, values));
+
+        Map<String, Integer> map = new TreeMap<>();
+        map.put("a", 1);
+        map.put("b", 2);
+        assertEquals(Integer.valueOf(2), Utils.findOne(v -> v == 2, map));
+        assertNull(Utils.findOne(v -> v == 9, map));
+    }
 
     @Test
     public void memoizedLocalHostnameCachesUnderlyingInstanceResult() throws Exception {
@@ -609,30 +611,30 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals("default", Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1.0.0"), "worker", "default"));
     }
 
-//    @Test
-//    public void localhostMergeConvertAndWindowsHelpersCoverCommonPartitions() {
-//        assertTrue(Utils.isLocalhostAddress("localhost"));
-//        assertTrue(Utils.isLocalhostAddress("127.0.0.1"));
-//        assertFalse(Utils.isLocalhostAddress("192.168.1.10"));
-//        assertNotNull(Utils.isOnWindows());
-//
-//        Map<String, Integer> first = new HashMap<>();
-//        first.put("a", 1);
-//        Map<String, Integer> second = new HashMap<>();
-//        second.put("a", 2);
-//        second.put("b", 3);
-//        Map<String, Integer> merged = Utils.merge(first, second);
-//        assertEquals(Integer.valueOf(2), merged.get("a"));
-//        assertEquals(Integer.valueOf(3), merged.get("b"));
-//        assertEquals(Integer.valueOf(1), first.get("a"));
-//
-//        Map<Integer, String> sparse = new HashMap<>();
-//        sparse.put(2, "two");
-//        sparse.put(4, "four");
-//        ArrayList<String> array = Utils.convertToArray(sparse, 2);
-//        assertEquals(Arrays.asList("two", null, "four"), array);
-//        assertTrue(Utils.convertToArray(Collections.<Integer, String>emptyMap(), 0).isEmpty());
-//    }
+    // @Test
+    public void localhostMergeConvertAndWindowsHelpersCoverCommonPartitions() {
+        assertTrue(Utils.isLocalhostAddress("localhost"));
+        assertTrue(Utils.isLocalhostAddress("127.0.0.1"));
+        assertFalse(Utils.isLocalhostAddress("192.168.1.10"));
+        assertNotNull(Utils.isOnWindows());
+
+        Map<String, Integer> first = new HashMap<>();
+        first.put("a", 1);
+        Map<String, Integer> second = new HashMap<>();
+        second.put("a", 2);
+        second.put("b", 3);
+        Map<String, Integer> merged = Utils.merge(first, second);
+        assertEquals(Integer.valueOf(2), merged.get("a"));
+        assertEquals(Integer.valueOf(3), merged.get("b"));
+        assertEquals(Integer.valueOf(1), first.get("a"));
+
+        Map<Integer, String> sparse = new HashMap<>();
+        sparse.put(2, "two");
+        sparse.put(4, "four");
+        ArrayList<String> array = Utils.convertToArray(sparse, 2);
+        assertEquals(Arrays.asList("two", null, "four"), array);
+        assertTrue(Utils.convertToArray(Collections.<Integer, String>emptyMap(), 0).isEmpty());
+    }
 
     @Test
     public void validKeyAndTopologyNameValidationUseDefinedCharacterClasses() throws Exception {
@@ -652,23 +654,23 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         } catch (IllegalArgumentException | NullPointerException expected) { }
     }
 
-//    @Test
-//    public void topologyCycleDetectionFindsCycleAndValidateCycleFreeRejectsIt() throws Exception {
-//        StormTopology acyclic = new StormTopology();
-//        acyclic.put_to_spouts("s", new SpoutSpec(null, componentWithInputs()));
-//        acyclic.put_to_bolts("b", new Bolt(null, componentWithInputs(new GlobalStreamId("s", "default"))));
-//        assertTrue(Utils.findComponentCycles(acyclic, "acyclic").isEmpty());
-//        Utils.validateCycleFree(acyclic, "acyclic");
-//
-//        StormTopology cyclic = new StormTopology();
-//        cyclic.put_to_bolts("a", new Bolt(null, componentWithInputs(new GlobalStreamId("b", "default"))));
-//        cyclic.put_to_bolts("b", new Bolt(null, componentWithInputs(new GlobalStreamId("a", "default"))));
-//        assertFalse(Utils.findComponentCycles(cyclic, "cyclic").isEmpty());
-//        try {
-//            Utils.validateCycleFree(cyclic, "cyclic");
-//            fail("Cycle should invalidate topology");
-//        } catch (InvalidTopologyException expected) { }
-//    }
+    // @Test
+    public void topologyCycleDetectionFindsCycleAndValidateCycleFreeRejectsIt() throws Exception {
+        StormTopology acyclic = new StormTopology();
+        acyclic.put_to_spouts("s", new SpoutSpec(null, componentWithInputs()));
+        acyclic.put_to_bolts("b", new Bolt(null, componentWithInputs(new GlobalStreamId("s", "default"))));
+        assertTrue(Utils.findComponentCycles(acyclic, "acyclic").isEmpty());
+        Utils.validateCycleFree(acyclic, "acyclic");
+
+        StormTopology cyclic = new StormTopology();
+        cyclic.put_to_bolts("a", new Bolt(null, componentWithInputs(new GlobalStreamId("b", "default"))));
+        cyclic.put_to_bolts("b", new Bolt(null, componentWithInputs(new GlobalStreamId("a", "default"))));
+        assertFalse(Utils.findComponentCycles(cyclic, "cyclic").isEmpty());
+        try {
+            Utils.validateCycleFree(cyclic, "cyclic");
+            fail("Cycle should invalidate topology");
+        } catch (InvalidTopologyException expected) { }
+    }
 
     @Test
     public void suicideAndExitProcessPathsAreRepresentedWithoutTerminatingJvm() {

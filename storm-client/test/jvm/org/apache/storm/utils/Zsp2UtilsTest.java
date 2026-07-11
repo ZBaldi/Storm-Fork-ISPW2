@@ -217,42 +217,42 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertNotNull(Utils.memoizedLocalHostname());
     }
 
-//    @Test
-//    public void javaAndDelegateSerialization_roundTripSerializableValues() {
-//        HashMap<String, Object> value = new HashMap<String, Object>();
-//        value.put("name", "storm");
-//        value.put("n", Integer.valueOf(2));
-//
-//        byte[] javaBytes = Utils.javaSerialize(value);
-//        assertEquals(value, Utils.javaDeserialize(javaBytes, HashMap.class));
-//
-//        byte[] delegateBytes = Utils.serialize(value);
-//        assertEquals(value, Utils.deserialize(delegateBytes, HashMap.class));
-//
-//        String asString = Utils.serializeToString(value);
-//        assertEquals(value, Utils.deserializeFromString(asString, HashMap.class));
-//    }
+    // @Test
+    public void javaAndDelegateSerialization_roundTripSerializableValues() {
+        HashMap<String, Object> value = new HashMap<String, Object>();
+        value.put("name", "storm");
+        value.put("n", Integer.valueOf(2));
 
-//    @Test
-//    public void mapGetAndNumericHelpers_coverDefaultAndBoundaryValues() {
-//        Map<String, Integer> map = new HashMap<String, Integer>();
-//        map.put("present", 10);
-//        map.put("nullValue", null);
-//        assertEquals(Integer.valueOf(10), Utils.get(map, "present", 0));
-//        assertEquals(Integer.valueOf(5), Utils.get(map, "missing", 5));
-//        assertNull(Utils.get(map, "nullValue", 5));
-//
-//        assertEquals(0.0, Utils.zeroIfNaNOrInf(Double.NaN), 0.0);
-//        assertEquals(0.0, Utils.zeroIfNaNOrInf(Double.POSITIVE_INFINITY), 0.0);
-//        assertEquals(-1.5, Utils.zeroIfNaNOrInf(-1.5), 0.0);
-//        assertEquals(0.0, Utils.nullToZero(null), 0.0);
-//        assertEquals(2.5, Utils.nullToZero(2.5), 0.0);
-//        assertEquals("b", Utils.OR(null, "b"));
-//        assertEquals("a", Utils.OR("a", "b"));
-//        assertTrue(Utils.toPositive(-1) >= 0);
-//        assertEquals(0, Utils.toPositive(0));
-//        assertEquals(1, Utils.toPositive(1));
-//    }
+        byte[] javaBytes = Utils.javaSerialize(value);
+        assertEquals(value, Utils.javaDeserialize(javaBytes, HashMap.class));
+
+        byte[] delegateBytes = Utils.serialize(value);
+        assertEquals(value, Utils.deserialize(delegateBytes, HashMap.class));
+
+        String asString = Utils.serializeToString(value);
+        assertEquals(value, Utils.deserializeFromString(asString, HashMap.class));
+    }
+
+    // @Test
+    public void mapGetAndNumericHelpers_coverDefaultAndBoundaryValues() {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("present", 10);
+        map.put("nullValue", null);
+        assertEquals(Integer.valueOf(10), Utils.get(map, "present", 0));
+        assertEquals(Integer.valueOf(5), Utils.get(map, "missing", 5));
+        assertNull(Utils.get(map, "nullValue", 5));
+
+        assertEquals(0.0, Utils.zeroIfNaNOrInf(Double.NaN), 0.0);
+        assertEquals(0.0, Utils.zeroIfNaNOrInf(Double.POSITIVE_INFINITY), 0.0);
+        assertEquals(-1.5, Utils.zeroIfNaNOrInf(-1.5), 0.0);
+        assertEquals(0.0, Utils.nullToZero(null), 0.0);
+        assertEquals(2.5, Utils.nullToZero(2.5), 0.0);
+        assertEquals("b", Utils.OR(null, "b"));
+        assertEquals("a", Utils.OR("a", "b"));
+        assertTrue(Utils.toPositive(-1) >= 0);
+        assertEquals(0, Utils.toPositive(0));
+        assertEquals(1, Utils.toPositive(1));
+    }
 
     @Test
     public void joinTupleRepeatAndPartitionMethods_returnExpectedCollections() {
@@ -408,29 +408,29 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals(Double.valueOf(64.0), Utils.parseJvmHeapMemByChildOpts(Collections.<String>emptyList(), 64.0));
     }
 
-//    @Test
-//    public void configValidationAndClassHelpers_handleSimpleInputs() {
-//        Map<String, Object> conf = new HashMap<String, Object>();
-//        conf.put("clazz", "java.lang.String");
-//        assertEquals("", Utils.getConfiguredClass(conf, "clazz"));
-//        assertNull(Utils.getConfiguredClass(conf, "missing"));
-//        assertFalse(Utils.isValidConf(null));
-//        assertNotNull(Utils.threadDump());
-//    }
+    // @Test
+    public void configValidationAndClassHelpers_handleSimpleInputs() {
+        Map<String, Object> conf = new HashMap<String, Object>();
+        conf.put("clazz", "java.lang.String");
+        assertEquals("", Utils.getConfiguredClass(conf, "clazz"));
+        assertNull(Utils.getConfiguredClass(conf, "missing"));
+        assertFalse(Utils.isValidConf(null));
+        assertNotNull(Utils.threadDump());
+    }
 
-//    @Test
-//    public void integerDivisionAndConvertToArray_coverBoundaries() {
-//        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
-//        assertEquals(Integer.valueOf(4), divided.get(0));
-//        assertEquals(Integer.valueOf(3), divided.get(1));
-//        assertEquals(Integer.valueOf(3), divided.get(2));
-//
-//        Map<Integer, String> map = new HashMap<Integer, String>();
-//        map.put(0, "zero");
-//        map.put(2, "two");
-//        ArrayList<String> array = Utils.convertToArray(map, 0);
-//        assertEquals(Arrays.asList("zero", null, "two"), array);
-//    }
+    // @Test
+    public void integerDivisionAndConvertToArray_coverBoundaries() {
+        TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
+        assertEquals(Integer.valueOf(4), divided.get(0));
+        assertEquals(Integer.valueOf(3), divided.get(1));
+        assertEquals(Integer.valueOf(3), divided.get(2));
+
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        map.put(0, "zero");
+        map.put(2, "two");
+        ArrayList<String> array = Utils.convertToArray(map, 0);
+        assertEquals(Arrays.asList("zero", null, "two"), array);
+    }
 
     @Test
     public void readYamlAndParseJson_handleValidEmptyAndInvalidInputs() throws Exception {
@@ -467,19 +467,19 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         }
     }
 
-//    @Test
-//    public void findOne_overloadsReturnFirstMatchOrNull() {
-//        IPredicate<String> startsWithB = new IPredicate<String>() {
-//            public boolean test(String value) { return value.startsWith("b"); }
-//        };
-//        assertEquals("bee", Utils.findOne(startsWithB, Arrays.asList("ant", "bee", "bat")));
-//        assertNull(Utils.findOne(startsWithB, Arrays.asList("ant", "cat")));
-//
-//        Map<String, String> values = new HashMap<String, String>();
-//        values.put("1", "ant");
-//        values.put("2", "bee");
-//        assertEquals("bee", Utils.findOne(startsWithB, values));
-//    }
+    // @Test
+    public void findOne_overloadsReturnFirstMatchOrNull() {
+        IPredicate<String> startsWithB = new IPredicate<String>() {
+            public boolean test(String value) { return value.startsWith("b"); }
+        };
+        assertEquals("bee", Utils.findOne(startsWithB, Arrays.asList("ant", "bee", "bat")));
+        assertNull(Utils.findOne(startsWithB, Arrays.asList("ant", "cat")));
+
+        Map<String, String> values = new HashMap<String, String>();
+        values.put("1", "ant");
+        values.put("2", "bee");
+        assertEquals("bee", Utils.findOne(startsWithB, values));
+    }
 
     @Test
     public void versionAndClasspathMethods_handleEmptyConfiguration() throws Exception {
