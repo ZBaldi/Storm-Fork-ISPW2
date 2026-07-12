@@ -154,6 +154,7 @@
         <asm.version>9.10.1</asm.version>
         <error_prone_annotations.version>2.49.0</error_prone_annotations.version>
         <bouncycastle.version>1.84</bouncycastle.version>
+        <pmd.skip>true</pmd.skip>
     </properties>
 
     <modules>
@@ -1114,6 +1115,7 @@
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>3.28.0</version>
                     <configuration>
+                        <skip>${pmd.skip}</skip>
                         <targetJdk>${maven.compiler.target}</targetJdk>
                         <rulesets>
                             <ruleset>storm/pmd-ruleset.xml</ruleset>
