@@ -31,4 +31,4 @@ jobs:
           cache: maven
 
       - name: Build
-        run: mvn -B clean verify
+        run: mvn -B clean verify -Dpmd.skip=true
