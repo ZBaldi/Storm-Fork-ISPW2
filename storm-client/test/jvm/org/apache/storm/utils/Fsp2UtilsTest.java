@@ -140,7 +140,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test readCommandLineOpts with valid encoded values. Expected = parsed map. */
-    // @Test
+    // @Test    (FAILED)  java.lang.Integer<1>
     public void readCommandLineOptsValidPropertyShouldParseValues() {
         System.setProperty("storm.options", "a=1,b=" + Utils.urlEncodeUtf8("hello world"));
         Map<String, Object> opts = Utils.readCommandLineOpts();
@@ -631,7 +631,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test toCompressedJsonConf/fromCompressedJsonConf with valid map. Expected = round trip. */
-    // @Test
+    // @Test   (FAILED)  expected {"a":1}
     public void compressedJsonConfValidMapShouldPass() {
         Map<String, Object> map = new HashMap<>();
         map.put("a", 1L);
@@ -678,7 +678,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test isValidConf with valid-like configuration. Expected = boolean result without exception. */
-    // @Test
+    // @Test   expected = true
     public void isValidConfSmokeShouldReturnBoolean() {
         Assert.assertFalse(Utils.isValidConf(null));
         Assert.assertEquals(Utils.isValidConf(new HashMap<String, Object>()), Utils.isValidConf(new HashMap<String, Object>()));
@@ -696,7 +696,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test getTopologyId with mocked Nimbus client. Expected = matching topology id. */
-    // @Test
+    // @Test  (FAILED) expected = null
     public void getTopologyIdMatchingNameShouldReturnId() throws Exception {
         Nimbus.Iface client = mock(Nimbus.Iface.class);
         TopologySummary summary = new TopologySummary();
@@ -710,7 +710,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test validateTopologyBlobStoreMap with empty config. Expected = completes. */
-    // @Test
+    // @Test  (FAILED)  ConnectException: Connection refused)
     public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws Exception {
         Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
     }
@@ -773,7 +773,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test integerDivided with boundary values. Expected = sum distributed among pieces. */
-    // @Test
+    // @Test  (FAILED)  key 0 doesn't exists
     public void integerDividedValidValuesShouldPass() {
         TreeMap<Integer, Integer> ret = Utils.integerDivided(10, 3);
         Assert.assertEquals(Integer.valueOf(4), ret.get(0));
@@ -834,7 +834,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
 //    }
 
     /** Test parseJson with valid and blank json. Expected = parsed map and empty map. */
-    // @Test
+    // @Test   (FAILED) expected integer not long
     public void parseJsonValidAndBlankShouldPass() {
         Assert.assertEquals(1L, Utils.parseJson("{\"a\":1}").get("a"));
         Assert.assertTrue(Utils.parseJson(null).isEmpty());
@@ -884,10 +884,10 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test getCompatibleVersion with empty versioned map. Expected = default value. */
-    // @Test
+    @Test
     public void getCompatibleVersionEmptyMapShouldReturnDefault() {
         String def = "default";
-        Assert.assertSame(def, Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1,0,0"), "test", def));  // CHANGED 1,0,0 TO STRING "1,0,0"
+        Assert.assertSame(def, Utils.getCompatibleVersion(new TreeMap<SimpleVersion, String>(), new SimpleVersion("1.0.0"), "test", def));  // CHANGED 1,0,0 TO STRING "1.0.0"
     }
 
     /** Test getConfigFromClasspath with empty classpath. Expected = provided conf or defaults fallback. */
@@ -949,7 +949,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test validateTopologyName with valid and invalid names. Expected = invalid names throw InvalidTopologyException. */
-    // @Test
+    // @Test   (FAILED)  expected IllegalArgumentException
     public void validateTopologyNameValuesShouldPass() throws Exception {
         Utils.validateTopologyName("valid-topology_1");
         Assert.assertThrows(InvalidTopologyException.class, new org.junit.function.ThrowingRunnable() {

@@ -304,7 +304,7 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertTrue(true);
     }
 
-    // @Test
+    // @Test (FAILED) Required field 'spouts' is unset!
     public void testThriftSerializeDeserialize() {
         StormTopology topology = new StormTopology();
         byte[] bytes = Utils.thriftSerialize(topology);
@@ -360,7 +360,7 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertFalse(dir.exists());
     }
 
-    // @Test
+    // @Test (FAILED) Object must be an instance of TBase
     public void testSerializeDeserializeDelegate() {
         String value = "abc";
         byte[] bytes = Utils.serialize(value);
@@ -495,7 +495,7 @@ public class Zsp1UtilsTest {  //CLEANED NOT USED IMPORTS
         assertEquals("a", Utils.OR("a", "b"));
     }
 
-    // @Test
+    // @Test  (FAILED) sum is number of pieces in this case  2 people have 3 pieces, 1 person has 4 pieces
     public void testIntegerDividedBoundaries() {
         TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
         int sum = 0;

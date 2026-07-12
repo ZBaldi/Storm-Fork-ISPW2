@@ -217,7 +217,7 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertNotNull(Utils.memoizedLocalHostname());
     }
 
-    // @Test
+    // @Test (FAILED) Object must be an instance of TBase
     public void javaAndDelegateSerialization_roundTripSerializableValues() {
         HashMap<String, Object> value = new HashMap<String, Object>();
         value.put("name", "storm");
@@ -233,7 +233,7 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals(value, Utils.deserializeFromString(asString, HashMap.class));
     }
 
-    // @Test
+    // @Test  (FAILED) default value is 5
     public void mapGetAndNumericHelpers_coverDefaultAndBoundaryValues() {
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("present", 10);
@@ -408,7 +408,7 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertEquals(Double.valueOf(64.0), Utils.parseJvmHeapMemByChildOpts(Collections.<String>emptyList(), 64.0));
     }
 
-    // @Test
+    // @Test  (FAILED) returned true
     public void configValidationAndClassHelpers_handleSimpleInputs() {
         Map<String, Object> conf = new HashMap<String, Object>();
         conf.put("clazz", "java.lang.String");
@@ -418,7 +418,7 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         assertNotNull(Utils.threadDump());
     }
 
-    // @Test
+    // @Test  (FAILED) 0 is not a key
     public void integerDivisionAndConvertToArray_coverBoundaries() {
         TreeMap<Integer, Integer> divided = Utils.integerDivided(10, 3);
         assertEquals(Integer.valueOf(4), divided.get(0));
@@ -467,7 +467,7 @@ public class Zsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         }
     }
 
-    // @Test
+    // @Test  (BUG FOUND ALSO BY LLM !!!)
     public void findOne_overloadsReturnFirstMatchOrNull() {
         IPredicate<String> startsWithB = new IPredicate<String>() {
             public boolean test(String value) { return value.startsWith("b"); }

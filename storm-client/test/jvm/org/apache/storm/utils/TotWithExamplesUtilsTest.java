@@ -309,7 +309,7 @@ public class TotWithExamplesUtilsTest {  //REMOVED NOT USED IMPORTS
         assertFalse(tempDir.exists());
     }
 
-    // @Test
+    // @Test  (FAILED)   IllegalArgumentException: Object must be an instance of TBase
     public void configuredSerializationDelegateShouldRoundTripObjectsAndStrings() {
         Map<String, Object> input = new HashMap<>();
         input.put("key", "value");
@@ -569,7 +569,7 @@ public class TotWithExamplesUtilsTest {  //REMOVED NOT USED IMPORTS
         assertFalse(Utils.isValidKey("../secret"));
     }
 
-    // @Test
+    // @Test   (FAILED) IllegalArgumentException: Topology name '/' is not valid. It can't be null and it must match ^[^/.:\\]+$
     public void validateTopologyNameShouldFollowConfiguredTopologyNamePattern() {
         Utils.validateTopologyName("/");
         try {

@@ -160,7 +160,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test asyncLoop full signature with startImmediately false. Expected = configured SmartThread returned but not started. */
-    // @Test
+    // @Test   (FAILED) expected Thread-0-fsp3-thread
     public void asyncLoopFullSignatureNotStartedShouldPass() {
         Callable<Long> callable = () -> null;
         Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.MAX_PRIORITY, false, false, "fsp3-thread");
@@ -172,7 +172,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test asyncLoop overload with handler. Expected = thread runs callable and stops when null is returned. */
-    // @Test
+    // @Test   (FAILED)  expected Thread-0-named-loop
     public void asyncLoopNamedOverloadShouldExecuteOnce() throws Exception {
         AtomicInteger calls = new AtomicInteger();
         UncaughtExceptionHandler handler = (t, e) -> { };
@@ -232,7 +232,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test exitProcess in an isolated SecurityManager. Expected = attempts requested exit code. */
-    // @Test
+    // @Test   (FAILED)  UnsupportedOperationException: The Security Manager is deprecated and will be removed in a future release
     public void exitProcessShouldAttemptSystemExit() {
         System.setSecurityManager(new NoExitSecurityManager(originalSecurityManager));
         ExitException thrown = Assert.assertThrows(ExitException.class, () -> Utils.exitProcess(7, "test"));
@@ -301,7 +301,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test uncaught exception handlers with allowed exceptions. Expected = no exception. */
-    // @Test
+    // @Test    (FAILED)   launched an Error
     public void uncaughtExceptionHandlersAllowedExceptionsShouldPass() {
         Set<Class<?>> allowed = new HashSet<>();
         allowed.add(IllegalArgumentException.class);
@@ -352,7 +352,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test reverseMap(List) with list of sequences. Expected = indexes grouped by object value. */
-    // @Test
+    // @Test   (FAILED) a is not a key anymore
     public void reverseMapListShouldGroupPositions() {
         List<List<Object>> input = Arrays.asList(
                 Arrays.asList((Object) "a", "b"),
@@ -402,7 +402,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test readAndLogStream valid stream and null stream. Expected = valid stream consumed, null handled internally. */
-    // @Test
+    // @Test  (FAILED) NullPointerException
     public void readAndLogStreamCategoriesShouldPass() {
         InputStream in = new ByteArrayInputStream("line1\nline2".getBytes(StandardCharsets.UTF_8));
         Utils.readAndLogStream("prefix", in);
@@ -410,7 +410,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test getComponentCommon for spout, bolt, state spout and missing id. */
-    // @Test
+    // @Test  (FAILED)  IllegalArgumentException: Could not find component with id missing
     public void getComponentCommonCategoriesShouldPass() {
         ComponentCommon spoutCommon = new ComponentCommon();
         ComponentCommon boltCommon = new ComponentCommon();
@@ -460,7 +460,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test GlobalStreamId helper. Expected = default stream for null/empty else provided stream. */
-    // @Test
+    // @Test (FAILED) expected = GlobalStreamId(componentId:component, streamId:)
     public void getGlobalStreamIdCategoriesShouldPass() {
         Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", null));
         Assert.assertEquals(new GlobalStreamId("component", Utils.DEFAULT_STREAM_ID), Utils.getGlobalStreamId("component", ""));
@@ -478,7 +478,7 @@ public class Fsp3UtilsTest {
 //    }
 
     /** Test toPositive boundary values. Expected = non-negative hash-style transformation. */
-    // @Test
+    // @Test  (FAILED) it's not an absolute value method
     public void toPositiveBoundariesShouldPass() {
         Assert.assertEquals(0, Utils.toPositive(0));
         Assert.assertEquals(1, Utils.toPositive(1));
@@ -487,7 +487,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test compressed JSON config round trip and invalid serialized payload. */
-    // @Test
+    // @Test  (FAILED)  expected = {"number":3,"key":"value"}
     public void compressedJsonConfRoundTripShouldPass() {
         Map<String, Object> conf = new HashMap<>();
         conf.put("key", "value");
@@ -519,7 +519,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test isValidConf with valid and invalid topology config. */
-    // @Test
+    // @Test   (FAILED)    NullPointerException: Cannot invoke "Object.toString()" because the return value of "java.util.Map$Entry.getKey()" is null
     public void isValidConfCategoriesShouldPass() {
         Map<String, Object> conf = new HashMap<>();
         conf.put("key", "value");
@@ -602,7 +602,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test integerDivided with boundary values. */
-    // @Test
+    // @Test    (FAILED)   Actual   :{0=1}
     public void integerDividedBoundariesShouldPass() {
         Assert.assertEquals(new TreeMap<Integer, Integer>() {{ put(0, 0); }}, Utils.integerDivided(0, 1));
         TreeMap<Integer, Integer> split = Utils.integerDivided(10, 3);
@@ -642,7 +642,7 @@ public class Fsp3UtilsTest {
     }
 
     /** Test findOne overloads for collection and map. */
-    // @Test
+    // @Test    (FAILED)   ClassCastException: class java.util.LinkedHashMap$Entry cannot be cast to class java.lang.String
     public void findOneCategoriesShouldPass() {
         Assert.assertEquals("bb", Utils.findOne(x -> x.length() == 2, Arrays.asList("a", "bb", "cc")));
         Assert.assertNull(Utils.findOne(x -> x.startsWith("z"), Arrays.asList("a", "bb")));

@@ -183,7 +183,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.isSystemId(null);
     }
 
-    // @Test
+    // @Test   (FAILED)  expected = Thread-0-utils-test-loop
     public void asyncLoopFullSignatureStartImmediatelyFalseShouldReturnConfiguredThread() {
         Callable<Object> callable = new Callable<Object>() { public Object call() { return -1; } };
         Utils.SmartThread thread = Utils.asyncLoop(callable, true, null, Thread.NORM_PRIORITY, false, false, "utils-test-loop");
@@ -192,7 +192,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         assertFalse(thread.isAlive());
     }
 
-    // @Test
+    // @Test   (FAILED)  expected = Thread-0-named-loop
     public void asyncLoopWithThreadNameShouldReturnThread() {
         Utils.SmartThread thread = Utils.asyncLoop(new Callable<Object>() { public Object call() { return -1; } }, "named-loop", null);
         assertEquals("named-loop", thread.getName());
@@ -248,7 +248,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.secureRandomLong();
     }
 
-    // @Test
+    @Test
     public void localHostnameDelegatedToInstanceShouldReturnMockedValue() throws Exception {
         Utils mock = new Utils() {
             @Override
@@ -282,7 +282,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.javaDeserialize(new byte[] {1, 2, 3}, String.class);
     }
 
-    // @Test
+    // @Test  (FAILED)  NullPointerException: Cannot invoke "java.util.Map.get(Object)" because "m" is null
     public void getExistingMissingAndNullMapShouldReturnExpectedValueOrDefault() {
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("a", 1);
@@ -442,7 +442,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.deserializeFromString(null, String.class);
     }
 
-    // @Test
+    // @Test   (FAILED)  position expected is 4
     public void toByteArrayShouldNotMutateOriginalBufferPosition() {
         ByteBuffer buffer = ByteBuffer.wrap(new byte[] {0, 1, 2, 3});
         buffer.position(1);
@@ -472,7 +472,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         assertSame(common, Utils.getComponentCommon(topology, "s"));
     }
 
-    // @Test(expected = IllegalArgumentException.class)
+    // @Test(expected = IllegalArgumentException.class)    (FAILED)  NullPointerException
     public void getComponentCommonMissingIdShouldThrowIllegalArgumentException() {
         Utils.getComponentCommon(new StormTopology(), "missing");
     }
@@ -539,7 +539,7 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
         Utils.fromCompressedJsonConf(new byte[] {1, 2, 3});
     }
 
-    // @Test
+    // @Test   (FAILED)  expected = #####
     public void redactValueShouldReturnNewMapAndNotModifyOriginal() {
         Map<String, Object> input = new HashMap<String, Object>();
         input.put("secret", "value");

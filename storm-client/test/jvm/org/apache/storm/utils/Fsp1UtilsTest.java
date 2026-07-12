@@ -158,7 +158,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test asyncLoop method with full parameters and startImmediately false. Expected = SmartThread */
-    // @Test
+    // @Test  (FAILED)  Thread-0-test-thread
     public void asyncLoopFullParametersShouldPass() {
         Utils.SmartThread thread = Utils.asyncLoop(() -> null, true, null, Thread.NORM_PRIORITY, false, false, "test-thread");
         Assert.assertNotNull(thread);
@@ -507,7 +507,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test getComponentCommon method with empty topology. Expected = null */
-    // @Test
+    // @Test   (FAILED)  IllegalArgumentException: Could not find component with id missing
     public void getComponentCommonEmptyTopologyShouldPass() {
         StormTopology topology = new StormTopology();
         topology.set_spouts(new HashMap<>());
@@ -666,7 +666,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test validateTopologyBlobStoreMap method with empty config. Expected = no exception */
-    // @Test
+    // @Test   (FAILED)  ConnectException: Connection refused
     public void validateTopologyBlobStoreMapEmptyConfShouldPass() throws AuthorizationException, InvalidTopologyException {  // ADDED THROWS
         Utils.validateTopologyBlobStoreMap(new HashMap<String, Object>());
     }
@@ -742,7 +742,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test integerDivided method with positive values. Expected = sum divided */
-    // @Test
+    // @Test  (FAILED) expected should be 3
     public void integerDividedValidValuesShouldPass() {
         TreeMap<Integer, Integer> result = Utils.integerDivided(10, 3);
         int total = 0;
@@ -804,7 +804,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test findOne method with map and matching predicate. Expected = first matching value */
-    // @Test
+    // @Test   (FAILED)  BUG AS BEFORE!!!
     public void findOneMapMatchShouldPass() {
         Map<String, Integer> map = new LinkedHashMap<>();
         map.put("a", 1);
@@ -821,7 +821,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test parseJson method with empty json. Expected = empty map */
-    // @Test
+    // @Test   (FAILED)  java.lang.String cannot be cast to class java.util.Map
     public void parseJsonEmptyStringShouldPass() {
         Assert.assertEquals(new HashMap<String, Object>(), Utils.parseJson(""));
     }
@@ -949,7 +949,7 @@ public class Fsp1UtilsTest {  // REMOVED NOT USED IMPORTS
     }
 
     /** Test validateTopologyName method with invalid name. Expected = InvalidTopologyException */
-    // @Test
+    // @Test  (FAILED)  expected java.lang.IllegalArgumentException
     public void validateTopologyNameInvalidThrowsException() {
         Assert.assertThrows(InvalidTopologyException.class, () -> Utils.validateTopologyName("bad/name"));
     }
