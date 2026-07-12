@@ -1,4 +1,3 @@
-#try
 name: Build
 
 on:
@@ -32,4 +31,4 @@ jobs:
           cache: maven
 
       - name: Build
-        run: mvn -B clean verify -Dpmd.skip=true
+        run: mvn -B clean verify
