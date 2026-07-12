@@ -1041,7 +1041,7 @@
                     <configuration>
                         <redirectTestOutputToFile>true</redirectTestOutputToFile>
                         <excludedGroups>IntegrationTest | ${java.unit.test.exclude.groups}</excludedGroups>
-                        <argLine>-Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
+                        <argLine>@{argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
                         <trimStackTrace>false</trimStackTrace>
                         <forkCount>1.0C</forkCount>
                         <reuseForks>false</reuseForks>

@@ -220,7 +220,7 @@ public class Utils {
         return findAndReadConfigFile(name, true);
     }
 
-    private static InputStream getConfigFileInputStream(String configFilePath)
+    public static InputStream getConfigFileInputStream(String configFilePath)
         throws IOException {
         if (null == configFilePath) {
             throw new IOException(
