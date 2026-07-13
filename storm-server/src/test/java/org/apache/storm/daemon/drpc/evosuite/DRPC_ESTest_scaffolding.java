@@ -32,7 +32,7 @@
 //
 //  @BeforeClass
 //  public static void initEvoSuiteFramework() {
-//    org.evosuite.runtime.RuntimeSettings.className = "org.apache.storm.daemon.drpc.DRPC";
+//    org.evosuite.runtime.RuntimeSettings.className = "org.apache.storm.daemon.drpc.refactored.zero.DRPC";
 //    org.evosuite.runtime.GuiSupport.initialize();
 //    org.evosuite.runtime.RuntimeSettings.maxNumberOfThreads = 100;
 //    org.evosuite.runtime.RuntimeSettings.maxNumberOfIterationsPerLoop = 10000;
@@ -240,7 +240,7 @@
 //      "org.apache.storm.generated.JavaObjectArg",
 //      "org.apache.storm.shade.org.apache.curator.framework.schema.SchemaViolation",
 //      "org.apache.storm.shade.org.apache.zookeeper.Watcher$WatcherType",
-//      "org.apache.storm.daemon.drpc.DRPC",
+//      "org.apache.storm.daemon.drpc.refactored.zero.DRPC",
 //      "org.apache.storm.shade.org.apache.zookeeper.ClientCnxn",
 //      "org.apache.storm.executor.IRunningExecutor",
 //      "org.apache.storm.shade.org.yaml.snakeyaml.emitter.Emitable",
@@ -1312,7 +1312,7 @@
 //      "org.apache.storm.shade.org.yaml.snakeyaml.parser.ParserImpl$ParseBlockSequenceEntryValue",
 //      "org.apache.storm.generated.TopologyHistoryInfo$TopologyHistoryInfoStandardScheme",
 //      "org.apache.storm.shade.org.yaml.snakeyaml.constructor.AbstractConstruct",
-//      "org.apache.storm.daemon.drpc.DRPC$1",
+//      "org.apache.storm.daemon.drpc.refactored.zero.DRPC$1",
 //      "org.apache.storm.shade.org.apache.curator.ensemble.exhibitor.ExhibitorRestClient",
 //      "org.apache.storm.nimbus.ITopologyActionNotifierPlugin",
 //      "org.apache.storm.shade.org.apache.zookeeper.KeeperException$NodeExistsException",
@@ -2238,8 +2238,8 @@
 //      "org.apache.storm.generated.DRPCExecutionException",
 //      "org.apache.storm.utils.WrappedDRPCExecutionException",
 //      "org.apache.storm.generated.DRPCExceptionType",
-//      "org.apache.storm.daemon.drpc.DRPC",
-//      "org.apache.storm.daemon.drpc.DRPC$1",
+//      "org.apache.storm.daemon.drpc.refactored.zero.DRPC",
+//      "org.apache.storm.daemon.drpc.refactored.zero.DRPC$1",
 //      "org.apache.storm.daemon.StormCommon",
 //      "org.apache.storm.security.auth.ReqContext",
 //      "org.apache.storm.logging.ThriftAccessLogger",

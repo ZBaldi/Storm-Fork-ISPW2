@@ -1,0 +1,10 @@
+package org.apache.storm.daemon.drpc_4.randoop;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({ RegressionTest0.class })
+public class RegressionTest {
+}
+

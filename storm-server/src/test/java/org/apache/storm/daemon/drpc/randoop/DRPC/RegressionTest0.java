@@ -1,5 +1,6 @@
 package org.apache.storm.daemon.drpc.randoop.DRPC;
 
+import org.apache.storm.daemon.drpc.refactored.zero.DRPC;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -28,7 +29,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) -1);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) -1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -43,7 +44,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 10);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 10);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -67,7 +68,7 @@ public class RegressionTest0 {
         java.util.Map<java.lang.String, java.lang.Object> strMap1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC2 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, strMap1);
+            DRPC dRPC2 = new DRPC(stormMetricsRegistry0, strMap1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"java.util.Map.get(Object)\" because \"conf\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -82,7 +83,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, 0L);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, 0L);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -97,7 +98,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, 100L);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, 100L);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -112,7 +113,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) ' ');
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) ' ');
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -127,7 +128,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, 10L);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, 10L);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -142,7 +143,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 0);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -157,7 +158,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, 1L);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, 1L);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -172,7 +173,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 100);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 100);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -187,7 +188,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (-1));
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (-1));
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -202,7 +203,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) -1);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) -1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -217,7 +218,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) '4');
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) '4');
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -232,7 +233,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 100);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 100);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -247,7 +248,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 'a');
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 'a');
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -262,7 +263,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 100);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 100);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -277,7 +278,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) '#');
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) '#');
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -292,7 +293,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (-1L));
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (-1L));
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -307,7 +308,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 10);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 10);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -322,7 +323,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 0);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -337,7 +338,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 0);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -352,7 +353,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 1);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (short) 1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -367,7 +368,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 1);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -382,7 +383,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 10);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) 10);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -397,7 +398,7 @@ public class RegressionTest0 {
         org.apache.storm.security.auth.IAuthorizer iAuthorizer1 = null;
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.daemon.drpc.DRPC dRPC3 = new org.apache.storm.daemon.drpc.DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 1);
+            DRPC dRPC3 = new DRPC(stormMetricsRegistry0, iAuthorizer1, (long) (byte) 1);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"org.apache.storm.metric.StormMetricsRegistry.registerMeter(String)\" because \"metricsRegistry\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.

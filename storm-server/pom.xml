@@ -178,7 +178,7 @@
                 <artifactId>pitest-maven</artifactId>
                 <configuration>
                     <targetClasses>
-                        <param>org.apache.storm.daemon.drpc.DRPC</param>
+                        <param>org.apache.storm.daemon.drpc.refactored.zero.DRPC</param>
                     </targetClasses>
                     <targetTests>
                         <param>org.apache.storm.daemon.drpc.*Test</param>

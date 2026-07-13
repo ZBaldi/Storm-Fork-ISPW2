@@ -25,7 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.storm.daemon.common.AuthorizationExceptionMapper;
-import org.apache.storm.daemon.drpc.DRPC;
+import org.apache.storm.daemon.drpc.refactored.zero.DRPC;
 import org.apache.storm.metric.StormMetricsRegistry;
 
 @ApplicationPath("")

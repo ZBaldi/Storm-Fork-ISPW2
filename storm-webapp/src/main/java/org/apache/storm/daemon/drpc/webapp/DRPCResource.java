@@ -28,7 +28,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Context;
 
-import org.apache.storm.daemon.drpc.DRPC;
+import org.apache.storm.daemon.drpc.refactored.zero.DRPC;
 import org.apache.storm.metric.StormMetricsRegistry;
 
 @Path("/drpc/")

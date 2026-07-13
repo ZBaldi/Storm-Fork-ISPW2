@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import org.apache.storm.Config;
 import org.apache.storm.DaemonConfig;
+import org.apache.storm.daemon.drpc.refactored.zero.DRPC;
+import org.apache.storm.daemon.drpc.refactored.zero.DRPCThrift;
 import org.apache.storm.daemon.drpc.webapp.DRPCApplication;
 import org.apache.storm.daemon.drpc.webapp.ReqContextFilter;
 import org.apache.storm.daemon.ui.FilterConfiguration;

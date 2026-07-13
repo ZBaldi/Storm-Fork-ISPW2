@@ -321,7 +321,7 @@
                                         <PYTHONPATH>../../../bin:$PYTHONPATH</PYTHONPATH>
                                         <PYTHONDONTWRITEBYTECODE>true</PYTHONDONTWRITEBYTECODE>
                                     </environmentVariables>
-                                    <skip>${skipTests}</skip>
+                                    <skip>${skipPythonTests}</skip>
                                 </configuration>
                                 <id>python3-test</id>
                                 <phase>test</phase>

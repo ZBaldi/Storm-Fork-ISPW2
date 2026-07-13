@@ -6,7 +6,7 @@
 //package org.apache.storm.daemon.drpc.evosuite;
 //
 //import org.apache.storm.daemon.drpc.BlockingOutstandingRequest;
-//import org.apache.storm.daemon.drpc.DRPC;
+//import org.apache.storm.daemon.drpc.refactored.zero.DRPC;
 //import org.apache.storm.daemon.drpc.RequestFactory;
 //import org.apache.storm.generated.DRPCExecutionException;
 //import org.apache.storm.metric.StormMetricsRegistry;
@@ -58,9 +58,9 @@
 //             // java.lang.ThreadLocal.setInitialValue(ThreadLocal.java:195)
 //             // java.lang.ThreadLocal.get(ThreadLocal.java:172)
 //             // org.apache.storm.security.auth.ReqContext.context(ReqContext.java:78)
-//             // org.apache.storm.daemon.drpc.DRPC.checkAuthorization(DRPC.java:139)
-//             // org.apache.storm.daemon.drpc.DRPC.execute(DRPC.java:221)
-//             // org.apache.storm.daemon.drpc.DRPC.executeBlocking(DRPC.java:232)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.checkAuthorization(DRPC.java:139)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.execute(DRPC.java:221)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.executeBlocking(DRPC.java:232)
 //             // sun.reflect.GeneratedMethodAccessor149.invoke(Unknown Source)
 //             // sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 //             // java.lang.reflect.Method.invoke(Method.java:498)
@@ -107,7 +107,7 @@
 //         //
 //         // DRPC request 'null' for 'unknown' user is not authorized
 //         //
-//         verifyException("org.apache.storm.daemon.drpc.DRPC", e);
+//         verifyException("org.apache.storm.daemon.drpc.refactored.zero.DRPC", e);
 //      }
 //  }
 //
@@ -156,7 +156,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.daemon.drpc.DRPC", e);
+//         verifyException("org.apache.storm.daemon.drpc.refactored.zero.DRPC", e);
 //      }
 //  }
 //
@@ -206,7 +206,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.daemon.drpc.DRPC", e);
+//         verifyException("org.apache.storm.daemon.drpc.refactored.zero.DRPC", e);
 //      }
 //  }
 //
@@ -254,8 +254,8 @@
 //             // java.lang.ThreadLocal.setInitialValue(ThreadLocal.java:195)
 //             // java.lang.ThreadLocal.get(ThreadLocal.java:172)
 //             // org.apache.storm.security.auth.ReqContext.context(ReqContext.java:78)
-//             // org.apache.storm.daemon.drpc.DRPC.checkAuthorization(DRPC.java:139)
-//             // org.apache.storm.daemon.drpc.DRPC.execute(DRPC.java:221)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.checkAuthorization(DRPC.java:139)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.execute(DRPC.java:221)
 //             // sun.reflect.GeneratedMethodAccessor147.invoke(Unknown Source)
 //             // sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 //             // java.lang.reflect.Method.invoke(Method.java:498)
@@ -296,7 +296,7 @@
 //         //
 //         // DRPC request '9k1G' for '9k1G' user is not authorized
 //         //
-//         verifyException("org.apache.storm.daemon.drpc.DRPC", e);
+//         verifyException("org.apache.storm.daemon.drpc.refactored.zero.DRPC", e);
 //      }
 //  }
 //
@@ -365,8 +365,8 @@
 //             // java.lang.ThreadLocal.setInitialValue(ThreadLocal.java:195)
 //             // java.lang.ThreadLocal.get(ThreadLocal.java:172)
 //             // org.apache.storm.security.auth.ReqContext.context(ReqContext.java:78)
-//             // org.apache.storm.daemon.drpc.DRPC.checkAuthorizationNoLog(DRPC.java:143)
-//             // org.apache.storm.daemon.drpc.DRPC.fetchRequest(DRPC.java:192)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.checkAuthorizationNoLog(DRPC.java:143)
+//             // org.apache.storm.daemon.drpc.refactored.zero.DRPC.fetchRequest(DRPC.java:192)
 //             // sun.reflect.GeneratedMethodAccessor139.invoke(Unknown Source)
 //             // sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 //             // java.lang.reflect.Method.invoke(Method.java:498)
