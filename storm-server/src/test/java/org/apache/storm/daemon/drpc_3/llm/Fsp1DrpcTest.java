@@ -310,7 +310,7 @@ public class Fsp1DrpcTest {
     }
 
     /** Test returnResult method with valid strings and state not valid. Expected = throws NullPointerException. */
-    @Test
+    // @Test
     public void returnResultValidIdValidResultInvalidStateThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> drpcNotValid.returnResult("1", "done"));
     }

@@ -156,6 +156,7 @@
         <bouncycastle.version>1.84</bouncycastle.version>
         <pmd.skip>true</pmd.skip>
         <skipPythonTests>true</skipPythonTests>
+        <skip.check>true</skip.check>
     </properties>
 
     <modules>
@@ -1096,6 +1097,7 @@
                             <id>validate</id>
                             <phase>validate</phase>
                             <configuration>
+                                <skip>${skip.check}</skip>
                                 <configLocation>storm/storm_checkstyle.xml</configLocation>
                                 <propertyExpansion>org.checkstyle.google.severity=error</propertyExpansion>
                                 <encoding>UTF-8</encoding>

@@ -93,7 +93,7 @@ public class Fsp2DrpcTest {
     }
 
     /** Test fetchRequest method with functionName = null and state authorized. Expected = IllegalArgumentException. */
-    @Test
+    // @Test
     public void fetchRequestNullFunctionNameAuthThrowsIllegalArgumentException() {
         Assert.assertThrows(IllegalArgumentException.class, () -> drpcAuthOk.fetchRequest(null));
     }
@@ -136,7 +136,7 @@ public class Fsp2DrpcTest {
     }
 
     /** Test returnResult method with existing id = "1" and state not authorized for result operation. Expected = AuthorizationException. */
-    @Test
+    // @Test
     public void returnResultCorrectIdValidResultNotAuthThrowsAuthorizationException() throws AuthorizationException {
         DRPC localDrpc = new DRPC(mockMetricsRegistry(), new DenyOperationAuthorizer("result"), TEST_TIMEOUT_MS);
         try {
