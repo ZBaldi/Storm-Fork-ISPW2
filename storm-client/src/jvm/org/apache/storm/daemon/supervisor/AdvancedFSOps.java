@@ -39,7 +39,7 @@ import java.util.Set;
 import org.apache.storm.Config;
 import org.apache.storm.shade.org.apache.commons.io.FileUtils;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -15,7 +15,7 @@ package org.apache.storm.streams;
 import org.apache.storm.topology.IBasicBolt;
 import org.apache.storm.topology.IComponent;
 import org.apache.storm.topology.IRichBolt;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Sink node holds IRich or IBasic bolts that are passed via the {@code Stream#to()} api.

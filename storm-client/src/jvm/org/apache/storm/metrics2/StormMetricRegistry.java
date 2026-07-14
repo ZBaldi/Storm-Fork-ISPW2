@@ -38,7 +38,7 @@ import org.apache.storm.metrics2.reporters.StormReporter;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.task.WorkerTopologyContext;
 import org.apache.storm.utils.ReflectionUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

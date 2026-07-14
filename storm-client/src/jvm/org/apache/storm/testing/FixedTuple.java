@@ -14,7 +14,7 @@ package org.apache.storm.testing;
 
 import java.io.Serializable;
 import java.util.List;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class FixedTuple implements Serializable {
     public String stream;

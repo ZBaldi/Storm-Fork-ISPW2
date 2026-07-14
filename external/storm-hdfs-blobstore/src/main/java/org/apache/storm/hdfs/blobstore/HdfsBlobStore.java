@@ -48,7 +48,7 @@ import org.apache.storm.generated.SettableBlobMeta;
 import org.apache.storm.nimbus.ILeaderElector;
 import org.apache.storm.nimbus.NimbusInfo;
 import org.apache.storm.utils.HadoopLoginUtil;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.WrappedKeyAlreadyExistsException;
 import org.apache.storm.utils.WrappedKeyNotFoundException;
 import org.slf4j.Logger;

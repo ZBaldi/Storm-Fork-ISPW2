@@ -22,7 +22,7 @@ import org.apache.storm.task.GeneralTopologyContext;
 import org.apache.storm.tuple.MessageId;
 import org.apache.storm.tuple.TupleImpl;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

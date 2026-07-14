@@ -20,7 +20,7 @@ import org.apache.storm.generated.WorkerTokenServiceType;
 import org.apache.storm.shade.com.google.common.annotations.VisibleForTesting;
 import org.apache.storm.shade.org.apache.zookeeper.ZooDefs;
 import org.apache.storm.shade.org.apache.zookeeper.data.ACL;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

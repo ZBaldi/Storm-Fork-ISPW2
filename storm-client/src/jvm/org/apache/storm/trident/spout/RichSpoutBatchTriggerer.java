@@ -31,7 +31,7 @@ import org.apache.storm.trident.tuple.ConsList;
 import org.apache.storm.trident.util.TridentUtils;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 
 public class RichSpoutBatchTriggerer implements IRichSpout {

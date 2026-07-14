@@ -85,7 +85,7 @@ import org.apache.storm.trident.util.ErrorEdgeFactory;
 import org.apache.storm.trident.util.IndexedEdge;
 import org.apache.storm.trident.util.TridentUtils;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 // graph with 3 kinds of nodes:
 // operation, partition, or spout

@@ -27,7 +27,7 @@ import org.apache.storm.shade.net.minidev.json.JSONObject;
 import org.apache.storm.shade.net.minidev.json.JSONValue;
 import org.apache.storm.shade.net.minidev.json.parser.ParseException;
 import org.apache.storm.task.TopologyContext;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * JsonSerializer implements the JSON multilang protocol.

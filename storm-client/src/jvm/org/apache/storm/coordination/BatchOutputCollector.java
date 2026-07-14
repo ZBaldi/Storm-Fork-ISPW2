@@ -19,7 +19,7 @@
 package org.apache.storm.coordination;
 
 import java.util.List;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public abstract class BatchOutputCollector {
 

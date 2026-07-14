@@ -34,7 +34,7 @@ import org.apache.storm.shade.com.google.common.cache.CacheBuilder;
 import org.apache.storm.shade.com.google.common.cache.CacheLoader;
 import org.apache.storm.shade.com.google.common.cache.LoadingCache;
 import org.apache.storm.utils.Time;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

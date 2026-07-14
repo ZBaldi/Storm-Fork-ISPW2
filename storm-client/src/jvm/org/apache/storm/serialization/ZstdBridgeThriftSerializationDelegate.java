@@ -13,7 +13,7 @@
 package org.apache.storm.serialization;
 
 import java.util.Map;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Always writes Zstd out, but tests incoming bytes to determine the format.

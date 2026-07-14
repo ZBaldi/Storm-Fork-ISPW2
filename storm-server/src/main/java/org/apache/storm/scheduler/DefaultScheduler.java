@@ -19,14 +19,13 @@
 package org.apache.storm.scheduler;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import org.apache.storm.metric.StormMetricsRegistry;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class DefaultScheduler implements IScheduler {
 

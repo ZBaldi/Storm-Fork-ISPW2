@@ -24,7 +24,7 @@ import org.apache.storm.shade.io.netty.buffer.ByteBufAllocator;
 import org.apache.storm.shade.io.netty.buffer.Unpooled;
 import org.apache.storm.shade.io.netty.channel.ChannelHandlerContext;
 import org.apache.storm.shade.io.netty.handler.codec.MessageToMessageEncoder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

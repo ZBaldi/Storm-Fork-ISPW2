@@ -24,7 +24,7 @@ import org.apache.storm.thrift.TBase;
 import org.apache.storm.topology.IComponent;
 import org.apache.storm.topology.OutputFieldsGetter;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class TridentUtils {
     public static Fields fieldsUnion(Fields... fields) {

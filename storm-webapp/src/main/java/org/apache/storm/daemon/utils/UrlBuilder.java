@@ -21,7 +21,7 @@ package org.apache.storm.daemon.utils;
 import static java.util.stream.Collectors.joining;
 
 import java.util.Map;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Convenient utility class to build the URL.

@@ -18,7 +18,7 @@ import java.util.Random;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.storm.utils.Time;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * The timer defined in this file is very similar to java.util.Timer, except it integrates with Storm's time simulation capabilities. This

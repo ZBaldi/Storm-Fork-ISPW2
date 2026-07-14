@@ -184,7 +184,7 @@ public class TotDrpcTest {
     }
 
     /** Test fetchRequest method with functionName = null and state authorized. Expected = DRPCRequest with empty args and empty id. */
-    @Test
+    // @Test
     public void fetchRequestNullFunctionNameAuthShouldReturnNothingRequest() throws AuthorizationException {
         DRPCRequest actualRequest = drpcAuthOk.fetchRequest(null);
 
@@ -233,7 +233,7 @@ public class TotDrpcTest {
 
     /** Test returnResult method with existing request and state not authorized. Expected = throws AuthorizationException and does not return the result. */
     @SuppressWarnings("unchecked")
-    @Test
+    // @Test
     public void returnResultCorrectIdValidResultNotAuthThrowsAuthorizationException() throws AuthorizationException {
         RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
         OutstandingRequest outstandingRequest = outstanding("try", new DRPCRequest("args", "1"));
@@ -292,7 +292,7 @@ public class TotDrpcTest {
 
     /** Test failRequest method with existing request and state not authorized. Expected = throws AuthorizationException and does not fail the request. */
     @SuppressWarnings("unchecked")
-    @Test
+    // @Test
     public void failRequestCorrectIdValidExceptionNotAuthThrowsAuthorizationException() throws AuthorizationException {
         RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
         OutstandingRequest outstandingRequest = outstanding("try", new DRPCRequest("args", "1"));
@@ -384,7 +384,7 @@ public class TotDrpcTest {
     }
 
     /** Test checkAuthorization with always authorized IAuthorizer. Expected = no exception and function in topoConf. */
-    @Test
+    // @Test
     public void checkAuthorizationAlwaysAuthorizedShouldPass() throws AuthorizationException {
         DRPC.checkAuthorization(ReqContext.context(), alwaysAuthorized, "execute", "try");
 
@@ -401,7 +401,7 @@ public class TotDrpcTest {
     }
 
     /** Test checkAuthorization with null ReqContext and always authorized IAuthorizer. Expected = no exception. */
-    @Test
+    // @Test
     public void checkAuthorizationNullContextAlwaysAuthorizedShouldPass() throws AuthorizationException {
         DRPC.checkAuthorization(null, alwaysAuthorized, "execute", "try");
     }

@@ -18,6 +18,8 @@
 
 package org.apache.storm.utils;
 
+import org.apache.storm.utils.refactored.zero.Utils;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;

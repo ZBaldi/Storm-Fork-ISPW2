@@ -90,7 +90,7 @@ zstd.
 ### Zip-bomb protection
 
 `GzipUtils.decompress` and `ZstdUtils.decompress` (both in
-`org.apache.storm.utils.Utils`) wrap the decompressor stream in an Apache
+`org.apache.storm.utils.refactored.zero.Utils`) wrap the decompressor stream in an Apache
 Commons `BoundedInputStream` with `maxCount` set to the configured cap.
 After draining the bounded stream, the underlying decompressor is probed
 with one extra `read()`; if any byte remains, the call fails with:

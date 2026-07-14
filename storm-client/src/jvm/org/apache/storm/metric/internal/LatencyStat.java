@@ -21,7 +21,7 @@ package org.apache.storm.metric.internal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Keeps track of approximate latency for the last 10 mins, 3 hours, 1 day, and all time.

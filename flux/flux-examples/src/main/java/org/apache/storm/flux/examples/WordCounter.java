@@ -18,7 +18,7 @@
 
 package org.apache.storm.flux.examples;
 
-import static org.apache.storm.utils.Utils.tuple;
+import static org.apache.storm.utils.refactored.zero.Utils.tuple;
 
 import java.util.Map;
 

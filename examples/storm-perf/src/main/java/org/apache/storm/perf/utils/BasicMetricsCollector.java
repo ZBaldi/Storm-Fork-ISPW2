@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.apache.storm.generated.Nimbus;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class BasicMetricsCollector implements AutoCloseable {
     /* headers */

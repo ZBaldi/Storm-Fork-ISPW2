@@ -14,7 +14,7 @@ package org.apache.storm.spout;
 
 import java.util.List;
 import org.apache.storm.task.OutputCollector;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * This output collector exposes the API for emitting tuples from an {@link org.apache.storm.topology.IRichSpout}. The main difference

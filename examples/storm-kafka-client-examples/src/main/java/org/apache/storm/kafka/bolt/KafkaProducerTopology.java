@@ -26,7 +26,7 @@ import org.apache.storm.kafka.bolt.mapper.FieldNameBasedTupleToKafkaMapper;
 import org.apache.storm.kafka.bolt.selector.DefaultTopicSelector;
 import org.apache.storm.lambda.LambdaSpout;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class KafkaProducerTopology {
 

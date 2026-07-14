@@ -44,7 +44,7 @@ import org.apache.storm.daemon.ui.UIHelpers;
 import org.apache.storm.daemon.ui.resources.StormApiResource;
 import org.apache.storm.metric.StormMetricsRegistry;
 import org.apache.storm.security.auth.IHttpCredentialsPlugin;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

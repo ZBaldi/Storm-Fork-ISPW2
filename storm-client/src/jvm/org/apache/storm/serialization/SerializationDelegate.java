@@ -12,10 +12,12 @@
 
 package org.apache.storm.serialization;
 
+import org.apache.storm.utils.refactored.zero.Utils;
+
 import java.util.Map;
 
 /**
- * Allow {@link org.apache.storm.utils.Utils} to delegate meta serialization.
+ * Allow {@link Utils} to delegate meta serialization.
  */
 public interface SerializationDelegate {
 

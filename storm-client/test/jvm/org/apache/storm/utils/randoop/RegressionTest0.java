@@ -1,5 +1,6 @@
 package org.apache.storm.utils.randoop;
 
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -24,14 +25,14 @@ public class RegressionTest0 {
     public void test001() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test001");
-        org.apache.storm.utils.Utils.validateTopologyName("hi!");
+        Utils.validateTopologyName("hi!");
     }
 
     @Test
     public void test002() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test002");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) 10L);
+        long long2 = Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) 10L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 11L + "'", long2 == 11L);
     }
 
@@ -39,7 +40,7 @@ public class RegressionTest0 {
     public void test003() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test003");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) (-1.0d));
+        double double1 = Utils.nullToZero((java.lang.Double) (-1.0d));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-1.0d) + "'", double1 == (-1.0d));
     }
 
@@ -49,7 +50,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test004");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -62,7 +63,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test005");
         // The following exception was thrown during execution in test generation
         try {
-            org.apache.storm.utils.Utils.validateTopologyName("");
+            Utils.validateTopologyName("");
             org.junit.Assert.fail("Expected exception of type java.lang.IllegalArgumentException; message: Topology name '' is not valid. It can't be null and it must match ^[^/.:\\\\]+$");
         } catch (java.lang.IllegalArgumentException e) {
             // Expected exception.
@@ -73,7 +74,7 @@ public class RegressionTest0 {
     public void test006() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test006");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 1.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 1.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.0d + "'", double1 == 1.0d);
     }
 
@@ -81,7 +82,7 @@ public class RegressionTest0 {
     public void test007() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test007");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (-1.0f));
+        double double1 = Utils.zeroIfNaNOrInf((double) (-1.0f));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-1.0d) + "'", double1 == (-1.0d));
     }
 
@@ -89,7 +90,7 @@ public class RegressionTest0 {
     public void test008() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test008");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 10.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 10.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 10.0d + "'", double1 == 10.0d);
     }
 
@@ -97,7 +98,7 @@ public class RegressionTest0 {
     public void test009() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test009");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("");
+        boolean boolean1 = Utils.isLocalhostAddress("");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -108,7 +109,7 @@ public class RegressionTest0 {
         java.nio.ByteBuffer byteBuffer0 = null;
         // The following exception was thrown during execution in test generation
         try {
-            byte[] byteArray1 = org.apache.storm.utils.Utils.toByteArray(byteBuffer0);
+            byte[] byteArray1 = Utils.toByteArray(byteBuffer0);
             org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: Cannot invoke \"java.nio.ByteBuffer.remaining()\" because \"buffer\" is null");
         } catch (java.lang.NullPointerException e) {
             // Expected exception.
@@ -119,7 +120,7 @@ public class RegressionTest0 {
     public void test011() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test011");
-        org.apache.storm.utils.Utils.validateTopologyName("0hi!100");
+        Utils.validateTopologyName("0hi!100");
     }
 
     @Test
@@ -127,9 +128,9 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test012");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.Object obj4 = org.apache.storm.utils.Utils.OR((java.lang.Object) exception0, (java.lang.Object) '#');
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.Object obj4 = Utils.OR((java.lang.Object) exception0, (java.lang.Object) '#');
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertEquals("'" + obj4 + "' != '" + '#' + "'", obj4, '#');
@@ -139,7 +140,7 @@ public class RegressionTest0 {
     public void test013() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test013");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("hi!");
+        java.lang.String str1 = Utils.urlDecodeUtf8("hi!");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "hi!" + "'", str1, "hi!");
     }
 
@@ -147,7 +148,7 @@ public class RegressionTest0 {
     public void test014() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test014");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) 0L);
+        long long2 = Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) 0L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 0L + "'", long2 == 0L);
     }
 
@@ -155,7 +156,7 @@ public class RegressionTest0 {
     public void test015() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test015");
-        java.lang.CharSequence charSequence2 = org.apache.storm.utils.Utils.OR((java.lang.CharSequence) "hi!", (java.lang.CharSequence) "");
+        java.lang.CharSequence charSequence2 = Utils.OR((java.lang.CharSequence) "hi!", (java.lang.CharSequence) "");
         org.junit.Assert.assertEquals("'" + charSequence2 + "' != '" + "hi!" + "'", charSequence2, "hi!");
     }
 
@@ -163,7 +164,7 @@ public class RegressionTest0 {
     public void test016() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test016");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 0);
+        double double1 = Utils.zeroIfNaNOrInf((double) 0);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
@@ -171,7 +172,7 @@ public class RegressionTest0 {
     public void test017() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test017");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) ' ');
+        double double1 = Utils.zeroIfNaNOrInf((double) ' ');
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 32.0d + "'", double1 == 32.0d);
     }
 
@@ -181,7 +182,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test018");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("0hi!100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("0hi!100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -192,7 +193,7 @@ public class RegressionTest0 {
     public void test019() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test019");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 32.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 32.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 32.0d + "'", double1 == 32.0d);
     }
 
@@ -200,7 +201,7 @@ public class RegressionTest0 {
     public void test020() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test020");
-        int int1 = org.apache.storm.utils.Utils.toPositive(10);
+        int int1 = Utils.toPositive(10);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 10 + "'", int1 == 10);
     }
 
@@ -208,7 +209,7 @@ public class RegressionTest0 {
     public void test021() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test021");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (short) 0);
+        int int1 = Utils.toPositive((int) (short) 0);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
@@ -216,7 +217,7 @@ public class RegressionTest0 {
     public void test022() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test022");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) 10L);
+        long long2 = Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) 10L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
@@ -224,7 +225,7 @@ public class RegressionTest0 {
     public void test023() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test023");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("hi!");
+        java.lang.String str1 = Utils.urlEncodeUtf8("hi!");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "hi%21" + "'", str1, "hi%21");
     }
 
@@ -232,7 +233,7 @@ public class RegressionTest0 {
     public void test024() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test024");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("");
+        java.lang.String str1 = Utils.urlDecodeUtf8("");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "" + "'", str1, "");
     }
 
@@ -240,7 +241,7 @@ public class RegressionTest0 {
     public void test025() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test025");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) 0L);
+        long long2 = Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) 0L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
@@ -248,7 +249,7 @@ public class RegressionTest0 {
     public void test026() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test026");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (short) 1);
+        int int1 = Utils.toPositive((int) (short) 1);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 1 + "'", int1 == 1);
     }
 
@@ -256,7 +257,7 @@ public class RegressionTest0 {
     public void test027() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test027");
-        int int1 = org.apache.storm.utils.Utils.toPositive(0);
+        int int1 = Utils.toPositive(0);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
@@ -267,15 +268,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         java.lang.String[] strArray13 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList14 = new java.util.ArrayList<java.lang.String>();
         boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList14, strArray13);
-        java.util.List<java.lang.String> strList16 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
-        long long18 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.lang.String> strList16 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
+        long long18 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -294,7 +295,7 @@ public class RegressionTest0 {
     public void test029() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test029");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) -1, (int) 'a');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) -1, (int) 'a');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -305,15 +306,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         java.lang.String[] strArray13 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList14 = new java.util.ArrayList<java.lang.String>();
         boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList14, strArray13);
-        java.util.List<java.lang.String> strList16 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
-        java.lang.Object obj19 = org.apache.storm.utils.Utils.OR((java.lang.Object) strList14, (java.lang.Object) 0L);
+        java.util.List<java.lang.String> strList16 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
+        java.lang.Object obj19 = Utils.OR((java.lang.Object) strList14, (java.lang.Object) 0L);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -336,16 +337,16 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test031");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
         java.lang.Object[] objArray8 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList9 = org.apache.storm.utils.Utils.tuple(objArray8);
+        java.util.List<java.lang.Object> objList9 = Utils.tuple(objArray8);
         java.lang.Object[] objArray13 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList14 = org.apache.storm.utils.Utils.tuple(objArray13);
+        java.util.List<java.lang.Object> objList14 = Utils.tuple(objArray13);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList15 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean16 = objListList15.add(objList4);
         boolean boolean17 = objListList15.add(objList9);
         boolean boolean18 = objListList15.add(objList14);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap19 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList15);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap19 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList15);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -368,7 +369,7 @@ public class RegressionTest0 {
     public void test032() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test032");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) '#');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, (int) '#');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -376,7 +377,7 @@ public class RegressionTest0 {
     public void test033() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test033");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("hi!");
+        boolean boolean1 = Utils.isLocalhostAddress("hi!");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -384,7 +385,7 @@ public class RegressionTest0 {
     public void test034() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test034");
-        int int1 = org.apache.storm.utils.Utils.toPositive((-1));
+        int int1 = Utils.toPositive((-1));
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 2147483647 + "'", int1 == 2147483647);
     }
 
@@ -394,7 +395,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test035");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(1, (int) (byte) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(1, (int) (byte) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -408,16 +409,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         java.lang.String[] strArray13 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList14 = new java.util.ArrayList<java.lang.String>();
         boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList14, strArray13);
-        java.util.List<java.lang.String> strList16 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
-        java.util.List<java.lang.String> strList18 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.List<java.lang.String> strList19 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.List<java.lang.String> strList16 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
+        java.util.List<java.lang.String> strList18 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.List<java.lang.String> strList19 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -437,7 +438,7 @@ public class RegressionTest0 {
     public void test037() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test037");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (byte) -1);
+        int int1 = Utils.toPositive((int) (byte) -1);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 2147483647 + "'", int1 == 2147483647);
     }
 
@@ -445,14 +446,14 @@ public class RegressionTest0 {
     public void test038() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test038");
-        org.apache.storm.utils.Utils.validateTopologyName("hi%21");
+        Utils.validateTopologyName("hi%21");
     }
 
     @Test
     public void test039() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test039");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(10, (int) (byte) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(10, (int) (byte) -1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -462,7 +463,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test040");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("hi!");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("hi!");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -473,7 +474,7 @@ public class RegressionTest0 {
     public void test041() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test041");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0hi!100");
+        boolean boolean1 = Utils.isValidKey("0hi!100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -481,7 +482,7 @@ public class RegressionTest0 {
     public void test042() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test042");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0hi!100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0hi!100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi%21100" + "'", str1, "0hi%21100");
     }
 
@@ -489,7 +490,7 @@ public class RegressionTest0 {
     public void test043() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test043");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 0.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 0.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
@@ -497,7 +498,7 @@ public class RegressionTest0 {
     public void test044() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test044");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 1);
+        double double1 = Utils.zeroIfNaNOrInf((double) 1);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.0d + "'", double1 == 1.0d);
     }
 
@@ -505,7 +506,7 @@ public class RegressionTest0 {
     public void test045() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test045");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00hi!100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00hi!100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi!100100" + "'", str1, "00hi!100100");
     }
 
@@ -513,7 +514,7 @@ public class RegressionTest0 {
     public void test046() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test046");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("hi!");
+        boolean boolean1 = Utils.isValidKey("hi!");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -521,7 +522,7 @@ public class RegressionTest0 {
     public void test047() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test047");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (short) 100);
+        double double1 = Utils.zeroIfNaNOrInf((double) (short) 100);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 100.0d + "'", double1 == 100.0d);
     }
 
@@ -529,7 +530,7 @@ public class RegressionTest0 {
     public void test048() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test048");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("00hi!100100");
+        boolean boolean1 = Utils.isLocalhostAddress("00hi!100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -537,7 +538,7 @@ public class RegressionTest0 {
     public void test049() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test049");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0hi%21100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0hi%21100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi%2521100" + "'", str1, "0hi%2521100");
     }
 
@@ -545,7 +546,7 @@ public class RegressionTest0 {
     public void test050() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test050");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0hi%2521100");
+        boolean boolean1 = Utils.isValidKey("0hi%2521100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -556,15 +557,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         java.lang.String[] strArray13 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList14 = new java.util.ArrayList<java.lang.String>();
         boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList14, strArray13);
-        java.util.List<java.lang.String> strList16 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
-        java.lang.String str19 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi!100");
+        java.util.List<java.lang.String> strList16 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
+        java.lang.String str19 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi!100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -583,7 +584,7 @@ public class RegressionTest0 {
     public void test052() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test052");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("0hi%21100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("0hi%21100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi!100" + "'", str1, "0hi!100");
     }
 
@@ -591,14 +592,14 @@ public class RegressionTest0 {
     public void test053() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test053");
-        org.apache.storm.utils.Utils.validateTopologyName("0hi%21100");
+        Utils.validateTopologyName("0hi%21100");
     }
 
     @Test
     public void test054() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test054");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) 'a', (int) (byte) 1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) 'a', (int) (byte) 1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -606,7 +607,7 @@ public class RegressionTest0 {
     public void test055() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test055");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) '4');
+        double double1 = Utils.zeroIfNaNOrInf((double) '4');
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 52.0d + "'", double1 == 52.0d);
     }
 
@@ -616,7 +617,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test056");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("0hi%2521100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("0hi%2521100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -627,7 +628,7 @@ public class RegressionTest0 {
     public void test057() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test057");
-        java.lang.Comparable<java.lang.String> strComparable2 = org.apache.storm.utils.Utils.OR((java.lang.Comparable<java.lang.String>) "", (java.lang.Comparable<java.lang.String>) "0hi%21100");
+        java.lang.Comparable<java.lang.String> strComparable2 = Utils.OR((java.lang.Comparable<java.lang.String>) "", (java.lang.Comparable<java.lang.String>) "0hi%21100");
         org.junit.Assert.assertEquals("'" + strComparable2 + "' != '" + "" + "'", strComparable2, "");
     }
 
@@ -637,7 +638,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test058");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("hi%21");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("hi%21");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -648,7 +649,7 @@ public class RegressionTest0 {
     public void test059() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test059");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (byte) 0);
+        int int1 = Utils.toPositive((int) (byte) 0);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 0 + "'", int1 == 0);
     }
 
@@ -656,7 +657,7 @@ public class RegressionTest0 {
     public void test060() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test060");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 100L);
+        long long2 = Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 100L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-101L) + "'", long2 == (-101L));
     }
 
@@ -666,7 +667,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test061");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("000hi!100100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("000hi!100100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -680,16 +681,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -709,7 +710,7 @@ public class RegressionTest0 {
     public void test063() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test063");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 10L);
+        double double1 = Utils.zeroIfNaNOrInf((double) 10L);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 10.0d + "'", double1 == 10.0d);
     }
 
@@ -720,7 +721,7 @@ public class RegressionTest0 {
         java.lang.Long[] longArray6 = new java.lang.Long[] { 10L, 100L, 10L, 1L, (-101L), (-1L) };
         java.util.ArrayList<java.lang.Long> longList7 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean8 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList7, longArray6);
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList7);
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList7);
         org.junit.Assert.assertNotNull(longArray6);
         org.junit.Assert.assertArrayEquals(longArray6, new java.lang.Long[] { 10L, 100L, 10L, 1L, (-101L), (-1L) });
         org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
@@ -731,7 +732,7 @@ public class RegressionTest0 {
     public void test065() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test065");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("");
+        boolean boolean1 = Utils.isValidKey("");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -739,7 +740,7 @@ public class RegressionTest0 {
     public void test066() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test066");
-        int int1 = org.apache.storm.utils.Utils.toPositive(1);
+        int int1 = Utils.toPositive(1);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 1 + "'", int1 == 1);
     }
 
@@ -747,7 +748,7 @@ public class RegressionTest0 {
     public void test067() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test067");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (byte) 10);
+        int int1 = Utils.toPositive((int) (byte) 10);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 10 + "'", int1 == 10);
     }
 
@@ -755,7 +756,7 @@ public class RegressionTest0 {
     public void test068() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test068");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) '4');
+        int int1 = Utils.toPositive((int) '4');
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 52 + "'", int1 == 52);
     }
 
@@ -763,7 +764,7 @@ public class RegressionTest0 {
     public void test069() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test069");
-        java.lang.constant.Constable constable2 = org.apache.storm.utils.Utils.OR((java.lang.constant.Constable) (short) 10, (java.lang.constant.Constable) 100.0d);
+        java.lang.constant.Constable constable2 = Utils.OR((java.lang.constant.Constable) (short) 10, (java.lang.constant.Constable) 100.0d);
         org.junit.Assert.assertEquals("'" + constable2 + "' != '" + (short) 10 + "'", constable2, (short) 10);
     }
 
@@ -773,7 +774,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test070");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(10, 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(10, 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -784,14 +785,14 @@ public class RegressionTest0 {
     public void test071() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test071");
-        org.apache.storm.utils.Utils.validateTopologyName("00hi!100100");
+        Utils.validateTopologyName("00hi!100100");
     }
 
     @Test
     public void test072() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test072");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) (-1L));
+        long long2 = Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) (-1L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-12L) + "'", long2 == (-12L));
     }
 
@@ -800,20 +801,20 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test073");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
         java.lang.Exception exception5 = null;
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.OR(runtimeException4, runtimeException10);
-        java.lang.RuntimeException runtimeException13 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
-        java.lang.RuntimeException runtimeException14 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException12 = Utils.OR(runtimeException4, runtimeException10);
+        java.lang.RuntimeException runtimeException13 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException14 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -833,7 +834,7 @@ public class RegressionTest0 {
     public void test074() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test074");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0hi%21100");
+        boolean boolean1 = Utils.isValidKey("0hi%21100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -841,15 +842,15 @@ public class RegressionTest0 {
     public void test075() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test075");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
-        java.util.SortedMap<java.lang.Integer, java.lang.Integer> intMap14 = org.apache.storm.utils.Utils.OR((java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap9);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap17 = org.apache.storm.utils.Utils.integerDivided((int) '#', (int) (short) 100);
-        java.util.AbstractMap<java.lang.Integer, java.lang.Integer> intMap18 = org.apache.storm.utils.Utils.OR((java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap17);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
+        java.util.SortedMap<java.lang.Integer, java.lang.Integer> intMap14 = Utils.OR((java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap9);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap17 = Utils.integerDivided((int) '#', (int) (short) 100);
+        java.util.AbstractMap<java.lang.Integer, java.lang.Integer> intMap18 = Utils.OR((java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap17);
         org.junit.Assert.assertNotNull(intMap2);
         org.junit.Assert.assertNotNull(intMap5);
         org.junit.Assert.assertNotNull(intMap6);
@@ -865,7 +866,7 @@ public class RegressionTest0 {
     public void test076() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test076");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) (-12L));
+        long long2 = Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) (-12L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-112L) + "'", long2 == (-112L));
     }
 
@@ -873,7 +874,7 @@ public class RegressionTest0 {
     public void test077() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test077");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 2147483647);
+        double double1 = Utils.zeroIfNaNOrInf((double) 2147483647);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 2.147483647E9d + "'", double1 == 2.147483647E9d);
     }
 
@@ -884,16 +885,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        java.util.List<java.util.List<java.lang.Long>> longListList17 = org.apache.storm.utils.Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList10);
-        java.lang.String str19 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "0hi!100");
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        java.util.List<java.util.List<java.lang.Long>> longListList17 = Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList10);
+        java.lang.String str19 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "0hi!100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -913,7 +914,7 @@ public class RegressionTest0 {
     public void test079() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test079");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0hi%2521100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0hi%2521100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi%252521100" + "'", str1, "0hi%252521100");
     }
 
@@ -924,8 +925,8 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 1L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.util.List<java.util.List<java.lang.Long>> longListList6 = org.apache.storm.utils.Utils.partitionFixed((int) (short) -1, (java.util.Collection<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.util.List<java.util.List<java.lang.Long>> longListList6 = Utils.partitionFixed((int) (short) -1, (java.util.Collection<java.lang.Long>) longList3);
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 1L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -937,7 +938,7 @@ public class RegressionTest0 {
     public void test081() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test081");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00hi!100100");
+        boolean boolean1 = Utils.isValidKey("00hi!100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -945,7 +946,7 @@ public class RegressionTest0 {
     public void test082() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test082");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) (-101L));
+        long long2 = Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) (-101L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-112L) + "'", long2 == (-112L));
     }
 
@@ -955,7 +956,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test083");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(0, 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(0, 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -968,7 +969,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test084");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) 'a', (int) (short) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) 'a', (int) (short) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -979,7 +980,7 @@ public class RegressionTest0 {
     public void test085() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test085");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 10);
+        double double1 = Utils.zeroIfNaNOrInf((double) 10);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 10.0d + "'", double1 == 10.0d);
     }
 
@@ -989,7 +990,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test086");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("0hi%21100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("0hi%21100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -1000,7 +1001,7 @@ public class RegressionTest0 {
     public void test087() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test087");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (-112L));
+        double double1 = Utils.zeroIfNaNOrInf((double) (-112L));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-112.0d) + "'", double1 == (-112.0d));
     }
 
@@ -1008,7 +1009,7 @@ public class RegressionTest0 {
     public void test088() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test088");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 52.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 52.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 52.0d + "'", double1 == 52.0d);
     }
 
@@ -1016,7 +1017,7 @@ public class RegressionTest0 {
     public void test089() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test089");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(2147483647, (int) '#');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(2147483647, (int) '#');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -1024,7 +1025,7 @@ public class RegressionTest0 {
     public void test090() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test090");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) 1L);
+        long long2 = Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) 1L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
@@ -1035,16 +1036,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
         java.lang.Long[] longArray10 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList11 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList11, longArray10);
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList5);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList5);
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList5);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -1064,7 +1065,7 @@ public class RegressionTest0 {
     public void test092() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test092");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (short) 10);
+        int int1 = Utils.toPositive((int) (short) 10);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 10 + "'", int1 == 10);
     }
 
@@ -1072,7 +1073,7 @@ public class RegressionTest0 {
     public void test093() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test093");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("hi%21");
+        boolean boolean1 = Utils.isLocalhostAddress("hi%21");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1083,16 +1084,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
         java.lang.Long[] longArray10 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList11 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList11, longArray10);
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList5);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed((int) '#', (java.util.Collection<java.lang.Long>) longList5);
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList5);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed((int) '#', (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -1112,7 +1113,7 @@ public class RegressionTest0 {
     public void test095() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test095");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi%21100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi%21100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%2521100100" + "'", str1, "00hi%2521100100");
     }
 
@@ -1120,7 +1121,7 @@ public class RegressionTest0 {
     public void test096() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test096");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((-1.0d));
+        double double1 = Utils.zeroIfNaNOrInf((-1.0d));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-1.0d) + "'", double1 == (-1.0d));
     }
 
@@ -1128,7 +1129,7 @@ public class RegressionTest0 {
     public void test097() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test097");
-        int int1 = org.apache.storm.utils.Utils.toPositive(100);
+        int int1 = Utils.toPositive(100);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 100 + "'", int1 == 100);
     }
 
@@ -1136,7 +1137,7 @@ public class RegressionTest0 {
     public void test098() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test098");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (byte) 1);
+        int int1 = Utils.toPositive((int) (byte) 1);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 1 + "'", int1 == 1);
     }
 
@@ -1144,7 +1145,7 @@ public class RegressionTest0 {
     public void test099() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test099");
-        java.lang.Comparable<java.lang.String> strComparable2 = org.apache.storm.utils.Utils.OR((java.lang.Comparable<java.lang.String>) "0hi!100", (java.lang.Comparable<java.lang.String>) "00hi%21100100");
+        java.lang.Comparable<java.lang.String> strComparable2 = Utils.OR((java.lang.Comparable<java.lang.String>) "0hi!100", (java.lang.Comparable<java.lang.String>) "00hi%21100100");
         org.junit.Assert.assertEquals("'" + strComparable2 + "' != '" + "0hi!100" + "'", strComparable2, "0hi!100");
     }
 
@@ -1155,16 +1156,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList10);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList10);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -1184,7 +1185,7 @@ public class RegressionTest0 {
     public void test101() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test101");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi!100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi!100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%21100100" + "'", str1, "00hi%21100100");
     }
 
@@ -1192,7 +1193,7 @@ public class RegressionTest0 {
     public void test102() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test102");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00hi%21100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00hi%21100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi!100100" + "'", str1, "00hi!100100");
     }
 
@@ -1200,7 +1201,7 @@ public class RegressionTest0 {
     public void test103() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test103");
-        java.lang.constant.Constable constable2 = org.apache.storm.utils.Utils.OR((java.lang.constant.Constable) (-101L), (java.lang.constant.Constable) 1.0f);
+        java.lang.constant.Constable constable2 = Utils.OR((java.lang.constant.Constable) (-101L), (java.lang.constant.Constable) 1.0f);
         org.junit.Assert.assertEquals("'" + constable2 + "' != '" + (-101L) + "'", constable2, (-101L));
     }
 
@@ -1209,19 +1210,19 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test104");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.lang.Object[] objArray9 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList10 = org.apache.storm.utils.Utils.tuple(objArray9);
-        java.util.List<java.lang.Object> objList11 = org.apache.storm.utils.Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList10 = Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList11 = Utils.tuple(objArray9);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList12 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean13 = objListList12.add(objList5);
         boolean boolean14 = objListList12.add(objList11);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap17 = org.apache.storm.utils.Utils.reverseMap(objMap16);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap18 = org.apache.storm.utils.Utils.reverseMap(objMap16);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = org.apache.storm.utils.Utils.reverseMap(objMap16);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap17 = Utils.reverseMap(objMap16);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap18 = Utils.reverseMap(objMap16);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = Utils.reverseMap(objMap16);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -1248,15 +1249,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         java.lang.Long[] longArray8 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList9 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean10 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList9, longArray8);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
-        long long14 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.util.RandomAccess randomAccess15 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
-        java.lang.String str17 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "0hi!100");
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
+        long long14 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.util.RandomAccess randomAccess15 = Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
+        java.lang.String str17 = Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "0hi!100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -1278,16 +1279,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         java.lang.String[] strArray13 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList14 = new java.util.ArrayList<java.lang.String>();
         boolean boolean15 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList14, strArray13);
-        java.util.List<java.lang.String> strList16 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
-        java.util.List<java.lang.String> strList18 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList14);
-        java.util.List<java.lang.String> strList19 = org.apache.storm.utils.Utils.getRepeat(strList18);
+        java.util.List<java.lang.String> strList16 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) strList14);
+        java.util.List<java.lang.String> strList18 = Utils.getRepeat((java.util.List<java.lang.String>) strList14);
+        java.util.List<java.lang.String> strList19 = Utils.getRepeat(strList18);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -1307,7 +1308,7 @@ public class RegressionTest0 {
     public void test107() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test107");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((-1), (int) (short) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((-1), (int) (short) 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -1315,7 +1316,7 @@ public class RegressionTest0 {
     public void test108() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test108");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("0hi%2521100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("0hi%2521100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi%21100" + "'", str1, "0hi%21100");
     }
 
@@ -1323,7 +1324,7 @@ public class RegressionTest0 {
     public void test109() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test109");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00hi%2521100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00hi%2521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%21100100" + "'", str1, "00hi%21100100");
     }
 
@@ -1331,7 +1332,7 @@ public class RegressionTest0 {
     public void test110() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test110");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-101L));
+        long long2 = Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-101L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 0L + "'", long2 == 0L);
     }
 
@@ -1340,9 +1341,9 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test111");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
-        java.util.List<java.lang.Object> objList3 = org.apache.storm.utils.Utils.tuple(objArray1);
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList3 = Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray1);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -1357,7 +1358,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test112");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("0hi%252521100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("0hi%252521100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -1368,14 +1369,14 @@ public class RegressionTest0 {
     public void test113() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test113");
-        org.apache.storm.utils.Utils.validateTopologyName("00hi%2521100100");
+        Utils.validateTopologyName("00hi%2521100100");
     }
 
     @Test
     public void test114() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test114");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("0hi!100");
+        boolean boolean1 = Utils.isLocalhostAddress("0hi!100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1383,7 +1384,7 @@ public class RegressionTest0 {
     public void test115() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test115");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf(0.0d);
+        double double1 = Utils.zeroIfNaNOrInf(0.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
@@ -1394,15 +1395,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
         java.lang.String[] strArray14 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList15 = new java.util.ArrayList<java.lang.String>();
         boolean boolean16 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList15, strArray14);
-        java.util.List<java.lang.String> strList17 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList15);
-        java.util.RandomAccess randomAccess18 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) strList15);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 0, (java.util.Collection<java.lang.Long>) longList5);
+        java.util.List<java.lang.String> strList17 = Utils.getRepeat((java.util.List<java.lang.String>) strList15);
+        java.util.RandomAccess randomAccess18 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) strList15);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed((int) (byte) 0, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -1424,16 +1425,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         java.lang.Long[] longArray8 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList9 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean10 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList9, longArray8);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
-        long long14 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.util.RandomAccess randomAccess15 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str18 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%252521100");
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
+        long long14 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.util.RandomAccess randomAccess15 = Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str18 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%252521100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -1453,7 +1454,7 @@ public class RegressionTest0 {
     public void test118() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test118");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000hi%2521100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000hi%2521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%21100100100" + "'", str1, "000hi%21100100100");
     }
 
@@ -1461,7 +1462,7 @@ public class RegressionTest0 {
     public void test119() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test119");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00hi%2521100100");
+        boolean boolean1 = Utils.isValidKey("00hi%2521100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1469,21 +1470,21 @@ public class RegressionTest0 {
     public void test120() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test120");
-        org.apache.storm.utils.Utils.validateTopologyName("000hi%21100100100");
+        Utils.validateTopologyName("000hi%21100100100");
     }
 
     @Test
     public void test121() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test121");
-        org.apache.storm.utils.Utils.validateTopologyName("000hi%2521100100100");
+        Utils.validateTopologyName("000hi%2521100100100");
     }
 
     @Test
     public void test122() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test122");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0100" + "'", str1, "0100");
     }
 
@@ -1494,10 +1495,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "000hi!100100100");
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "000hi!100100100");
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -1511,7 +1512,7 @@ public class RegressionTest0 {
     public void test124() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test124");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0hi%252521100");
+        boolean boolean1 = Utils.isValidKey("0hi%252521100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1519,15 +1520,15 @@ public class RegressionTest0 {
     public void test125() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test125");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
-        java.util.SortedMap<java.lang.Integer, java.lang.Integer> intMap14 = org.apache.storm.utils.Utils.OR((java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap9);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap17 = org.apache.storm.utils.Utils.integerDivided(2147483647, (int) (byte) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap18 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap14, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap17);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
+        java.util.SortedMap<java.lang.Integer, java.lang.Integer> intMap14 = Utils.OR((java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SortedMap<java.lang.Integer, java.lang.Integer>) intMap9);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap17 = Utils.integerDivided(2147483647, (int) (byte) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap18 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap14, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap17);
         org.junit.Assert.assertNotNull(intMap2);
         org.junit.Assert.assertNotNull(intMap5);
         org.junit.Assert.assertNotNull(intMap6);
@@ -1543,7 +1544,7 @@ public class RegressionTest0 {
     public void test126() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test126");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0100");
+        boolean boolean1 = Utils.isValidKey("0100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
@@ -1552,19 +1553,19 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test127");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.lang.Object[] objArray9 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList10 = org.apache.storm.utils.Utils.tuple(objArray9);
-        java.util.List<java.lang.Object> objList11 = org.apache.storm.utils.Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList10 = Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList11 = Utils.tuple(objArray9);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList12 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean13 = objListList12.add(objList5);
         boolean boolean14 = objListList12.add(objList11);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap17 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap18 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap19 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap17 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap18 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap19 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -1588,7 +1589,7 @@ public class RegressionTest0 {
     public void test128() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test128");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 100.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 100.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 100.0d + "'", double1 == 100.0d);
     }
 
@@ -1596,7 +1597,7 @@ public class RegressionTest0 {
     public void test129() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test129");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (short) 1);
+        double double1 = Utils.zeroIfNaNOrInf((double) (short) 1);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.0d + "'", double1 == 1.0d);
     }
 
@@ -1607,16 +1608,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        java.util.List<java.util.List<java.lang.Long>> longListList17 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str19 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi%21100100");
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        java.util.List<java.util.List<java.lang.Long>> longListList17 = Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str19 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi%21100100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -1639,11 +1640,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed(100, (java.util.Collection<java.lang.Long>) longList5);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.util.List<java.util.List<java.lang.Long>> longListList12 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 10, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed(100, (java.util.Collection<java.lang.Long>) longList5);
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.util.List<java.util.List<java.lang.Long>> longListList12 = Utils.partitionFixed((int) (byte) 10, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -1658,7 +1659,7 @@ public class RegressionTest0 {
     public void test132() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test132");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("hi%21");
+        java.lang.String str1 = Utils.urlEncodeUtf8("hi%21");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "hi%2521" + "'", str1, "hi%2521");
     }
 
@@ -1666,7 +1667,7 @@ public class RegressionTest0 {
     public void test133() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test133");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(2147483647, 10);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(2147483647, 10);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -1675,19 +1676,19 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test134");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.lang.Object[] objArray9 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList10 = org.apache.storm.utils.Utils.tuple(objArray9);
-        java.util.List<java.lang.Object> objList11 = org.apache.storm.utils.Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList10 = Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList11 = Utils.tuple(objArray9);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList12 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean13 = objListList12.add(objList5);
         boolean boolean14 = objListList12.add(objList11);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap17 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap18 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = org.apache.storm.utils.Utils.reverseMap(objMap18);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap16 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap17 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap18 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = Utils.reverseMap(objMap18);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -1711,7 +1712,7 @@ public class RegressionTest0 {
     public void test135() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test135");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("hi%21");
+        boolean boolean1 = Utils.isValidKey("hi%21");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1722,16 +1723,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
         java.lang.Long[] longArray10 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList11 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList11, longArray10);
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 0, (java.util.Collection<java.lang.Long>) longList11);
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed((int) (short) 0, (java.util.Collection<java.lang.Long>) longList11);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -1752,14 +1753,14 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test137");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap11 = org.apache.storm.utils.Utils.reverseMap(objMap10);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap11 = Utils.reverseMap(objMap10);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -1776,7 +1777,7 @@ public class RegressionTest0 {
     public void test138() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test138");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) (-112L));
+        long long2 = Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) (-112L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-111L) + "'", long2 == (-111L));
     }
 
@@ -1784,7 +1785,7 @@ public class RegressionTest0 {
     public void test139() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test139");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) (-112.0d));
+        double double1 = Utils.nullToZero((java.lang.Double) (-112.0d));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-112.0d) + "'", double1 == (-112.0d));
     }
 
@@ -1792,7 +1793,7 @@ public class RegressionTest0 {
     public void test140() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test140");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("0hi%2521100");
+        boolean boolean1 = Utils.isLocalhostAddress("0hi%2521100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -1800,7 +1801,7 @@ public class RegressionTest0 {
     public void test141() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test141");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) '#', (int) (byte) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) '#', (int) (byte) 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -1808,7 +1809,7 @@ public class RegressionTest0 {
     public void test142() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test142");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (short) -1);
+        int int1 = Utils.toPositive((int) (short) -1);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 2147483647 + "'", int1 == 2147483647);
     }
 
@@ -1816,14 +1817,14 @@ public class RegressionTest0 {
     public void test143() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test143");
-        org.apache.storm.utils.Utils.validateTopologyName("000hi!100100100");
+        Utils.validateTopologyName("000hi!100100100");
     }
 
     @Test
     public void test144() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test144");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) ' ');
+        int int1 = Utils.toPositive((int) ' ');
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 32 + "'", int1 == 32);
     }
 
@@ -1831,7 +1832,7 @@ public class RegressionTest0 {
     public void test145() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test145");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) (-1L));
+        long long2 = Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) (-1L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-1L) + "'", long2 == (-1L));
     }
 
@@ -1839,7 +1840,7 @@ public class RegressionTest0 {
     public void test146() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test146");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("1");
+        boolean boolean1 = Utils.isValidKey("1");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + true + "'", boolean1 == true);
     }
 
@@ -1849,7 +1850,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test147");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) '4', (int) (byte) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) '4', (int) (byte) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -1860,7 +1861,7 @@ public class RegressionTest0 {
     public void test148() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test148");
-        org.apache.storm.utils.Utils.validateTopologyName("0hi%2521100");
+        Utils.validateTopologyName("0hi%2521100");
     }
 
     @Test
@@ -1870,16 +1871,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         java.lang.Long[] longArray8 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList9 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean10 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList9, longArray8);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
-        long long14 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.util.RandomAccess randomAccess15 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
-        java.lang.String str18 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "0000hi!100100100100");
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "hi!");
+        long long14 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.util.RandomAccess randomAccess15 = Utils.OR((java.util.RandomAccess) longList3, (java.util.RandomAccess) longList9);
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList9);
+        java.lang.String str18 = Utils.join((java.lang.Iterable<java.lang.Long>) longList9, "0000hi!100100100100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -1900,11 +1901,11 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test150");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
         java.lang.Object[] objArray5 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray6 = org.apache.storm.utils.Utils.OR(objArray1, objArray5);
-        java.util.List<java.lang.Object> objList7 = org.apache.storm.utils.Utils.tuple(objArray6);
-        java.util.List<java.lang.Object> objList8 = org.apache.storm.utils.Utils.tuple(objArray6);
+        java.lang.Object[] objArray6 = Utils.OR(objArray1, objArray5);
+        java.util.List<java.lang.Object> objList7 = Utils.tuple(objArray6);
+        java.util.List<java.lang.Object> objList8 = Utils.tuple(objArray6);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -1923,7 +1924,7 @@ public class RegressionTest0 {
     public void test151() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test151");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf(100.0d);
+        double double1 = Utils.zeroIfNaNOrInf(100.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 100.0d + "'", double1 == 100.0d);
     }
 
@@ -1931,7 +1932,7 @@ public class RegressionTest0 {
     public void test152() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test152");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi%252521100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi%252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%25252521100100" + "'", str1, "00hi%25252521100100");
     }
 
@@ -1939,9 +1940,9 @@ public class RegressionTest0 {
     public void test153() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test153");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 1, 10);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap6 = org.apache.storm.utils.Utils.OR(intMap2, intMap5);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = Utils.integerDivided((int) (byte) 1, 10);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap6 = Utils.OR(intMap2, intMap5);
         org.junit.Assert.assertNotNull(intMap2);
         org.junit.Assert.assertNotNull(intMap5);
         org.junit.Assert.assertNotNull(intMap6);
@@ -1954,11 +1955,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "000hi!100100100");
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "000hi!100100100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -1973,7 +1974,7 @@ public class RegressionTest0 {
     public void test155() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test155");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("hi%2521");
+        java.lang.String str1 = Utils.urlDecodeUtf8("hi%2521");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "hi%21" + "'", str1, "hi%21");
     }
 
@@ -1981,7 +1982,7 @@ public class RegressionTest0 {
     public void test156() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test156");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 0.0f);
+        double double1 = Utils.zeroIfNaNOrInf((double) 0.0f);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 0.0d + "'", double1 == 0.0d);
     }
 
@@ -1992,10 +1993,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray1 = new java.lang.Long[] { 1L };
         java.util.ArrayList<java.lang.Long> longList2 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean3 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList2, longArray1);
-        long long4 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList2);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList2, "0100");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList2, "0000hi!100100100100");
+        long long4 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList2);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList2);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList2, "0100");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList2, "0000hi!100100100100");
         org.junit.Assert.assertNotNull(longArray1);
         org.junit.Assert.assertArrayEquals(longArray1, new java.lang.Long[] { 1L });
         org.junit.Assert.assertTrue("'" + boolean3 + "' != '" + true + "'", boolean3 == true);
@@ -2009,7 +2010,7 @@ public class RegressionTest0 {
     public void test158() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test158");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi%25252521100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi%25252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%2525252521100100" + "'", str1, "00hi%2525252521100100");
     }
 
@@ -2020,11 +2021,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2039,14 +2040,14 @@ public class RegressionTest0 {
     public void test160() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test160");
-        org.apache.storm.utils.Utils.validateTopologyName("hi%2521");
+        Utils.validateTopologyName("hi%2521");
     }
 
     @Test
     public void test161() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test161");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("1");
+        boolean boolean1 = Utils.isLocalhostAddress("1");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2054,7 +2055,7 @@ public class RegressionTest0 {
     public void test162() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test162");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("0000hi!100100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("0000hi!100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0000hi!100100100100" + "'", str1, "0000hi!100100100100");
     }
 
@@ -2062,14 +2063,14 @@ public class RegressionTest0 {
     public void test163() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test163");
-        org.apache.storm.utils.Utils.validateTopologyName("00hi%21100100");
+        Utils.validateTopologyName("00hi%21100100");
     }
 
     @Test
     public void test164() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test164");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("hi%2521");
+        boolean boolean1 = Utils.isValidKey("hi%2521");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2078,18 +2079,18 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test165");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
         java.lang.Object[] objArray14 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList15 = org.apache.storm.utils.Utils.tuple(objArray14);
-        java.util.List<java.lang.Object> objList16 = org.apache.storm.utils.Utils.tuple(objArray14);
-        java.util.List<java.lang.Object> objList17 = org.apache.storm.utils.Utils.get(objMap9, (java.lang.Object) (byte) 100, objList16);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap18 = org.apache.storm.utils.Utils.reverseMap(objMap9);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = org.apache.storm.utils.Utils.reverseMap(objMap9);
+        java.util.List<java.lang.Object> objList15 = Utils.tuple(objArray14);
+        java.util.List<java.lang.Object> objList16 = Utils.tuple(objArray14);
+        java.util.List<java.lang.Object> objList17 = Utils.get(objMap9, (java.lang.Object) (byte) 100, objList16);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap18 = Utils.reverseMap(objMap9);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = Utils.reverseMap(objMap9);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -2112,7 +2113,7 @@ public class RegressionTest0 {
     public void test166() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test166");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf(2.147483647E9d);
+        double double1 = Utils.zeroIfNaNOrInf(2.147483647E9d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 2.147483647E9d + "'", double1 == 2.147483647E9d);
     }
 
@@ -2120,7 +2121,7 @@ public class RegressionTest0 {
     public void test167() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test167");
-        org.apache.storm.utils.Utils.validateTopologyName("00000hi!100100100100100");
+        Utils.validateTopologyName("00000hi!100100100100100");
     }
 
     @Test
@@ -2129,7 +2130,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test168");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("00hi%21100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("00hi%21100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -2140,7 +2141,7 @@ public class RegressionTest0 {
     public void test169() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test169");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 1L);
+        long long2 = Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 1L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 101L + "'", long2 == 101L);
     }
 
@@ -2148,7 +2149,7 @@ public class RegressionTest0 {
     public void test170() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test170");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) 'a');
+        int int1 = Utils.toPositive((int) 'a');
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 97 + "'", int1 == 97);
     }
 
@@ -2156,14 +2157,14 @@ public class RegressionTest0 {
     public void test171() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test171");
-        org.apache.storm.utils.Utils.validateTopologyName("0hi%252521100");
+        Utils.validateTopologyName("0hi%252521100");
     }
 
     @Test
     public void test172() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test172");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("000hi%2521100100100");
+        boolean boolean1 = Utils.isValidKey("000hi%2521100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2174,11 +2175,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "00hi!100100");
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList5);
-        java.util.List<java.util.List<java.lang.Long>> longListList12 = org.apache.storm.utils.Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "00hi!100100");
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList5);
+        java.util.List<java.util.List<java.lang.Long>> longListList12 = Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -2196,16 +2197,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList4);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2225,7 +2226,7 @@ public class RegressionTest0 {
     public void test175() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test175");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) '#');
+        double double1 = Utils.zeroIfNaNOrInf((double) '#');
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 35.0d + "'", double1 == 35.0d);
     }
 
@@ -2233,7 +2234,7 @@ public class RegressionTest0 {
     public void test176() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test176");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-112L), (java.lang.Long) (-111L));
+        long long2 = Utils.bitXor((java.lang.Long) (-112L), (java.lang.Long) (-111L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 1L + "'", long2 == 1L);
     }
 
@@ -2241,7 +2242,7 @@ public class RegressionTest0 {
     public void test177() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test177");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("000hi%2521100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("000hi%2521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%252521100100100" + "'", str1, "000hi%252521100100100");
     }
 
@@ -2249,7 +2250,7 @@ public class RegressionTest0 {
     public void test178() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test178");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-1L));
+        long long2 = Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-1L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 100L + "'", long2 == 100L);
     }
 
@@ -2260,9 +2261,9 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -2275,7 +2276,7 @@ public class RegressionTest0 {
     public void test180() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test180");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00000hi!100100100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00000hi!100100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00000hi!100100100100100" + "'", str1, "00000hi!100100100100100");
     }
 
@@ -2283,7 +2284,7 @@ public class RegressionTest0 {
     public void test181() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test181");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) 100L);
+        long long2 = Utils.bitXor((java.lang.Long) 11L, (java.lang.Long) 100L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 111L + "'", long2 == 111L);
     }
 
@@ -2291,7 +2292,7 @@ public class RegressionTest0 {
     public void test182() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test182");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("000hi!100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("000hi!100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2299,7 +2300,7 @@ public class RegressionTest0 {
     public void test183() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test183");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("000000hi!100100100100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("000000hi!100100100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000000hi%21100100100100100100" + "'", str1, "000000hi%21100100100100100100");
     }
 
@@ -2307,7 +2308,7 @@ public class RegressionTest0 {
     public void test184() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test184");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 10L, (java.lang.Long) 101L);
+        long long2 = Utils.bitXor((java.lang.Long) 10L, (java.lang.Long) 101L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 111L + "'", long2 == 111L);
     }
 
@@ -2318,16 +2319,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        java.util.List<java.util.List<java.lang.Long>> longListList17 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str19 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        java.util.List<java.util.List<java.lang.Long>> longListList17 = Utils.partitionFixed((int) (short) 100, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str19 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2348,15 +2349,15 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test186");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -2372,7 +2373,7 @@ public class RegressionTest0 {
     public void test187() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test187");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 101L);
+        long long2 = Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 101L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-102L) + "'", long2 == (-102L));
     }
 
@@ -2380,7 +2381,7 @@ public class RegressionTest0 {
     public void test188() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test188");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 52);
+        double double1 = Utils.zeroIfNaNOrInf((double) 52);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 52.0d + "'", double1 == 52.0d);
     }
 
@@ -2390,7 +2391,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test189");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("00hi%2525252521100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("00hi%2525252521100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -2401,7 +2402,7 @@ public class RegressionTest0 {
     public void test190() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test190");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000000hi%21100100100100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000000hi%21100100100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000000hi!100100100100100100" + "'", str1, "000000hi!100100100100100100");
     }
 
@@ -2412,12 +2413,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed(100, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed(100, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2434,17 +2435,17 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test192");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.lang.Object[] objArray9 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList10 = org.apache.storm.utils.Utils.tuple(objArray9);
-        java.util.List<java.lang.Object> objList11 = org.apache.storm.utils.Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList10 = Utils.tuple(objArray9);
+        java.util.List<java.lang.Object> objList11 = Utils.tuple(objArray9);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList12 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean13 = objListList12.add(objList5);
         boolean boolean14 = objListList12.add(objList11);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap16 = org.apache.storm.utils.Utils.reverseMap(objMap15);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap17 = org.apache.storm.utils.Utils.reverseMap(objMap15);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap15 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList12);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap16 = Utils.reverseMap(objMap15);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap17 = Utils.reverseMap(objMap15);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -2466,7 +2467,7 @@ public class RegressionTest0 {
     public void test193() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test193");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("0000hi!100100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("0000hi!100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2474,7 +2475,7 @@ public class RegressionTest0 {
     public void test194() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test194");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) (-12L));
+        long long2 = Utils.bitXor((java.lang.Long) 1L, (java.lang.Long) (-12L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-11L) + "'", long2 == (-11L));
     }
 
@@ -2482,7 +2483,7 @@ public class RegressionTest0 {
     public void test195() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test195");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("1");
+        java.lang.String str1 = Utils.urlEncodeUtf8("1");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "1" + "'", str1, "1");
     }
 
@@ -2490,7 +2491,7 @@ public class RegressionTest0 {
     public void test196() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test196");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 'a');
+        double double1 = Utils.zeroIfNaNOrInf((double) 'a');
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 97.0d + "'", double1 == 97.0d);
     }
 
@@ -2498,14 +2499,14 @@ public class RegressionTest0 {
     public void test197() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test197");
-        org.apache.storm.utils.Utils.validateTopologyName("000000hi%21100100100100100100");
+        Utils.validateTopologyName("000000hi%21100100100100100100");
     }
 
     @Test
     public void test198() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test198");
-        java.lang.CharSequence charSequence2 = org.apache.storm.utils.Utils.OR((java.lang.CharSequence) "hi%2521", (java.lang.CharSequence) "000hi%252521100100100");
+        java.lang.CharSequence charSequence2 = Utils.OR((java.lang.CharSequence) "hi%2521", (java.lang.CharSequence) "000hi%252521100100100");
         org.junit.Assert.assertEquals("'" + charSequence2 + "' != '" + "hi%2521" + "'", charSequence2, "hi%2521");
     }
 
@@ -2513,7 +2514,7 @@ public class RegressionTest0 {
     public void test199() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test199");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (-12L));
+        double double1 = Utils.zeroIfNaNOrInf((double) (-12L));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-12.0d) + "'", double1 == (-12.0d));
     }
 
@@ -2521,7 +2522,7 @@ public class RegressionTest0 {
     public void test200() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test200");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00000hi!100100100100100");
+        boolean boolean1 = Utils.isValidKey("00000hi!100100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2529,7 +2530,7 @@ public class RegressionTest0 {
     public void test201() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test201");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 10, 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 10, 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -2540,15 +2541,15 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
         java.lang.String[] strArray14 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList15 = new java.util.ArrayList<java.lang.String>();
         boolean boolean16 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList15, strArray14);
-        java.util.List<java.lang.String> strList17 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList15);
-        java.util.RandomAccess randomAccess18 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) strList15);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList5);
+        java.util.List<java.lang.String> strList17 = Utils.getRepeat((java.util.List<java.lang.String>) strList15);
+        java.util.RandomAccess randomAccess18 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) strList15);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -2567,7 +2568,7 @@ public class RegressionTest0 {
     public void test203() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test203");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) ' ', (int) (short) 1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) ' ', (int) (short) 1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -2575,7 +2576,7 @@ public class RegressionTest0 {
     public void test204() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test204");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 10L);
+        long long2 = Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 10L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 110L + "'", long2 == 110L);
     }
 
@@ -2583,7 +2584,7 @@ public class RegressionTest0 {
     public void test205() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test205");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("00hi%2521100100");
+        boolean boolean1 = Utils.isLocalhostAddress("00hi%2521100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2591,7 +2592,7 @@ public class RegressionTest0 {
     public void test206() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test206");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 2.147483647E9d);
+        double double1 = Utils.nullToZero((java.lang.Double) 2.147483647E9d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 2.147483647E9d + "'", double1 == 2.147483647E9d);
     }
 
@@ -2602,11 +2603,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) -1, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed((int) (byte) -1, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2621,7 +2622,7 @@ public class RegressionTest0 {
     public void test208() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test208");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("00hi%21100100");
+        boolean boolean1 = Utils.isLocalhostAddress("00hi%21100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2632,11 +2633,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        long long8 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%2521100100");
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        long long8 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%2521100100");
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -2652,16 +2653,16 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test210");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
         java.lang.Object[] objArray5 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray6 = org.apache.storm.utils.Utils.OR(objArray1, objArray5);
-        java.util.List<java.lang.Object> objList7 = org.apache.storm.utils.Utils.tuple(objArray6);
+        java.lang.Object[] objArray6 = Utils.OR(objArray1, objArray5);
+        java.util.List<java.lang.Object> objList7 = Utils.tuple(objArray6);
         java.lang.Object[] objArray11 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList12 = org.apache.storm.utils.Utils.tuple(objArray11);
-        java.util.List<java.lang.Object> objList13 = org.apache.storm.utils.Utils.tuple(objArray11);
-        java.util.List<java.lang.Object> objList14 = org.apache.storm.utils.Utils.tuple(objArray11);
-        java.lang.Object[] objArray15 = org.apache.storm.utils.Utils.OR(objArray6, objArray11);
-        java.util.List<java.lang.Object> objList16 = org.apache.storm.utils.Utils.tuple(objArray6);
+        java.util.List<java.lang.Object> objList12 = Utils.tuple(objArray11);
+        java.util.List<java.lang.Object> objList13 = Utils.tuple(objArray11);
+        java.util.List<java.lang.Object> objList14 = Utils.tuple(objArray11);
+        java.lang.Object[] objArray15 = Utils.OR(objArray6, objArray11);
+        java.util.List<java.lang.Object> objList16 = Utils.tuple(objArray6);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -2690,15 +2691,15 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test211");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap12 = org.apache.storm.utils.Utils.reverseMap(objMap11);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap12 = Utils.reverseMap(objMap11);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -2716,7 +2717,7 @@ public class RegressionTest0 {
     public void test212() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test212");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000hi%21100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000hi%21100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi!100100100" + "'", str1, "000hi!100100100");
     }
 
@@ -2724,13 +2725,13 @@ public class RegressionTest0 {
     public void test213() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test213");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (short) -1);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (short) 1);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
-        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap14 = org.apache.storm.utils.Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5, intMap13);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap6 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap9 = Utils.integerDivided((int) (byte) -1, (int) (short) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = Utils.integerDivided((int) (short) 0, (int) (short) 1);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap13 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap9, (java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap12);
+        java.util.SequencedMap<java.lang.Integer, java.lang.Integer> intMap14 = Utils.OR((java.util.SequencedMap<java.lang.Integer, java.lang.Integer>) intMap5, intMap13);
         org.junit.Assert.assertNotNull(intMap2);
         org.junit.Assert.assertNotNull(intMap5);
         org.junit.Assert.assertNotNull(intMap6);
@@ -2744,7 +2745,7 @@ public class RegressionTest0 {
     public void test214() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test214");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("");
+        java.lang.String str1 = Utils.urlEncodeUtf8("");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "" + "'", str1, "");
     }
 
@@ -2752,7 +2753,7 @@ public class RegressionTest0 {
     public void test215() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test215");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-12L), (java.lang.Long) (-112L));
+        long long2 = Utils.bitXor((java.lang.Long) (-12L), (java.lang.Long) (-112L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 100L + "'", long2 == 100L);
     }
 
@@ -2760,7 +2761,7 @@ public class RegressionTest0 {
     public void test216() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test216");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 101L);
+        double double1 = Utils.zeroIfNaNOrInf((double) 101L);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 101.0d + "'", double1 == 101.0d);
     }
 
@@ -2768,7 +2769,7 @@ public class RegressionTest0 {
     public void test217() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test217");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("0hi%252521100");
+        boolean boolean1 = Utils.isLocalhostAddress("0hi%252521100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -2777,12 +2778,12 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test218");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList6 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList7 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList8 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList9 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList6 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList7 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList8 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList9 = Utils.tuple(objArray3);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -2800,7 +2801,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test219");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("00000hi!100100100100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("00000hi!100100100100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -2811,7 +2812,7 @@ public class RegressionTest0 {
     public void test220() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test220");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00hi%2525252521100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00hi%2525252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%25252521100100" + "'", str1, "00hi%25252521100100");
     }
 
@@ -2819,7 +2820,7 @@ public class RegressionTest0 {
     public void test221() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test221");
-        org.apache.storm.utils.Utils.validateTopologyName("00hi%2525252521100100");
+        Utils.validateTopologyName("00hi%2525252521100100");
     }
 
     @Test
@@ -2829,12 +2830,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.io.Serializable serializable13 = org.apache.storm.utils.Utils.OR((java.io.Serializable) longList4, (java.io.Serializable) "000hi!100100100");
-        long long14 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.io.Serializable serializable13 = Utils.OR((java.io.Serializable) longList4, (java.io.Serializable) "000hi!100100100");
+        long long14 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2850,7 +2851,7 @@ public class RegressionTest0 {
     public void test223() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test223");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(0, (int) '4');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(0, (int) '4');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -2858,7 +2859,7 @@ public class RegressionTest0 {
     public void test224() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test224");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(0, 97);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(0, 97);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -2866,7 +2867,7 @@ public class RegressionTest0 {
     public void test225() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test225");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) (short) 100);
+        int int1 = Utils.toPositive((int) (short) 100);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 100 + "'", int1 == 100);
     }
 
@@ -2874,7 +2875,7 @@ public class RegressionTest0 {
     public void test226() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test226");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 0, (int) '#');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) 0, (int) '#');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -2885,17 +2886,17 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList4);
-        long long19 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList4);
+        long long19 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2916,7 +2917,7 @@ public class RegressionTest0 {
     public void test228() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test228");
-        int int1 = org.apache.storm.utils.Utils.toPositive(97);
+        int int1 = Utils.toPositive(97);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 97 + "'", int1 == 97);
     }
 
@@ -2927,16 +2928,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        java.util.List<java.util.List<java.lang.Long>> longListList17 = org.apache.storm.utils.Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList10);
-        java.lang.String str19 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "00000hi!100100100100100");
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        java.util.List<java.util.List<java.lang.Long>> longListList17 = Utils.partitionFixed((int) '4', (java.util.Collection<java.lang.Long>) longList10);
+        java.lang.String str19 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "00000hi!100100100100100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -2957,18 +2958,18 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test230");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
         java.lang.Object[] objArray5 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray6 = org.apache.storm.utils.Utils.OR(objArray1, objArray5);
+        java.lang.Object[] objArray6 = Utils.OR(objArray1, objArray5);
         java.lang.Object[] objArray8 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList9 = org.apache.storm.utils.Utils.tuple(objArray8);
+        java.util.List<java.lang.Object> objList9 = Utils.tuple(objArray8);
         java.lang.Object[] objArray12 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray13 = org.apache.storm.utils.Utils.OR(objArray8, objArray12);
-        java.util.List<java.lang.Object> objList14 = org.apache.storm.utils.Utils.tuple(objArray12);
-        java.lang.Object[] objArray15 = org.apache.storm.utils.Utils.OR(objArray5, objArray12);
-        java.util.List<java.lang.Object> objList16 = org.apache.storm.utils.Utils.tuple(objArray15);
-        java.util.List<java.lang.Object> objList17 = org.apache.storm.utils.Utils.tuple(objArray15);
-        java.util.List<java.lang.Object> objList18 = org.apache.storm.utils.Utils.tuple(objArray15);
+        java.lang.Object[] objArray13 = Utils.OR(objArray8, objArray12);
+        java.util.List<java.lang.Object> objList14 = Utils.tuple(objArray12);
+        java.lang.Object[] objArray15 = Utils.OR(objArray5, objArray12);
+        java.util.List<java.lang.Object> objList16 = Utils.tuple(objArray15);
+        java.util.List<java.lang.Object> objList17 = Utils.tuple(objArray15);
+        java.util.List<java.lang.Object> objList18 = Utils.tuple(objArray15);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -3004,7 +3005,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test231");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 1, (int) (short) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) 1, (int) (short) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -3015,7 +3016,7 @@ public class RegressionTest0 {
     public void test232() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test232");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(100, (int) (byte) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(100, (int) (byte) -1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3023,7 +3024,7 @@ public class RegressionTest0 {
     public void test233() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test233");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(0, (int) (byte) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(0, (int) (byte) -1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3031,7 +3032,7 @@ public class RegressionTest0 {
     public void test234() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test234");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 10, (int) (short) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 10, (int) (short) 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3041,7 +3042,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test235");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("000hi%21100100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("000hi%21100100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -3052,7 +3053,7 @@ public class RegressionTest0 {
     public void test236() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test236");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3060,7 +3061,7 @@ public class RegressionTest0 {
     public void test237() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test237");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-12L), (java.lang.Long) 1L);
+        long long2 = Utils.bitXor((java.lang.Long) (-12L), (java.lang.Long) 1L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-11L) + "'", long2 == (-11L));
     }
 
@@ -3068,7 +3069,7 @@ public class RegressionTest0 {
     public void test238() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test238");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00hi%252521100100");
+        boolean boolean1 = Utils.isValidKey("00hi%252521100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3076,7 +3077,7 @@ public class RegressionTest0 {
     public void test239() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test239");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(97, 97);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(97, 97);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3087,10 +3088,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi%21");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi%21");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -3104,7 +3105,7 @@ public class RegressionTest0 {
     public void test241() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test241");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("000000hi!100100100100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("000000hi!100100100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3112,7 +3113,7 @@ public class RegressionTest0 {
     public void test242() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test242");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("000000hi%21100100100100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("000000hi%21100100100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3121,13 +3122,13 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test243");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -3141,7 +3142,7 @@ public class RegressionTest0 {
     public void test244() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test244");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 111L, (java.lang.Long) 0L);
+        long long2 = Utils.bitXor((java.lang.Long) 111L, (java.lang.Long) 0L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 111L + "'", long2 == 111L);
     }
 
@@ -3149,7 +3150,7 @@ public class RegressionTest0 {
     public void test245() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test245");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000hi%252521100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000hi%252521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%2521100100100" + "'", str1, "000hi%2521100100100");
     }
 
@@ -3160,11 +3161,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed(52, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed(52, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3180,19 +3181,19 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test247");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
         java.lang.Exception exception5 = null;
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.OR(runtimeException4, runtimeException10);
-        java.lang.RuntimeException runtimeException13 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException12);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException12 = Utils.OR(runtimeException4, runtimeException10);
+        java.lang.RuntimeException runtimeException13 = Utils.wrapInRuntime((java.lang.Exception) runtimeException12);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -3214,12 +3215,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList14 = org.apache.storm.utils.Utils.partitionFixed((-1), (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList14 = Utils.partitionFixed((-1), (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3235,7 +3236,7 @@ public class RegressionTest0 {
     public void test249() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test249");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) (-12.0d));
+        double double1 = Utils.nullToZero((java.lang.Double) (-12.0d));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-12.0d) + "'", double1 == (-12.0d));
     }
 
@@ -3246,14 +3247,14 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
-        java.lang.String str17 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
-        long long18 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
+        java.lang.String str17 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
+        long long18 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3272,13 +3273,13 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test251");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -3295,13 +3296,13 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList14 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 1, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str16 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "1");
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "");
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList14 = Utils.partitionFixed((int) (byte) 1, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str16 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "1");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3321,16 +3322,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((-1), (java.util.Collection<java.lang.Long>) longList4);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((-1), (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3350,7 +3351,7 @@ public class RegressionTest0 {
     public void test254() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test254");
-        org.apache.storm.utils.Utils.validateTopologyName("1");
+        Utils.validateTopologyName("1");
     }
 
     @Test
@@ -3358,14 +3359,14 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test255");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (byte) 10);
-        java.lang.Object obj13 = org.apache.storm.utils.Utils.OR((java.lang.Object) objListMap9, (java.lang.Object) (byte) 10);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = Utils.reverseMap(objMap8);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap12 = Utils.integerDivided((int) (short) 0, (int) (byte) 10);
+        java.lang.Object obj13 = Utils.OR((java.lang.Object) objListMap9, (java.lang.Object) (byte) 10);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -3385,7 +3386,7 @@ public class RegressionTest0 {
     public void test256() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test256");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 111L);
+        long long2 = Utils.bitXor((java.lang.Long) 100L, (java.lang.Long) 111L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 11L + "'", long2 == 11L);
     }
 
@@ -3393,7 +3394,7 @@ public class RegressionTest0 {
     public void test257() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test257");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00hi%2525252521100100");
+        boolean boolean1 = Utils.isValidKey("00hi%2525252521100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3401,7 +3402,7 @@ public class RegressionTest0 {
     public void test258() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test258");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-11L), (java.lang.Long) (-101L));
+        long long2 = Utils.bitXor((java.lang.Long) (-11L), (java.lang.Long) (-101L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 110L + "'", long2 == 110L);
     }
 
@@ -3410,18 +3411,18 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test259");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap10 = org.apache.storm.utils.Utils.reverseMap(objMap9);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap10 = Utils.reverseMap(objMap9);
         java.lang.Object[] objArray15 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList16 = org.apache.storm.utils.Utils.tuple(objArray15);
-        java.util.List<java.lang.Object> objList17 = org.apache.storm.utils.Utils.tuple(objArray15);
-        java.util.List<java.lang.Object> objList18 = org.apache.storm.utils.Utils.get(objMap9, (java.lang.Object) 2.147483647E9d, objList17);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = org.apache.storm.utils.Utils.reverseMap(objMap9);
+        java.util.List<java.lang.Object> objList16 = Utils.tuple(objArray15);
+        java.util.List<java.lang.Object> objList17 = Utils.tuple(objArray15);
+        java.util.List<java.lang.Object> objList18 = Utils.get(objMap9, (java.lang.Object) 2.147483647E9d, objList17);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap19 = Utils.reverseMap(objMap9);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -3444,7 +3445,7 @@ public class RegressionTest0 {
     public void test260() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test260");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000hi%2525252521100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000hi%2525252521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%25252521100100100" + "'", str1, "000hi%25252521100100100");
     }
 
@@ -3452,7 +3453,7 @@ public class RegressionTest0 {
     public void test261() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test261");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 10, (int) '#');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) 10, (int) '#');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3460,7 +3461,7 @@ public class RegressionTest0 {
     public void test262() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test262");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) (-111L));
+        long long2 = Utils.bitXor((java.lang.Long) 0L, (java.lang.Long) (-111L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-111L) + "'", long2 == (-111L));
     }
 
@@ -3468,9 +3469,9 @@ public class RegressionTest0 {
     public void test263() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test263");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(2147483647, (int) (byte) 100);
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, (int) (byte) 10);
-        java.util.AbstractMap<java.lang.Integer, java.lang.Integer> intMap6 = org.apache.storm.utils.Utils.OR((java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap5);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(2147483647, (int) (byte) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap5 = Utils.integerDivided((int) (short) 0, (int) (byte) 10);
+        java.util.AbstractMap<java.lang.Integer, java.lang.Integer> intMap6 = Utils.OR((java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap2, (java.util.AbstractMap<java.lang.Integer, java.lang.Integer>) intMap5);
         org.junit.Assert.assertNotNull(intMap2);
         org.junit.Assert.assertNotNull(intMap5);
         org.junit.Assert.assertNotNull(intMap6);
@@ -3480,14 +3481,14 @@ public class RegressionTest0 {
     public void test264() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test264");
-        org.apache.storm.utils.Utils.validateTopologyName("00hi%25252521100100");
+        Utils.validateTopologyName("00hi%25252521100100");
     }
 
     @Test
     public void test265() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test265");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) -1, (-1));
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) -1, (-1));
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3497,7 +3498,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test266");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("000hi%25252521100100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("000hi%25252521100100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -3508,7 +3509,7 @@ public class RegressionTest0 {
     public void test267() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test267");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (-102L));
+        double double1 = Utils.zeroIfNaNOrInf((double) (-102L));
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-102.0d) + "'", double1 == (-102.0d));
     }
 
@@ -3516,7 +3517,7 @@ public class RegressionTest0 {
     public void test268() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test268");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 110L, (java.lang.Long) (-12L));
+        long long2 = Utils.bitXor((java.lang.Long) 110L, (java.lang.Long) (-12L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-102L) + "'", long2 == (-102L));
     }
 
@@ -3527,12 +3528,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        long long8 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%25252521100100");
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        long long8 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%25252521100100");
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -3548,7 +3549,7 @@ public class RegressionTest0 {
     public void test270() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test270");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(10, (int) '#');
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(10, (int) '#');
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3559,11 +3560,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed(10, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed(10, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3578,7 +3579,7 @@ public class RegressionTest0 {
     public void test272() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test272");
-        org.apache.storm.utils.Utils.validateTopologyName("000000hi!100100100100100100");
+        Utils.validateTopologyName("000000hi!100100100100100100");
     }
 
     @Test
@@ -3586,17 +3587,17 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test273");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap12 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap13 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap14 = org.apache.storm.utils.Utils.reverseMap(objMap13);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap12 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap13 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap14 = Utils.reverseMap(objMap13);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -3619,11 +3620,11 @@ public class RegressionTest0 {
         java.lang.String[] strArray3 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList4 = new java.util.ArrayList<java.lang.String>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList4, strArray3);
-        java.util.List<java.lang.String> strList6 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList4);
-        java.util.List<java.lang.String> strList7 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList8 = org.apache.storm.utils.Utils.getRepeat(strList7);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat(strList8);
-        java.util.List<java.lang.String> strList10 = org.apache.storm.utils.Utils.getRepeat(strList9);
+        java.util.List<java.lang.String> strList6 = Utils.getRepeat((java.util.List<java.lang.String>) strList4);
+        java.util.List<java.lang.String> strList7 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList8 = Utils.getRepeat(strList7);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat(strList8);
+        java.util.List<java.lang.String> strList10 = Utils.getRepeat(strList9);
         org.junit.Assert.assertNotNull(strArray3);
         org.junit.Assert.assertArrayEquals(strArray3, new java.lang.String[] { "", "hi!", "0hi!100" });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3638,7 +3639,7 @@ public class RegressionTest0 {
     public void test275() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test275");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("000hi%25252521100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("000hi%25252521100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3646,7 +3647,7 @@ public class RegressionTest0 {
     public void test276() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test276");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 110L, (java.lang.Long) 0L);
+        long long2 = Utils.bitXor((java.lang.Long) 110L, (java.lang.Long) 0L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 110L + "'", long2 == 110L);
     }
 
@@ -3654,7 +3655,7 @@ public class RegressionTest0 {
     public void test277() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test277");
-        java.lang.Comparable<java.lang.String> strComparable2 = org.apache.storm.utils.Utils.OR((java.lang.Comparable<java.lang.String>) "00000hi!100100100100100", (java.lang.Comparable<java.lang.String>) "00hi%252521100100");
+        java.lang.Comparable<java.lang.String> strComparable2 = Utils.OR((java.lang.Comparable<java.lang.String>) "00000hi!100100100100100", (java.lang.Comparable<java.lang.String>) "00hi%252521100100");
         org.junit.Assert.assertEquals("'" + strComparable2 + "' != '" + "00000hi!100100100100100" + "'", strComparable2, "00000hi!100100100100100");
     }
 
@@ -3662,7 +3663,7 @@ public class RegressionTest0 {
     public void test278() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test278");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("000hi!100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("000hi!100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%21100100100" + "'", str1, "000hi%21100100100");
     }
 
@@ -3670,7 +3671,7 @@ public class RegressionTest0 {
     public void test279() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test279");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("000hi%21100100100");
+        boolean boolean1 = Utils.isLocalhostAddress("000hi%21100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3681,16 +3682,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
         java.lang.Long[] longArray10 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList11 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean12 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList11, longArray10);
-        long long13 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
-        long long16 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
-        java.util.RandomAccess randomAccess17 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList11);
-        java.util.List<java.util.List<java.lang.Long>> longListList19 = org.apache.storm.utils.Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList11);
+        long long13 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList11, "hi!");
+        long long16 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList11);
+        java.util.RandomAccess randomAccess17 = Utils.OR((java.util.RandomAccess) longList5, (java.util.RandomAccess) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList11);
+        java.util.List<java.util.List<java.lang.Long>> longListList19 = Utils.partitionFixed(1, (java.util.Collection<java.lang.Long>) longList11);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -3710,7 +3711,7 @@ public class RegressionTest0 {
     public void test281() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test281");
-        boolean boolean1 = org.apache.storm.utils.Utils.isLocalhostAddress("0100");
+        boolean boolean1 = Utils.isLocalhostAddress("0100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3718,7 +3719,7 @@ public class RegressionTest0 {
     public void test282() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test282");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 100, 97);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 100, 97);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3726,7 +3727,7 @@ public class RegressionTest0 {
     public void test283() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test283");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0000hi!100100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0000hi!100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0000hi%21100100100100" + "'", str1, "0000hi%21100100100100");
     }
 
@@ -3734,7 +3735,7 @@ public class RegressionTest0 {
     public void test284() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test284");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("01100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("01100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "01100" + "'", str1, "01100");
     }
 
@@ -3742,7 +3743,7 @@ public class RegressionTest0 {
     public void test285() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test285");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 10, (int) (byte) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) 10, (int) (byte) -1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -3750,7 +3751,7 @@ public class RegressionTest0 {
     public void test286() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test286");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi%2525252521100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi%2525252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%252525252521100100" + "'", str1, "00hi%252525252521100100");
     }
 
@@ -3758,14 +3759,14 @@ public class RegressionTest0 {
     public void test287() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test287");
-        org.apache.storm.utils.Utils.validateTopologyName("000hi%25252521100100100");
+        Utils.validateTopologyName("000hi%25252521100100100");
     }
 
     @Test
     public void test288() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test288");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-12L));
+        long long2 = Utils.bitXor((java.lang.Long) (-101L), (java.lang.Long) (-12L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 111L + "'", long2 == 111L);
     }
 
@@ -3773,7 +3774,7 @@ public class RegressionTest0 {
     public void test289() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test289");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("00hi%21100100");
+        boolean boolean1 = Utils.isValidKey("00hi%21100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3784,9 +3785,9 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 1L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.util.List<java.util.List<java.lang.Long>> longListList7 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 0, (java.util.Collection<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.util.List<java.util.List<java.lang.Long>> longListList7 = Utils.partitionFixed((int) (short) 0, (java.util.Collection<java.lang.Long>) longList3);
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 1L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -3800,21 +3801,21 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test291");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
         java.lang.Exception exception7 = null;
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception7);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception7);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
         java.lang.Exception exception10 = null;
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime(exception10);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException11);
-        java.lang.RuntimeException runtimeException13 = org.apache.storm.utils.Utils.OR(runtimeException8, runtimeException12);
-        java.lang.RuntimeException runtimeException14 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException13);
-        java.lang.Throwable throwable15 = org.apache.storm.utils.Utils.OR((java.lang.Throwable) runtimeException3, (java.lang.Throwable) runtimeException14);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime(exception10);
+        java.lang.RuntimeException runtimeException12 = Utils.wrapInRuntime((java.lang.Exception) runtimeException11);
+        java.lang.RuntimeException runtimeException13 = Utils.OR(runtimeException8, runtimeException12);
+        java.lang.RuntimeException runtimeException14 = Utils.wrapInRuntime((java.lang.Exception) runtimeException13);
+        java.lang.Throwable throwable15 = Utils.OR((java.lang.Throwable) runtimeException3, (java.lang.Throwable) runtimeException14);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -3838,15 +3839,15 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test292");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
         java.lang.Exception exception2 = null;
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception2);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime(exception2);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime(exception2);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.OR(runtimeException1, runtimeException5);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception2);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime(exception2);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime(exception2);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException8 = Utils.OR(runtimeException1, runtimeException5);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime((java.lang.Exception) runtimeException8);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException3);
         org.junit.Assert.assertNotNull(runtimeException4);
@@ -3862,20 +3863,20 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test293");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
         java.lang.Exception exception5 = null;
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.OR(runtimeException4, runtimeException10);
-        java.lang.RuntimeException runtimeException13 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException14 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException13);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException12 = Utils.OR(runtimeException4, runtimeException10);
+        java.lang.RuntimeException runtimeException13 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException14 = Utils.wrapInRuntime((java.lang.Exception) runtimeException13);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -3895,7 +3896,7 @@ public class RegressionTest0 {
     public void test294() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test294");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("0000hi%21100100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("0000hi%21100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0000hi!100100100100" + "'", str1, "0000hi!100100100100");
     }
 
@@ -3903,14 +3904,14 @@ public class RegressionTest0 {
     public void test295() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test295");
-        org.apache.storm.utils.Utils.validateTopologyName("01100");
+        Utils.validateTopologyName("01100");
     }
 
     @Test
     public void test296() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test296");
-        double double1 = org.apache.storm.utils.Utils.nullToZero((java.lang.Double) 101.0d);
+        double double1 = Utils.nullToZero((java.lang.Double) 101.0d);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 101.0d + "'", double1 == 101.0d);
     }
 
@@ -3921,10 +3922,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 1, (java.util.Collection<java.lang.Long>) longList4);
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi!100100");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (byte) 1, (java.util.Collection<java.lang.Long>) longList4);
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -3940,7 +3941,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test298");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(100, (int) (short) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(100, (int) (short) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -3951,7 +3952,7 @@ public class RegressionTest0 {
     public void test299() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test299");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("00hi%252521100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("00hi%252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%2521100100" + "'", str1, "00hi%2521100100");
     }
 
@@ -3959,14 +3960,14 @@ public class RegressionTest0 {
     public void test300() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test300");
-        org.apache.storm.utils.Utils.validateTopologyName("000hi%252521100100100");
+        Utils.validateTopologyName("000hi%252521100100100");
     }
 
     @Test
     public void test301() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test301");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("000hi%25252521100100100");
+        boolean boolean1 = Utils.isValidKey("000hi%25252521100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -3977,11 +3978,11 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "");
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%252521100100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "");
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%252521100100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -3999,8 +4000,8 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -4013,12 +4014,12 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test304");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
         java.lang.Object[] objArray5 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray6 = org.apache.storm.utils.Utils.OR(objArray1, objArray5);
-        java.util.List<java.lang.Object> objList7 = org.apache.storm.utils.Utils.tuple(objArray5);
-        java.util.List<java.lang.Object> objList8 = org.apache.storm.utils.Utils.tuple(objArray5);
-        java.util.List<java.lang.Object> objList9 = org.apache.storm.utils.Utils.tuple(objArray5);
+        java.lang.Object[] objArray6 = Utils.OR(objArray1, objArray5);
+        java.util.List<java.lang.Object> objList7 = Utils.tuple(objArray5);
+        java.util.List<java.lang.Object> objList8 = Utils.tuple(objArray5);
+        java.util.List<java.lang.Object> objList9 = Utils.tuple(objArray5);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -4038,7 +4039,7 @@ public class RegressionTest0 {
     public void test305() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test305");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("hi%2521");
+        java.lang.String str1 = Utils.urlEncodeUtf8("hi%2521");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "hi%252521" + "'", str1, "hi%252521");
     }
 
@@ -4048,7 +4049,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test306");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) '4', 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) '4', 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -4060,11 +4061,11 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test307");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4079,13 +4080,13 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        long long11 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "01100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        long long11 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00000hi!100100100100100");
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "01100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -4105,16 +4106,16 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
         java.lang.Long[] longArray9 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList10 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean11 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList10, longArray9);
-        long long12 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
-        long long15 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
-        java.util.RandomAccess randomAccess16 = org.apache.storm.utils.Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
-        long long17 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList18 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        long long12 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList10, "hi!");
+        long long15 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList10);
+        java.util.RandomAccess randomAccess16 = Utils.OR((java.util.RandomAccess) longList4, (java.util.RandomAccess) longList10);
+        long long17 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList18 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4137,11 +4138,11 @@ public class RegressionTest0 {
         java.lang.String[] strArray6 = new java.lang.String[] { "00hi%252521100100", "0000hi!100100100100", "00hi%2521100100", "hi%2521", "00hi%2521100100", "00hi!100100" };
         java.util.ArrayList<java.lang.String> strList7 = new java.util.ArrayList<java.lang.String>();
         boolean boolean8 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList7, strArray6);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList10 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList11 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList12 = org.apache.storm.utils.Utils.getRepeat(strList11);
-        java.util.List<java.lang.String> strList13 = org.apache.storm.utils.Utils.getRepeat(strList11);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList10 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList11 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList12 = Utils.getRepeat(strList11);
+        java.util.List<java.lang.String> strList13 = Utils.getRepeat(strList11);
         org.junit.Assert.assertNotNull(strArray6);
         org.junit.Assert.assertArrayEquals(strArray6, new java.lang.String[] { "00hi%252521100100", "0000hi!100100100100", "00hi%2521100100", "hi%2521", "00hi%2521100100", "00hi!100100" });
         org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
@@ -4156,7 +4157,7 @@ public class RegressionTest0 {
     public void test311() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test311");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-111L), (java.lang.Long) 11L);
+        long long2 = Utils.bitXor((java.lang.Long) (-111L), (java.lang.Long) 11L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-102L) + "'", long2 == (-102L));
     }
 
@@ -4165,17 +4166,17 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test312");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap10 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap11 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap12 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap13 = org.apache.storm.utils.Utils.reverseMap(objMap8);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap14 = org.apache.storm.utils.Utils.reverseMap(objMap8);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = Utils.reverseMap(objMap8);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap10 = Utils.reverseMap(objMap8);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap11 = Utils.reverseMap(objMap8);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap12 = Utils.reverseMap(objMap8);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap13 = Utils.reverseMap(objMap8);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap14 = Utils.reverseMap(objMap8);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -4195,7 +4196,7 @@ public class RegressionTest0 {
     public void test313() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test313");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((-1), (int) (byte) -1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((-1), (int) (byte) -1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -4203,7 +4204,7 @@ public class RegressionTest0 {
     public void test314() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test314");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) 1L);
+        double double1 = Utils.zeroIfNaNOrInf((double) 1L);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + 1.0d + "'", double1 == 1.0d);
     }
 
@@ -4213,7 +4214,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test315");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("000hi%2521100100100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("000hi%2521100100100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -4224,7 +4225,7 @@ public class RegressionTest0 {
     public void test316() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test316");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("000000hi%21100100100100100100");
+        boolean boolean1 = Utils.isValidKey("000000hi%21100100100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -4233,16 +4234,16 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test317");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime((java.lang.Exception) runtimeException6);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4260,17 +4261,17 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test318");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap12 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap13 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap14 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap9 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap10 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap11 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap12 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap13 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap14 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -4290,7 +4291,7 @@ public class RegressionTest0 {
     public void test319() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test319");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided(2147483647, (int) (short) 1);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided(2147483647, (int) (short) 1);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -4301,10 +4302,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "000hi!100100100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "000hi!100100100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -4321,11 +4322,11 @@ public class RegressionTest0 {
         java.lang.String[] strArray3 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList4 = new java.util.ArrayList<java.lang.String>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList4, strArray3);
-        java.util.List<java.lang.String> strList6 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList4);
-        java.util.List<java.lang.String> strList7 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList4);
-        java.util.List<java.lang.String> strList8 = org.apache.storm.utils.Utils.getRepeat(strList7);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat(strList7);
-        java.util.List<java.lang.String> strList10 = org.apache.storm.utils.Utils.getRepeat(strList9);
+        java.util.List<java.lang.String> strList6 = Utils.getRepeat((java.util.List<java.lang.String>) strList4);
+        java.util.List<java.lang.String> strList7 = Utils.getRepeat((java.util.List<java.lang.String>) strList4);
+        java.util.List<java.lang.String> strList8 = Utils.getRepeat(strList7);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat(strList7);
+        java.util.List<java.lang.String> strList10 = Utils.getRepeat(strList9);
         org.junit.Assert.assertNotNull(strArray3);
         org.junit.Assert.assertArrayEquals(strArray3, new java.lang.String[] { "", "hi!", "0hi!100" });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4341,19 +4342,19 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test322");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
         java.lang.Exception exception4 = null;
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime(exception4);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime(exception4);
         java.lang.Exception exception6 = null;
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime(exception6);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception6);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime(exception6);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.OR(runtimeException5, runtimeException9);
-        java.lang.Throwable throwable13 = org.apache.storm.utils.Utils.OR((java.lang.Throwable) runtimeException3, (java.lang.Throwable) runtimeException5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime(exception6);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception6);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime(exception6);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException12 = Utils.OR(runtimeException5, runtimeException9);
+        java.lang.Throwable throwable13 = Utils.OR((java.lang.Throwable) runtimeException3, (java.lang.Throwable) runtimeException5);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4377,12 +4378,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%21100");
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "01100");
-        java.util.List<java.util.List<java.lang.Long>> longListList15 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 10, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%21100");
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "01100");
+        java.util.List<java.util.List<java.lang.Long>> longListList15 = Utils.partitionFixed((int) (byte) 10, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -4401,10 +4402,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi!100");
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi!100");
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed(2147483647, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4418,7 +4419,7 @@ public class RegressionTest0 {
     public void test325() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test325");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 10L);
+        long long2 = Utils.bitXor((java.lang.Long) (-1L), (java.lang.Long) 10L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-11L) + "'", long2 == (-11L));
     }
 
@@ -4427,13 +4428,13 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test326");
         java.lang.Object[] objArray1 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList2 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList2 = Utils.tuple(objArray1);
         java.lang.Object[] objArray5 = new java.lang.Object[] { "0hi!100", (-1) };
-        java.lang.Object[] objArray6 = org.apache.storm.utils.Utils.OR(objArray1, objArray5);
-        java.util.List<java.lang.Object> objList7 = org.apache.storm.utils.Utils.tuple(objArray1);
-        java.util.List<java.lang.Object> objList8 = org.apache.storm.utils.Utils.tuple(objArray1);
-        java.util.List<java.lang.Object> objList9 = org.apache.storm.utils.Utils.tuple(objArray1);
-        java.util.List<java.lang.Object> objList10 = org.apache.storm.utils.Utils.tuple(objArray1);
+        java.lang.Object[] objArray6 = Utils.OR(objArray1, objArray5);
+        java.util.List<java.lang.Object> objList7 = Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList8 = Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList9 = Utils.tuple(objArray1);
+        java.util.List<java.lang.Object> objList10 = Utils.tuple(objArray1);
         org.junit.Assert.assertNotNull(objArray1);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray1), "[0hi!100]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray1), "[0hi!100]");
@@ -4454,7 +4455,7 @@ public class RegressionTest0 {
     public void test327() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test327");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("001100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("001100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "001100100" + "'", str1, "001100100");
     }
 
@@ -4462,7 +4463,7 @@ public class RegressionTest0 {
     public void test328() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test328");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("0hi!100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("0hi!100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0hi!100" + "'", str1, "0hi!100");
     }
 
@@ -4471,17 +4472,17 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test329");
         java.lang.Object[] objArray3 = new java.lang.Object[] { 1.0f, (-1.0f), 10.0d };
-        java.util.List<java.lang.Object> objList4 = org.apache.storm.utils.Utils.tuple(objArray3);
-        java.util.List<java.lang.Object> objList5 = org.apache.storm.utils.Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList4 = Utils.tuple(objArray3);
+        java.util.List<java.lang.Object> objList5 = Utils.tuple(objArray3);
         java.util.ArrayList<java.util.List<java.lang.Object>> objListList6 = new java.util.ArrayList<java.util.List<java.lang.Object>>();
         boolean boolean7 = objListList6.add(objList5);
-        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = org.apache.storm.utils.Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = org.apache.storm.utils.Utils.reverseMap(objMap8);
+        java.util.Map<java.lang.Object, java.util.List<java.lang.Object>> objMap8 = Utils.reverseMap((java.util.List<java.util.List<java.lang.Object>>) objListList6);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap9 = Utils.reverseMap(objMap8);
         java.lang.Object[] objArray12 = new java.lang.Object[] { "0hi!100" };
-        java.util.List<java.lang.Object> objList13 = org.apache.storm.utils.Utils.tuple(objArray12);
-        java.util.List<java.lang.Object> objList14 = org.apache.storm.utils.Utils.tuple(objArray12);
-        java.util.List<java.lang.Object> objList15 = org.apache.storm.utils.Utils.get(objMap8, (java.lang.Object) 1, objList14);
-        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap16 = org.apache.storm.utils.Utils.reverseMap(objMap8);
+        java.util.List<java.lang.Object> objList13 = Utils.tuple(objArray12);
+        java.util.List<java.lang.Object> objList14 = Utils.tuple(objArray12);
+        java.util.List<java.lang.Object> objList15 = Utils.get(objMap8, (java.lang.Object) 1, objList14);
+        java.util.HashMap<java.util.List<java.lang.Object>, java.util.List<java.lang.Object>> objListMap16 = Utils.reverseMap(objMap8);
         org.junit.Assert.assertNotNull(objArray3);
         org.junit.Assert.assertEquals(java.util.Arrays.deepToString(objArray3), "[1.0, -1.0, 10.0]");
         org.junit.Assert.assertEquals(java.util.Arrays.toString(objArray3), "[1.0, -1.0, 10.0]");
@@ -4506,13 +4507,13 @@ public class RegressionTest0 {
         java.lang.Long[] longArray4 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList5 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean6 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList5, longArray4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList10 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
-        java.lang.String str12 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%21100");
-        java.lang.String str14 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%2521100");
-        java.lang.String str16 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%2521100");
-        java.util.List<java.util.List<java.lang.Long>> longListList17 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) -1, (java.util.Collection<java.lang.Long>) longList5);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList5);
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList10 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList5);
+        java.lang.String str12 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%21100");
+        java.lang.String str14 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%2521100");
+        java.lang.String str16 = Utils.join((java.lang.Iterable<java.lang.Long>) longList5, "0hi%2521100");
+        java.util.List<java.util.List<java.lang.Long>> longListList17 = Utils.partitionFixed((int) (byte) -1, (java.util.Collection<java.lang.Long>) longList5);
         org.junit.Assert.assertNotNull(longArray4);
         org.junit.Assert.assertArrayEquals(longArray4, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
@@ -4532,10 +4533,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
-        long long8 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str10 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi!100100");
+        long long8 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str10 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi!100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -4552,11 +4553,11 @@ public class RegressionTest0 {
         java.lang.String[] strArray6 = new java.lang.String[] { "00hi%252521100100", "0000hi!100100100100", "00hi%2521100100", "hi%2521", "00hi%2521100100", "00hi!100100" };
         java.util.ArrayList<java.lang.String> strList7 = new java.util.ArrayList<java.lang.String>();
         boolean boolean8 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList7, strArray6);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList10 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList11 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList7);
-        java.util.List<java.lang.String> strList12 = org.apache.storm.utils.Utils.getRepeat(strList11);
-        java.util.List<java.lang.String> strList13 = org.apache.storm.utils.Utils.getRepeat(strList12);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList10 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList11 = Utils.getRepeat((java.util.List<java.lang.String>) strList7);
+        java.util.List<java.lang.String> strList12 = Utils.getRepeat(strList11);
+        java.util.List<java.lang.String> strList13 = Utils.getRepeat(strList12);
         org.junit.Assert.assertNotNull(strArray6);
         org.junit.Assert.assertArrayEquals(strArray6, new java.lang.String[] { "00hi%252521100100", "0000hi!100100100100", "00hi%2521100100", "hi%2521", "00hi%2521100100", "00hi!100100" });
         org.junit.Assert.assertTrue("'" + boolean8 + "' != '" + true + "'", boolean8 == true);
@@ -4572,12 +4573,12 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test333");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime((java.lang.Exception) runtimeException5);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4592,7 +4593,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test334");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 1, (int) (short) 0);
+            java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 1, (int) (short) 0);
             org.junit.Assert.fail("Expected exception of type java.lang.ArithmeticException; message: / by zero");
         } catch (java.lang.ArithmeticException e) {
             // Expected exception.
@@ -4603,7 +4604,7 @@ public class RegressionTest0 {
     public void test335() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test335");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 101L, (java.lang.Long) 11L);
+        long long2 = Utils.bitXor((java.lang.Long) 101L, (java.lang.Long) 11L);
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + 110L + "'", long2 == 110L);
     }
 
@@ -4613,7 +4614,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test336");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("hi%2521");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("hi%2521");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.String cannot be cast to class java.util.Map (java.lang.String and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -4627,10 +4628,10 @@ public class RegressionTest0 {
         java.lang.String[] strArray3 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList4 = new java.util.ArrayList<java.lang.String>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList4, strArray3);
-        java.util.List<java.lang.String> strList6 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList4);
-        java.util.List<java.lang.String> strList7 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList8 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat(strList8);
+        java.util.List<java.lang.String> strList6 = Utils.getRepeat((java.util.List<java.lang.String>) strList4);
+        java.util.List<java.lang.String> strList7 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList8 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat(strList8);
         org.junit.Assert.assertNotNull(strArray3);
         org.junit.Assert.assertArrayEquals(strArray3, new java.lang.String[] { "", "hi!", "0hi!100" });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4647,12 +4648,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi%2525252521100100");
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "00hi%2525252521100100");
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4668,7 +4669,7 @@ public class RegressionTest0 {
     public void test339() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test339");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("00hi%252525252521100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("00hi%252525252521100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "00hi%25252525252521100100" + "'", str1, "00hi%25252525252521100100");
     }
 
@@ -4676,7 +4677,7 @@ public class RegressionTest0 {
     public void test340() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test340");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("0000hi%21100100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("0000hi%21100100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "0000hi%2521100100100100" + "'", str1, "0000hi%2521100100100100");
     }
 
@@ -4684,7 +4685,7 @@ public class RegressionTest0 {
     public void test341() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test341");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("000hi%252521100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("000hi%252521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%25252521100100100" + "'", str1, "000hi%25252521100100100");
     }
 
@@ -4695,10 +4696,10 @@ public class RegressionTest0 {
         java.lang.Long[] longArray2 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList3 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean4 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList3, longArray2);
-        long long5 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
-        java.lang.String str7 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
-        java.lang.String str9 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%2525252521100100");
+        long long5 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList3);
+        java.lang.String str7 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "hi!");
+        java.lang.String str9 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "0hi%21100");
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList3, "00hi%2525252521100100");
         org.junit.Assert.assertNotNull(longArray2);
         org.junit.Assert.assertArrayEquals(longArray2, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -4712,7 +4713,7 @@ public class RegressionTest0 {
     public void test343() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test343");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("1");
+        java.lang.String str1 = Utils.urlDecodeUtf8("1");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "1" + "'", str1, "1");
     }
 
@@ -4721,22 +4722,22 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test344");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException3);
         java.lang.Exception exception5 = null;
-        java.lang.RuntimeException runtimeException6 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException7 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException8 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException9 = org.apache.storm.utils.Utils.wrapInRuntime(exception5);
-        java.lang.RuntimeException runtimeException10 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
-        java.lang.RuntimeException runtimeException11 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
-        java.lang.RuntimeException runtimeException12 = org.apache.storm.utils.Utils.OR(runtimeException4, runtimeException10);
-        java.lang.RuntimeException runtimeException13 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
+        java.lang.RuntimeException runtimeException6 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException7 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException8 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException9 = Utils.wrapInRuntime(exception5);
+        java.lang.RuntimeException runtimeException10 = Utils.wrapInRuntime((java.lang.Exception) runtimeException9);
+        java.lang.RuntimeException runtimeException11 = Utils.wrapInRuntime((java.lang.Exception) runtimeException10);
+        java.lang.RuntimeException runtimeException12 = Utils.OR(runtimeException4, runtimeException10);
+        java.lang.RuntimeException runtimeException13 = Utils.wrapInRuntime((java.lang.Exception) runtimeException4);
         java.lang.Exception exception14 = null;
-        java.lang.RuntimeException runtimeException15 = org.apache.storm.utils.Utils.wrapInRuntime(exception14);
-        java.lang.Throwable throwable16 = org.apache.storm.utils.Utils.OR((java.lang.Throwable) runtimeException4, (java.lang.Throwable) runtimeException15);
+        java.lang.RuntimeException runtimeException15 = Utils.wrapInRuntime(exception14);
+        java.lang.Throwable throwable16 = Utils.OR((java.lang.Throwable) runtimeException4, (java.lang.Throwable) runtimeException15);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4760,7 +4761,7 @@ public class RegressionTest0 {
     public void test345() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test345");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlDecodeUtf8("000hi%25252521100100100");
+        java.lang.String str1 = Utils.urlDecodeUtf8("000hi%25252521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%252521100100100" + "'", str1, "000hi%252521100100100");
     }
 
@@ -4769,11 +4770,11 @@ public class RegressionTest0 {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test346");
         java.lang.Exception exception0 = null;
-        java.lang.RuntimeException runtimeException1 = org.apache.storm.utils.Utils.wrapInRuntime(exception0);
-        java.lang.RuntimeException runtimeException2 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
-        java.lang.RuntimeException runtimeException3 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
-        java.lang.RuntimeException runtimeException4 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
-        java.lang.RuntimeException runtimeException5 = org.apache.storm.utils.Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException1 = Utils.wrapInRuntime(exception0);
+        java.lang.RuntimeException runtimeException2 = Utils.wrapInRuntime((java.lang.Exception) runtimeException1);
+        java.lang.RuntimeException runtimeException3 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException4 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
+        java.lang.RuntimeException runtimeException5 = Utils.wrapInRuntime((java.lang.Exception) runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException1);
         org.junit.Assert.assertNotNull(runtimeException2);
         org.junit.Assert.assertNotNull(runtimeException3);
@@ -4785,7 +4786,7 @@ public class RegressionTest0 {
     public void test347() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test347");
-        double double1 = org.apache.storm.utils.Utils.zeroIfNaNOrInf((double) (byte) -1);
+        double double1 = Utils.zeroIfNaNOrInf((double) (byte) -1);
         org.junit.Assert.assertTrue("'" + double1 + "' != '" + (-1.0d) + "'", double1 == (-1.0d));
     }
 
@@ -4795,7 +4796,7 @@ public class RegressionTest0 {
             System.out.format("%n%s%n", "RegressionTest0.test348");
         // The following exception was thrown during execution in test generation
         try {
-            java.util.Map<java.lang.String, java.lang.Object> strMap1 = org.apache.storm.utils.Utils.parseJson("0100");
+            java.util.Map<java.lang.String, java.lang.Object> strMap1 = Utils.parseJson("0100");
             org.junit.Assert.fail("Expected exception of type java.lang.ClassCastException; message: class java.lang.Integer cannot be cast to class java.util.Map (java.lang.Integer and java.util.Map are in module java.base of loader 'bootstrap')");
         } catch (java.lang.ClassCastException e) {
             // Expected exception.
@@ -4806,7 +4807,7 @@ public class RegressionTest0 {
     public void test349() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test349");
-        java.lang.String str1 = org.apache.storm.utils.Utils.urlEncodeUtf8("000hi%2525252521100100100");
+        java.lang.String str1 = Utils.urlEncodeUtf8("000hi%2525252521100100100");
         org.junit.Assert.assertEquals("'" + str1 + "' != '" + "000hi%252525252521100100100" + "'", str1, "000hi%252525252521100100100");
     }
 
@@ -4814,7 +4815,7 @@ public class RegressionTest0 {
     public void test350() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test350");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) -1, (int) (byte) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) -1, (int) (byte) 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -4822,7 +4823,7 @@ public class RegressionTest0 {
     public void test351() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test351");
-        org.apache.storm.utils.Utils.validateTopologyName("hi%252521");
+        Utils.validateTopologyName("hi%252521");
     }
 
     @Test
@@ -4832,12 +4833,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 1L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long7 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList8 = org.apache.storm.utils.Utils.partitionFixed((int) (short) -1, (java.util.Collection<java.lang.Long>) longList4);
-        long long9 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        long long10 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.util.List<java.util.List<java.lang.Long>> longListList11 = org.apache.storm.utils.Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long7 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList8 = Utils.partitionFixed((int) (short) -1, (java.util.Collection<java.lang.Long>) longList4);
+        long long9 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        long long10 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.util.List<java.util.List<java.lang.Long>> longListList11 = Utils.partitionFixed((int) (byte) 100, (java.util.Collection<java.lang.Long>) longList4);
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 1L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4853,7 +4854,7 @@ public class RegressionTest0 {
     public void test353() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test353");
-        boolean boolean1 = org.apache.storm.utils.Utils.isValidKey("0000hi%21100100100100");
+        boolean boolean1 = Utils.isValidKey("0000hi%21100100100100");
         org.junit.Assert.assertTrue("'" + boolean1 + "' != '" + false + "'", boolean1 == false);
     }
 
@@ -4864,13 +4865,13 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.lang.String str13 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
-        java.lang.String str17 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0000hi%21100100100100");
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.lang.String str13 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%2521100");
+        java.lang.String str17 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0000hi%21100100100100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4887,7 +4888,7 @@ public class RegressionTest0 {
     public void test355() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test355");
-        long long2 = org.apache.storm.utils.Utils.bitXor((java.lang.Long) 111L, (java.lang.Long) (-12L));
+        long long2 = Utils.bitXor((java.lang.Long) 111L, (java.lang.Long) (-12L));
         org.junit.Assert.assertTrue("'" + long2 + "' != '" + (-101L) + "'", long2 == (-101L));
     }
 
@@ -4895,7 +4896,7 @@ public class RegressionTest0 {
     public void test356() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test356");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (byte) 100, (int) (short) 100);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (byte) 100, (int) (short) 100);
         org.junit.Assert.assertNotNull(intMap2);
     }
 
@@ -4903,7 +4904,7 @@ public class RegressionTest0 {
     public void test357() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test357");
-        int int1 = org.apache.storm.utils.Utils.toPositive(2147483647);
+        int int1 = Utils.toPositive(2147483647);
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 2147483647 + "'", int1 == 2147483647);
     }
 
@@ -4914,12 +4915,12 @@ public class RegressionTest0 {
         java.lang.Long[] longArray3 = new java.lang.Long[] { 0L, 100L };
         java.util.ArrayList<java.lang.Long> longList4 = new java.util.ArrayList<java.lang.Long>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.Long>) longList4, longArray3);
-        long long6 = org.apache.storm.utils.Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
-        java.lang.String str8 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
-        java.util.List<java.util.List<java.lang.Long>> longListList9 = org.apache.storm.utils.Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
-        java.lang.String str11 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
-        java.io.Serializable serializable13 = org.apache.storm.utils.Utils.OR((java.io.Serializable) longList4, (java.io.Serializable) "000hi!100100100");
-        java.lang.String str15 = org.apache.storm.utils.Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "001100100");
+        long long6 = Utils.bitXorVals((java.util.List<java.lang.Long>) longList4);
+        java.lang.String str8 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "hi!");
+        java.util.List<java.util.List<java.lang.Long>> longListList9 = Utils.partitionFixed((int) (short) 10, (java.util.Collection<java.lang.Long>) longList4);
+        java.lang.String str11 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "0hi%21100");
+        java.io.Serializable serializable13 = Utils.OR((java.io.Serializable) longList4, (java.io.Serializable) "000hi!100100100");
+        java.lang.String str15 = Utils.join((java.lang.Iterable<java.lang.Long>) longList4, "001100100");
         org.junit.Assert.assertNotNull(longArray3);
         org.junit.Assert.assertArrayEquals(longArray3, new java.lang.Long[] { 0L, 100L });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4935,7 +4936,7 @@ public class RegressionTest0 {
     public void test359() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test359");
-        int int1 = org.apache.storm.utils.Utils.toPositive((int) '#');
+        int int1 = Utils.toPositive((int) '#');
         org.junit.Assert.assertTrue("'" + int1 + "' != '" + 35 + "'", int1 == 35);
     }
 
@@ -4946,14 +4947,14 @@ public class RegressionTest0 {
         java.lang.String[] strArray3 = new java.lang.String[] { "", "hi!", "0hi!100" };
         java.util.ArrayList<java.lang.String> strList4 = new java.util.ArrayList<java.lang.String>();
         boolean boolean5 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList4, strArray3);
-        java.util.List<java.lang.String> strList6 = org.apache.storm.utils.Utils.getRepeat((java.util.List<java.lang.String>) strList4);
-        java.util.List<java.lang.String> strList7 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList8 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList9 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList10 = org.apache.storm.utils.Utils.getRepeat(strList6);
-        java.util.List<java.lang.String> strList11 = org.apache.storm.utils.Utils.getRepeat(strList10);
-        java.util.List<java.lang.String> strList12 = org.apache.storm.utils.Utils.getRepeat(strList11);
-        java.util.List<java.lang.String> strList13 = org.apache.storm.utils.Utils.getRepeat(strList11);
+        java.util.List<java.lang.String> strList6 = Utils.getRepeat((java.util.List<java.lang.String>) strList4);
+        java.util.List<java.lang.String> strList7 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList8 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList9 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList10 = Utils.getRepeat(strList6);
+        java.util.List<java.lang.String> strList11 = Utils.getRepeat(strList10);
+        java.util.List<java.lang.String> strList12 = Utils.getRepeat(strList11);
+        java.util.List<java.lang.String> strList13 = Utils.getRepeat(strList11);
         org.junit.Assert.assertNotNull(strArray3);
         org.junit.Assert.assertArrayEquals(strArray3, new java.lang.String[] { "", "hi!", "0hi!100" });
         org.junit.Assert.assertTrue("'" + boolean5 + "' != '" + true + "'", boolean5 == true);
@@ -4971,7 +4972,7 @@ public class RegressionTest0 {
     public void test361() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test361");
-        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = org.apache.storm.utils.Utils.integerDivided((int) (short) 0, 97);
+        java.util.TreeMap<java.lang.Integer, java.lang.Integer> intMap2 = Utils.integerDivided((int) (short) 0, 97);
         org.junit.Assert.assertNotNull(intMap2);
     }
 }

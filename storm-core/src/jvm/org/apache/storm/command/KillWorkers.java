@@ -16,7 +16,7 @@ import java.util.Map;
 import org.apache.storm.daemon.supervisor.StandaloneSupervisor;
 import org.apache.storm.daemon.supervisor.Supervisor;
 import org.apache.storm.metric.StormMetricsRegistry;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class KillWorkers {
     public static void main(String[] args) throws Exception {

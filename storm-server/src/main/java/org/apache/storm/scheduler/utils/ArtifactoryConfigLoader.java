@@ -36,7 +36,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.storm.DaemonConfig;
 import org.apache.storm.utils.ServerConfigUtils;
 import org.apache.storm.utils.Time;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.LoaderOptions;

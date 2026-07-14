@@ -14,7 +14,7 @@ package org.apache.storm.command;
 
 import java.util.Map;
 import org.apache.storm.healthcheck.HealthChecker;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class HealthCheck {
 

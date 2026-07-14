@@ -520,7 +520,7 @@ ClientBlobStore clientBlobStore = Utils.getClientBlobStore(theconf);
 The required Utils package can by imported by:
 
 ```java
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 ```
 
 ClientBlobStore and other blob-related classes can be imported by:

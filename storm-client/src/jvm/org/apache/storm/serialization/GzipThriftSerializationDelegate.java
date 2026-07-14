@@ -25,7 +25,7 @@ import org.apache.storm.thrift.TDeserializer;
 import org.apache.storm.thrift.TException;
 import org.apache.storm.thrift.TSerializer;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Note, this assumes it's deserializing a gzip byte stream, and will err if it encounters any other serialization.

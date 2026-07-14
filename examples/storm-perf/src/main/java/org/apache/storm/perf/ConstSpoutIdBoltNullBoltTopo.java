@@ -26,7 +26,7 @@ import org.apache.storm.perf.bolt.IdBolt;
 import org.apache.storm.perf.spout.ConstSpout;
 import org.apache.storm.perf.utils.Helper;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * ConstSpout -> IdBolt -> DevNullBolt This topology measures speed of messaging between spouts->bolt  and  bolt->bolt ConstSpout :

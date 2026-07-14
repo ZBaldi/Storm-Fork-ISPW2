@@ -21,7 +21,7 @@ import org.apache.storm.messaging.netty.SaslMessageToken;
 import org.apache.storm.shade.io.netty.buffer.ByteBuf;
 import org.apache.storm.shade.io.netty.channel.ChannelHandlerContext;
 import org.apache.storm.shade.io.netty.handler.codec.ByteToMessageDecoder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class ThriftDecoder extends ByteToMessageDecoder {
 

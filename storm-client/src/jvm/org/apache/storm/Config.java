@@ -30,7 +30,7 @@ import org.apache.storm.policy.IWaitStrategy;
 import org.apache.storm.serialization.IKryoDecorator;
 import org.apache.storm.serialization.IKryoFactory;
 import org.apache.storm.utils.ShellLogHandler;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.validation.ConfigValidation;
 import org.apache.storm.validation.ConfigValidation.EventLoggerRegistryValidator;
 import org.apache.storm.validation.ConfigValidation.ListOfListOfStringValidator;

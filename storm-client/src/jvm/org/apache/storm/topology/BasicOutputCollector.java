@@ -16,7 +16,7 @@ import java.util.List;
 import org.apache.storm.task.IOutputCollector;
 import org.apache.storm.task.OutputCollector;
 import org.apache.storm.tuple.Tuple;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 
 public class BasicOutputCollector implements IBasicOutputCollector {

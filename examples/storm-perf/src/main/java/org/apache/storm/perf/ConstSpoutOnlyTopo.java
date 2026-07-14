@@ -23,7 +23,7 @@ import org.apache.storm.generated.StormTopology;
 import org.apache.storm.perf.spout.ConstSpout;
 import org.apache.storm.perf.utils.Helper;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * This topo helps measure how fast a spout can produce data (so no bolts are attached).

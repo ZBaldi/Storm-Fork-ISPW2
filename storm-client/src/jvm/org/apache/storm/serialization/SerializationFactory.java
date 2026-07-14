@@ -44,7 +44,7 @@ import org.apache.storm.tuple.DetachedTuple;
 import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.ListDelegate;
 import org.apache.storm.utils.ReflectionUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

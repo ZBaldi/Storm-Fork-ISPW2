@@ -14,7 +14,7 @@ package org.apache.storm.executor;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.storm.Constants;
+
 import org.apache.storm.daemon.Shutdownable;
 import org.apache.storm.daemon.Task;
 import org.apache.storm.generated.Credentials;
@@ -24,11 +24,8 @@ import org.apache.storm.hooks.ITaskHook;
 import org.apache.storm.spout.ISpout;
 import org.apache.storm.task.IBolt;
 import org.apache.storm.task.TopologyContext;
-import org.apache.storm.tuple.AddressedTuple;
-import org.apache.storm.tuple.TupleImpl;
-import org.apache.storm.tuple.Values;
 import org.apache.storm.utils.JCQueue;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

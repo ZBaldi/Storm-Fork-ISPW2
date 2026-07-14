@@ -25,7 +25,7 @@ import org.apache.storm.StormSubmitter;
 import org.apache.storm.generated.Nimbus;
 import org.apache.storm.generated.TopologySummary;
 import org.apache.storm.utils.NimbusClient;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

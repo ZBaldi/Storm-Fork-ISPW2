@@ -21,7 +21,7 @@ package org.apache.storm.spout;
 import java.nio.ByteBuffer;
 import java.util.List;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class RawScheme implements Scheme {
     @Override

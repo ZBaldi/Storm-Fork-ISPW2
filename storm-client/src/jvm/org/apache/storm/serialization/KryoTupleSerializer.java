@@ -20,7 +20,7 @@ import org.apache.storm.Config;
 import org.apache.storm.task.GeneralTopologyContext;
 import org.apache.storm.tuple.Tuple;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class KryoTupleSerializer implements ITupleSerializer {
     private static final int DEFAULT_COMPRESSION_THRESHOLD = 1460;

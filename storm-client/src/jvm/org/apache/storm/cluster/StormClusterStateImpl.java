@@ -47,7 +47,7 @@ import org.apache.storm.shade.org.apache.zookeeper.KeeperException;
 import org.apache.storm.shade.org.apache.zookeeper.Watcher;
 import org.apache.storm.shade.org.apache.zookeeper.data.ACL;
 import org.apache.storm.utils.Time;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

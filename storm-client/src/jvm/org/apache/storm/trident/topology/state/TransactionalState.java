@@ -29,7 +29,7 @@ import org.apache.storm.shade.org.apache.zookeeper.CreateMode;
 import org.apache.storm.shade.org.apache.zookeeper.KeeperException;
 import org.apache.storm.shade.org.apache.zookeeper.data.ACL;
 import org.apache.storm.utils.CuratorUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.ZookeeperAuthInfo;
 
 import org.slf4j.Logger;

@@ -28,7 +28,7 @@ import org.apache.storm.generated.SupervisorWorkerHeartbeats;
 import org.apache.storm.thrift.TException;
 import org.apache.storm.thrift.transport.TTransportException;
 import org.apache.storm.utils.NimbusClient;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * Test for nimbus heartbeats max throughput, This is a client to collect the statistics.

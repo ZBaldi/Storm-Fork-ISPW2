@@ -12,7 +12,7 @@
 
 package org.apache.storm.testing;
 
-import static org.apache.storm.utils.Utils.get;
+import static org.apache.storm.utils.refactored.zero.Utils.get;
 
 import java.util.HashMap;
 import java.util.Map;

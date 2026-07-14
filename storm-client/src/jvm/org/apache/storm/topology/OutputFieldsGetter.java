@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.apache.storm.generated.StreamInfo;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class OutputFieldsGetter implements OutputFieldsDeclarer {
     private Map<String, StreamInfo> fields = new HashMap<>();

@@ -19,7 +19,7 @@
 package org.apache.storm.daemon.supervisor;
 
 import static org.apache.storm.daemon.nimbus.Nimbus.MIN_VERSION_SUPPORT_RPC_HEARTBEAT;
-import static org.apache.storm.utils.Utils.OR;
+import static org.apache.storm.utils.refactored.zero.Utils.OR;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,7 +55,7 @@ import org.apache.storm.utils.ServerConfigUtils;
 import org.apache.storm.utils.ServerUtils;
 import org.apache.storm.utils.SimpleVersion;
 import org.apache.storm.utils.Time;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.VersionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

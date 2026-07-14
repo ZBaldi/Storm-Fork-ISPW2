@@ -138,7 +138,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: Found multiple  resources. You're probably bundling the Storm jars with your topology jar. [file:/C:/Users/valba/OneDrive/Desktop/PROGETTO%20ISPW2/DEANGELIS/storm-2.5.0/storm-client/target/classes/, file:/C:/Users/valba/OneDrive/Desktop/PROGETTO%20ISPW2/DEANGELIS/storm-2.5.0/storm-server/target/classes/]
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //

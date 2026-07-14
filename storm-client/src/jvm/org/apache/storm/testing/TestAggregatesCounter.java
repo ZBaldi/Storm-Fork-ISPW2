@@ -12,7 +12,7 @@
 
 package org.apache.storm.testing;
 
-import static org.apache.storm.utils.Utils.tuple;
+import static org.apache.storm.utils.refactored.zero.Utils.tuple;
 
 import java.util.HashMap;
 import java.util.Map;

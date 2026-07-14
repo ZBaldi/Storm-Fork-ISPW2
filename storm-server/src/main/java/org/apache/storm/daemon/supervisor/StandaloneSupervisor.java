@@ -20,7 +20,7 @@ import java.util.Map;
 import org.apache.storm.DaemonConfig;
 import org.apache.storm.scheduler.ISupervisor;
 import org.apache.storm.utils.LocalState;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class StandaloneSupervisor implements ISupervisor {
     private String supervisorId;

@@ -26,7 +26,7 @@ import org.apache.storm.hdfs.spout.TextFileReader;
 import org.apache.storm.perf.bolt.DevNullBolt;
 import org.apache.storm.perf.utils.Helper;
 import org.apache.storm.topology.TopologyBuilder;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * This topo helps measure speed of reading from Hdfs.

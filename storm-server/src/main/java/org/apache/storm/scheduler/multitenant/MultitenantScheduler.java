@@ -24,7 +24,7 @@ import org.apache.storm.scheduler.TopologyDetails;
 import org.apache.storm.scheduler.utils.ConfigLoaderFactoryService;
 import org.apache.storm.scheduler.utils.IConfigLoader;
 import org.apache.storm.scheduler.utils.SchedulerConfigCache;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

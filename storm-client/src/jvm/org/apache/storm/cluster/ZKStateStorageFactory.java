@@ -19,7 +19,7 @@
 package org.apache.storm.cluster;
 
 import java.util.Map;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class ZKStateStorageFactory implements StateStorageFactory {

@@ -27,7 +27,7 @@
 //import org.apache.storm.topology.SharedOffHeapWithinWorker;
 //import org.apache.storm.utils.IPredicate;
 //import org.apache.storm.utils.SimpleVersion;
-//import org.apache.storm.utils.Utils;
+//import org.apache.storm.utils.refactored.zero.Utils;
 //import org.apache.storm.utils.WrappedAuthorizationException;
 //import org.evosuite.runtime.*;
 //import org.evosuite.runtime.Random;
@@ -165,7 +165,7 @@
 //         //
 //         // Topology name 'null' is not valid. It can't be null and it must match ^[^/.:\\\\]+$
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -236,7 +236,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -278,7 +278,7 @@
 //         //
 //         // Unexpected character (o) at position 0.
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -322,7 +322,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -338,7 +338,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -356,7 +356,7 @@
 //         //
 //         // Could not find config file on classpath METRIC_NAME
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -372,7 +372,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -412,7 +412,7 @@
 //         //
 //         // java.lang.String cannot be cast to java.util.Map
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -438,7 +438,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -534,7 +534,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -550,7 +550,7 @@
 //         //
 //         // java.lang.NullPointerException
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -571,7 +571,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -657,18 +657,18 @@
 //
 //  @Test(timeout = 4000)
 //  public void test033()  throws Throwable  {
-//      String string0 = "org.apache.storm.utils.Utils$SmartThread";
+//      String string0 = "org.apache.storm.utils.refactored.zero.Utils$SmartThread";
 //      Map<String, Object> map0 = null;
 //      // Undeclared exception!
 //      try {
-//        Utils.getTopologyInfo("org.apache.storm.utils.Utils$SmartThread", "org.apache.storm.utils.Utils$SmartThread", (Map<String, Object>) null);
+//        Utils.getTopologyInfo("org.apache.storm.utils.refactored.zero.Utils$SmartThread", "org.apache.storm.utils.refactored.zero.Utils$SmartThread", (Map<String, Object>) null);
 //        fail("Expecting exception: RuntimeException");
 //
 //      } catch(RuntimeException e) {
 //         //
 //         // org.evosuite.runtime.TooManyResourcesException: Loop has been executed more times than the allowed 10000
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -682,8 +682,8 @@
 //      StormTopology stormTopology1 = new StormTopology(stormTopology0);
 //      StormTopology stormTopology2 = Utils.addVersions(stormTopology1);
 //      stormTopology2.unset_worker_hooks();
-//      String string0 = "org.apache.storm.utils.Utils$JarConfigReader";
-//      SharedOffHeapWithinWorker sharedOffHeapWithinWorker0 = new SharedOffHeapWithinWorker(0.800000011920929, "org.apache.storm.utils.Utils$JarConfigReader");
+//      String string0 = "org.apache.storm.utils.refactored.zero.Utils$JarConfigReader";
+//      SharedOffHeapWithinWorker sharedOffHeapWithinWorker0 = new SharedOffHeapWithinWorker(0.800000011920929, "org.apache.storm.utils.refactored.zero.Utils$JarConfigReader");
 //      boolean boolean0 = true;
 //      ComponentObject._Fields componentObject__Fields0 = ComponentObject._Fields.SERIALIZED_JAVA;
 //      SpecificAggregateStats._Fields specificAggregateStats__Fields0 = SpecificAggregateStats._Fields.SPOUT;
@@ -714,7 +714,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: Cannot read. Remote side has closed. Tried to read 1 bytes, but only got 0 bytes. (This is often indicative of an internal error on the server side. Please check your server logs.)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -731,7 +731,7 @@
 //         //
 //         // Could not find config file on classpath RbeJr-?N~
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -789,7 +789,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -826,7 +826,7 @@
 //         //
 //         // Topology name 'lDAmm/J)n7.xhLUc' is not valid. It can't be null and it must match ^[^/.:\\\\]+$
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -850,7 +850,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -866,7 +866,7 @@
 //         //
 //         // Topology name '192.168.1.42' is not valid. It can't be null and it must match ^[^/.:\\\\]+$
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -899,8 +899,8 @@
 //             // org.apache.storm.shade.org.apache.commons.io.file.PathUtils.deleteDirectory(PathUtils.java:434)
 //             // org.apache.storm.shade.org.apache.commons.io.file.PathUtils.delete(PathUtils.java:391)
 //             // org.apache.storm.shade.org.apache.commons.io.FileUtils.forceDelete(FileUtils.java:1341)
-//             // org.apache.storm.utils.Utils.forceDeleteImpl(Utils.java:1786)
-//             // org.apache.storm.utils.Utils.forceDelete(Utils.java:827)
+//             // org.apache.storm.utils.refactored.zero.Utils.forceDeleteImpl(Utils.java:1786)
+//             // org.apache.storm.utils.refactored.zero.Utils.forceDelete(Utils.java:827)
 //             // sun.reflect.GeneratedMethodAccessor323.invoke(Unknown Source)
 //             // sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 //             // java.lang.reflect.Method.invoke(Method.java:498)
@@ -951,7 +951,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -977,7 +977,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1055,7 +1055,7 @@
 //         //
 //         // java.lang.NullPointerException
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1072,7 +1072,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1087,7 +1087,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1173,7 +1173,7 @@
 //         //
 //         // java.io.EOFException
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1246,7 +1246,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: Could not find config file, name not specified
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1284,9 +1284,9 @@
 //
 //      } catch(RuntimeException e) {
 //         //
-//         // java.io.NotSerializableException: org.apache.storm.utils.Utils$UptimeComputer
+//         // java.io.NotSerializableException: org.apache.storm.utils.refactored.zero.Utils$UptimeComputer
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1365,7 +1365,7 @@
 //         //
 //         // java.io.StreamCorruptedException: invalid stream header: 22B9EE47
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1383,7 +1383,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1447,7 +1447,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: Could not find config file, name not specified
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1463,7 +1463,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1495,7 +1495,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1533,7 +1533,7 @@
 //         //
 //         // AlreadyAliveException(msg:Z'jV,;kIe'g)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1550,7 +1550,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1636,7 +1636,7 @@
 //         //
 //         // Authentication is enabled but storm.zookeeper.superACL is not set
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1795,7 +1795,7 @@
 //         //
 //         // java.lang.String cannot be cast to java.util.Map
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1822,14 +1822,14 @@
 //  public void test096()  throws Throwable  {
 //      // Undeclared exception!
 //      try {
-//        Utils.parseZkId((String) null, "org.apache.storm.utils.Utils$4");
+//        Utils.parseZkId((String) null, "org.apache.storm.utils.refactored.zero.Utils$4");
 //        fail("Expecting exception: NullPointerException");
 //
 //      } catch(NullPointerException e) {
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1891,7 +1891,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: Cannot read. Remote side has closed. Tried to read 1 bytes, but only got 0 bytes. (This is often indicative of an internal error on the server side. Please check your server logs.)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1906,7 +1906,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1928,7 +1928,7 @@
 //         //
 //         // java.sql.SQLTransactionRollbackException: XRv`&.-w`v?$
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1947,7 +1947,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable: org.evosuite.runtime.mock.java.lang.MockThrowable: Required field 'supervisors' is unset! Struct:ClusterSummary(supervisors:null, topologies:null, nimbuses:null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -1969,7 +1969,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2013,7 +2013,7 @@
 //         //
 //         // org.evosuite.runtime.mock.java.lang.MockThrowable
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2117,7 +2117,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2155,7 +2155,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2172,7 +2172,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2187,7 +2187,7 @@
 //         //
 //         // Could not find config file on classpath 2]i7@TA)AR
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2252,7 +2252,7 @@
 //         //
 //         // Unexpected character (V) at position 0.
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2307,7 +2307,7 @@
 //         //
 //         // java.io.StreamCorruptedException: invalid stream header: 8B013A00
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2342,7 +2342,7 @@
 //         //
 //         // java.io.StreamCorruptedException: invalid stream header: 1F8B0800
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2375,7 +2375,7 @@
 //         //
 //         // Unexpected character (b) at position 0.
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2435,7 +2435,7 @@
 //         //
 //         // no message in exception (getMessage() returned null)
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2468,7 +2468,7 @@
 //         //
 //         // tgyOOBJ(- does not appear to be in the form scheme:acl, i.e. sasl:storm-user
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2520,7 +2520,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2551,7 +2551,7 @@
 //         //
 //         // 9W  does not appear to be in the form scheme:acl, i.e. sasl:storm-user
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2626,7 +2626,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2692,7 +2692,7 @@
 //         //
 //         // java.sql.SQLFeatureNotSupportedException:
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2741,7 +2741,7 @@
 //         //
 //         // org.evosuite.runtime.TooManyResourcesException: Loop has been executed more times than the allowed 10000
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //
@@ -2836,7 +2836,7 @@
 //         //
 //         // java.util.zip.ZipException: Not in GZIP format
 //         //
-//         verifyException("org.apache.storm.utils.Utils", e);
+//         verifyException("org.apache.storm.utils.refactored.zero.Utils", e);
 //      }
 //  }
 //}

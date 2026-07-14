@@ -14,7 +14,7 @@ package org.apache.storm.topology;
 
 import static org.apache.storm.spout.CheckpointSpout.CHECKPOINT_COMPONENT_ID;
 import static org.apache.storm.spout.CheckpointSpout.CHECKPOINT_STREAM_ID;
-import static org.apache.storm.utils.Utils.parseJson;
+import static org.apache.storm.utils.refactored.zero.Utils.parseJson;
 
 import java.io.NotSerializableException;
 import java.nio.ByteBuffer;
@@ -51,7 +51,7 @@ import org.apache.storm.task.OutputCollector;
 import org.apache.storm.task.TopologyContext;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Tuple;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.windowing.TupleWindow;
 
 /**

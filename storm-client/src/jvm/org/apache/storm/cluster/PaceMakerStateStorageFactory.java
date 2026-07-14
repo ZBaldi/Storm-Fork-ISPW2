@@ -20,7 +20,7 @@ package org.apache.storm.cluster;
 
 import java.util.Map;
 import org.apache.storm.pacemaker.PacemakerClientPool;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class PaceMakerStateStorageFactory implements StateStorageFactory {
     @Override

@@ -48,7 +48,7 @@ import org.apache.storm.shade.com.google.common.collect.ImmutableList;
 import org.apache.storm.utils.DisallowedStrategyException;
 import org.apache.storm.utils.ObjectReader;
 import org.apache.storm.utils.ReflectionUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

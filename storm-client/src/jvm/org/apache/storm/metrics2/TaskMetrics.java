@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 import org.apache.storm.task.WorkerTopologyContext;
 import org.apache.storm.utils.ConfigUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class TaskMetrics {
     private static final String METRIC_NAME_ACKED = "__ack-count";

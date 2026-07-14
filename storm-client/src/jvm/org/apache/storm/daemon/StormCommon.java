@@ -49,7 +49,7 @@ import org.apache.storm.task.WorkerTopologyContext;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.utils.ConfigUtils;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.WrappedInvalidTopologyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

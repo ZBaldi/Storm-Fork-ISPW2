@@ -178,11 +178,11 @@
                 <artifactId>pitest-maven</artifactId>
                 <configuration>
                     <targetClasses>
-                        <param>org.apache.storm.daemon.drpc.refactored.zero.DRPC</param>
+                        <param>org.apache.storm.daemon.drpc.refactored.four.DRPC</param>
                     </targetClasses>
                     <targetTests>
-                        <param>org.apache.storm.daemon.drpc.*Test</param>
-                        <param>org.apache.storm.daemon.drpc.*IT</param>
+                        <param>*PLUTO1</param>
+<!--                        <param>*IT</param>-->
                     </targetTests>
                 </configuration>
             </plugin>
@@ -193,8 +193,8 @@
                     <reuseForks>false</reuseForks>
                     <forkCount>1</forkCount>
                     <!--first for JaCoCo, second for pit-->
-<!--                    <argLine>@{argLine} ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>-->
-                     <argLine> ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
+                    <argLine>@{argLine} ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>
+<!--                     <argLine> ${storm-server.test.introspection.argLine} -Xmx3g -XX:+HeapDumpOnOutOfMemoryError</argLine>-->
                 </configuration>
             </plugin>
             <plugin>

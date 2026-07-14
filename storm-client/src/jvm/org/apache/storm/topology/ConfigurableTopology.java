@@ -34,7 +34,7 @@ import org.apache.storm.shade.org.apache.commons.lang3.StringUtils;
 import org.apache.storm.shade.org.yaml.snakeyaml.LoaderOptions;
 import org.apache.storm.shade.org.yaml.snakeyaml.Yaml;
 import org.apache.storm.shade.org.yaml.snakeyaml.constructor.SafeConstructor;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

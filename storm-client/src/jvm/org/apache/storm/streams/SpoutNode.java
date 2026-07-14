@@ -13,7 +13,7 @@
 package org.apache.storm.streams;
 
 import org.apache.storm.topology.IRichSpout;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * A spout node wraps an {@link IRichSpout}.

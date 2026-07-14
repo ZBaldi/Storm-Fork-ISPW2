@@ -24,7 +24,7 @@ import org.apache.storm.security.auth.ClientAuthUtils;
 import org.apache.storm.security.auth.IPrincipalToLocal;
 import org.apache.storm.security.auth.ReqContext;
 import org.apache.storm.shade.com.google.common.annotations.VisibleForTesting;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

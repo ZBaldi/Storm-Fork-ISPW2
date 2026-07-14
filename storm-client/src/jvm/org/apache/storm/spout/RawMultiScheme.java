@@ -23,7 +23,7 @@ import static java.util.Arrays.asList;
 import java.nio.ByteBuffer;
 import java.util.List;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 public class RawMultiScheme implements MultiScheme {
     @Override

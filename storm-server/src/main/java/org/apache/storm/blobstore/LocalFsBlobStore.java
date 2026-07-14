@@ -52,7 +52,7 @@ import org.apache.storm.shade.org.apache.curator.framework.CuratorFramework;
 import org.apache.storm.shade.org.apache.zookeeper.KeeperException;
 import org.apache.storm.utils.ConfigUtils;
 import org.apache.storm.utils.ObjectReader;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.WrappedKeyAlreadyExistsException;
 import org.apache.storm.utils.WrappedKeyNotFoundException;
 

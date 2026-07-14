@@ -46,7 +46,7 @@ import org.apache.storm.security.INimbusCredentialPlugin;
 import org.apache.storm.shade.org.apache.commons.codec.binary.Hex;
 import org.apache.storm.utils.ObjectReader;
 import org.apache.storm.utils.ReflectionUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

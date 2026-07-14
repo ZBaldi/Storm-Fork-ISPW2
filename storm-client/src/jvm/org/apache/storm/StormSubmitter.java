@@ -46,7 +46,7 @@ import org.apache.storm.shade.org.apache.commons.lang3.StringUtils;
 import org.apache.storm.thrift.TException;
 import org.apache.storm.utils.BufferFileInputStream;
 import org.apache.storm.utils.NimbusClient;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.WrappedInvalidTopologyException;
 import org.apache.storm.validation.ConfigValidation;
 import org.slf4j.Logger;

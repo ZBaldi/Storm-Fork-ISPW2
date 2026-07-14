@@ -79,7 +79,7 @@ import org.apache.storm.trident.windowing.config.TumblingCountWindow;
 import org.apache.storm.trident.windowing.config.TumblingDurationWindow;
 import org.apache.storm.trident.windowing.config.WindowConfig;
 import org.apache.storm.tuple.Fields;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * A Stream represents the core data model in Trident, and can be thought of as a "stream" of tuples that are processed as a series of small

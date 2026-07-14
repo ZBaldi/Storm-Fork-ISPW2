@@ -13,7 +13,7 @@
 package org.apache.storm.topology;
 
 import org.apache.storm.generated.SharedMemory;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 
 /**
  * A request for a shared memory region off heap between workers on a node.

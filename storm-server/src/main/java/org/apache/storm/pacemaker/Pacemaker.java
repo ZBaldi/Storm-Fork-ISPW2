@@ -28,7 +28,7 @@ import org.apache.storm.generated.HBServerMessageType;
 import org.apache.storm.metric.StormMetricsRegistry;
 import org.apache.storm.shade.uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 import org.apache.storm.utils.ConfigUtils;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.apache.storm.utils.VersionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

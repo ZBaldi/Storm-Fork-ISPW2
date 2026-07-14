@@ -19,7 +19,7 @@ import java.util.Set;
 import org.apache.storm.shade.io.netty.channel.Channel;
 import org.apache.storm.shade.io.netty.channel.ChannelHandlerContext;
 import org.apache.storm.shade.io.netty.channel.ChannelInboundHandlerAdapter;
-import org.apache.storm.utils.Utils;
+import org.apache.storm.utils.refactored.zero.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
