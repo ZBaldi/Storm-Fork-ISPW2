@@ -188,11 +188,11 @@
                 <artifactId>pitest-maven</artifactId>
                 <configuration>
                     <targetClasses>
-                        <param>org.apache.storm.utils.refactored.four.Utils</param>
+                        <param>org.apache.storm.utils.refactored.zero.Utils</param>
                     </targetClasses>
                     <targetTests>
-                        <param>*PLUTO1</param>
-<!--                        <param>org.apache.storm.utils.*IT</param>-->
+                        <param>org.apache.storm.utils.manual.*Test</param>
+<!--                        <param>org.apache.storm.utils.manual.*Test</param>-->
                     </targetTests>
                 </configuration>
             </plugin>

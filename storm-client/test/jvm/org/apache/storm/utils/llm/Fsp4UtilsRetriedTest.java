@@ -381,7 +381,7 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
     @Test
     public void uuidShouldReturnValidUuid() {
         String uuid = Utils.uuid();
-        Assert.assertEquals(uuid, java.util.UUID.fromString(uuid).toString());
+        Assert.assertEquals(uuid, UUID.fromString(uuid).toString());
     }
 
     /** Test javaSerialize/javaDeserialize methods with valid serializable object. Expected = round trip object */
@@ -842,7 +842,7 @@ public class Fsp4UtilsRetriedTest {  // REMOVED NOT USED IMPORTS
     @Test
     public void getTopologyIdNoMatchingTopologyShouldReturnNull() throws Exception {
         Nimbus.Iface client = mock(Nimbus.Iface.class);
-        when(client.getClusterInfo()).thenReturn(new org.apache.storm.generated.ClusterSummary());
+        when(client.getClusterInfo()).thenReturn(new ClusterSummary());
         Assert.assertNull(Utils.getTopologyId("missing", client));
     }
 

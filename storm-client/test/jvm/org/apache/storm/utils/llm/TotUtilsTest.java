@@ -468,8 +468,8 @@ public class TotUtilsTest {  // REMOVED NOT USED IMPORTS
     public void getComponentCommonShouldReturnCommonForSpout() {
         ComponentCommon common = new ComponentCommon();
         StormTopology topology = new StormTopology();
-        topology.set_spouts(new HashMap<String, org.apache.storm.generated.SpoutSpec>());
-        org.apache.storm.generated.SpoutSpec spout = new org.apache.storm.generated.SpoutSpec();
+        topology.set_spouts(new HashMap<String, SpoutSpec>());
+        SpoutSpec spout = new SpoutSpec();
         spout.set_common(common);
         topology.get_spouts().put("s", spout);
         assertSame(common, Utils.getComponentCommon(topology, "s"));

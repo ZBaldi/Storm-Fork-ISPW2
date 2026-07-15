@@ -547,7 +547,7 @@ public class DrpcIT {
             });
             Thread.sleep(1000);
             DummyWorkerClass dummyWorkerClass = new DummyWorkerClass(drpcThriftAuthKo);
-            dummyWorkerClass.executeFunctionAndReturnResult("try");
+            dummyWorkerClass.executeFunctionAndFailRequest("try");
         });
     }
 }

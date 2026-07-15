@@ -706,7 +706,7 @@ public class Fsp2UtilsTest {  // REMOVED NOT USED IMPORTS
         TopologySummary summary = new TopologySummary();
         summary.set_name("topology-a");
         summary.set_id("id-a");
-        org.apache.storm.generated.ClusterSummary clusterSummary = new org.apache.storm.generated.ClusterSummary();
+        ClusterSummary clusterSummary = new ClusterSummary();
         clusterSummary.set_topologies(Collections.singletonList(summary));
         when(client.getClusterInfo()).thenReturn(clusterSummary);
 

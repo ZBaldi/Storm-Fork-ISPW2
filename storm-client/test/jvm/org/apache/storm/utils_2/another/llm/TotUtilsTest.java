@@ -313,7 +313,7 @@ public class TotUtilsTest {
     /** Test uuid method. Expected = returns valid UUID string */
     @Test
     public void uuidShouldReturnValidUuidString() {
-        Assert.assertNotNull(java.util.UUID.fromString(Utils.uuid()));
+        Assert.assertNotNull(UUID.fromString(Utils.uuid()));
     }
 
     /** Test javaSerialize/javaDeserialize methods with valid serializable value. Expected = round trip preserves value */

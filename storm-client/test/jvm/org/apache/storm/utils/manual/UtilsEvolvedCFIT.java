@@ -508,6 +508,7 @@ public class UtilsEvolvedCFIT {
             Field clField = Utils.class.getDeclaredField("cl");
             clField.setAccessible(true);
             ClassLoader originalCl = (ClassLoader) clField.get(null);
+
             try {
                 byte[] invalidBytes = new byte[]{1, 2, 3};
                 clField.set(null, new ClassLoader() {
@@ -517,8 +518,10 @@ public class UtilsEvolvedCFIT {
                     }
                 });
                 Utils.javaDeserialize(invalidBytes, AccessControl.class);
+
             }catch(RuntimeException e){
                 throw e;
+
             }finally {
                 clField.set(null, originalCl);
             }
@@ -538,10 +541,7 @@ public class UtilsEvolvedCFIT {
 
     // READ YAML FILE TESTS
 
-    /**
-     * Test readYamlFile method with null file path.
-     * Expected = Returns null.
-     */
+    /** Test readYamlFile method with null file path. Expected = Returns null. */
     @Test
     public void readYamlFileNullFilePathShouldPass() {
 
@@ -627,7 +627,7 @@ public class UtilsEvolvedCFIT {
 
     // THRIFT DESERIALIZE TESTS
 
-    /** Test thriftDeserialize method with correct class, null byte array Expected = throws RuntimeException */
+    /** Test thriftDeserialize method with correct class, null byte array. Expected = throws RuntimeException */
     @Test
     public void thriftDeserializeCorrectClassNullByteThrowsRuntimeException() {
 

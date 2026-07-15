@@ -724,6 +724,8 @@ public class UtilsEvolvedCFMTIT {
         Assert.assertEquals("value", result.get("added"));
     }
 
+    // JAVA DESERIALIZE
+
     /** Test javaDeserialize method with valid serialized object and rejecting custom class loader. Expected = false. */
     @Test
     public void javaDeserializeWithCustomRejectingClassLoaderShouldPass() throws Exception {
@@ -775,7 +777,7 @@ public class UtilsEvolvedCFMTIT {
 
     /** Test findAndReadConfigFile single argument method with valid yaml file. Expected = returns parsed config map. */
     @Test
-    public void findAndReadConfigFileSingleArgumentShouldPass() throws Exception {  // OVERLOAD COVERED
+    public void findAndReadConfigFileSingleArgumentShouldPass() {  // OVERLOAD COVERED
 
         Map<String, Object> result = Utils.findAndReadConfigFile("correctYamlFile.yaml");
         Assert.assertEquals(2, result.size());

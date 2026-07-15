@@ -780,9 +780,9 @@ public class Zsp3UtilsTest {  // REMOVED NOT USED IMPORTS
         @Override public boolean equals(Object other) {
             if (!(other instanceof SerializableBox)) { return false; }
             SerializableBox that = (SerializableBox) other;
-            return value == that.value && java.util.Objects.equals(name, that.name);
+            return value == that.value && Objects.equals(name, that.name);
         }
-        @Override public int hashCode() { return java.util.Objects.hash(name, value); }
+        @Override public int hashCode() { return Objects.hash(name, value); }
     }
 
     private static final class RecordingSerializationDelegate implements SerializationDelegate {

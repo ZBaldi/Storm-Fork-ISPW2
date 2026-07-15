@@ -534,10 +534,10 @@ public class Fsp3UtilsTest {
     /** Test getTopologyId with a Nimbus proxy returning no topology summary. Expected = null. */
     @Test
     public void getTopologyIdMissingShouldReturnNull() {
-        org.apache.storm.generated.Nimbus.Iface client = (org.apache.storm.generated.Nimbus.Iface)
+        Nimbus.Iface client = (Nimbus.Iface)
                 java.lang.reflect.Proxy.newProxyInstance(
-                        org.apache.storm.generated.Nimbus.Iface.class.getClassLoader(),
-                        new Class<?>[] { org.apache.storm.generated.Nimbus.Iface.class },
+                        Nimbus.Iface.class.getClassLoader(),
+                        new Class<?>[] { Nimbus.Iface.class },
                         (proxy, method, args) -> "getTopologySummaryByName".equals(method.getName()) ? null : null);
         Assert.assertNull(Utils.getTopologyId("definitely-missing", client));
     }

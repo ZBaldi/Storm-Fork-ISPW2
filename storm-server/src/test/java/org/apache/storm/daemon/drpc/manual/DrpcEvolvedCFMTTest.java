@@ -578,6 +578,8 @@ public class DrpcEvolvedCFMTTest {
     //EVOLVED TESTS WITH CF APPROACHES//
     //--------------------------------//
 
+    //CLOSE TESTS
+
     /** Test close method with valid state and no pending requests. Expected = false */
     @Test
     public void closeValidStateNoRequestsShouldPass() {
@@ -623,6 +625,8 @@ public class DrpcEvolvedCFMTTest {
             requests.put("1", new NotBlockingOutstandingRequest("try", new DRPCRequest("args", "1")));
             drpcNotValid.close();});
     }
+
+    // CONSTRUCTOR TESTS
 
     /** Test constructor with valid metric registry and valid conf (ok IAuthorizer). Expected = false */
     @Test
@@ -670,6 +674,8 @@ public class DrpcEvolvedCFMTTest {
         });
     }
 
+    // FAIL REQUEST TESTS
+
     /** Test failRequest method with id = "1", null DRPCExecutionException and state authorized. Expected = "Request failed" */
     @SuppressWarnings("unchecked")
     @Test
@@ -691,6 +697,8 @@ public class DrpcEvolvedCFMTTest {
     //EVOLVED TESTS WITH MT APPROACHES//
     //--------------------------------//
 
+    // FETCH REQUEST TESTS
+
     /** Test fetchRequest method with correct functionName (exists) and authorized context. Expected = the request is marked as fetched after fetchRequest execution */
     @SuppressWarnings("unchecked")
     @Test
@@ -705,6 +713,25 @@ public class DrpcEvolvedCFMTTest {
         Assert.assertEquals(expectedRequest, actualRequest);
         Assert.assertTrue(outstandingRequest.wasFetched());
     }
+
+    /** Test fetchRequest method with correct functionName (exists) and authorized context. Expected = access logging is executed when a request is actually fetched. */
+    @SuppressWarnings("unchecked")
+    @Test
+    public void fetchRequestCorrectFunctionNameAuthShouldPassVerify() throws AuthorizationException {
+
+        try (MockedStatic<ThriftAccessLogger> mockedLogger = Mockito.mockStatic(ThriftAccessLogger.class)) {
+            RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
+            DRPCRequest expectedRequest = new DRPCRequest("args", "1");
+            OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest("try", expectedRequest);
+            Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
+            drpcAuthOk.execute("try", "args", factory);
+            DRPCRequest actualRequest = drpcAuthOk.fetchRequest("try");
+            Assert.assertEquals(expectedRequest, actualRequest);
+            mockedLogger.verify(() -> ThriftAccessLogger.logAccessFunction(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.eq("fetchRequest"), Mockito.eq("try")));
+        }
+    }
+
+    // TIMER TESTS
 
     /** Test timeout cleanup with pending request and authorized context. Expected = meterServerTimedOut.mark() is called when the request times out */
     @SuppressWarnings("unchecked")
@@ -729,6 +756,8 @@ public class DrpcEvolvedCFMTTest {
         drpc.close();
     }
 
+    // EXECUTE BLOCKING TESTS
+
     /** Test executeBlocking method with functionName = "try", funcArgs = "args" and authorized context. Expected = after executeBlocking execution, the request is removed from the internal requests map */
     @SuppressWarnings("unchecked")
     @Test
@@ -749,6 +778,8 @@ public class DrpcEvolvedCFMTTest {
         Assert.assertFalse(requests.containsKey("1"));
     }
 
+    // CHECK AUTHORIZATION TESTS
+
     /** Test checkAuthorization method with valid ReqContext, valid IAuthorizer (always ok), operation = "execute", function = "try" and enabled logging. Expected = ThriftAccessLogger.logAccessFunction is called */
     @Test
     public void checkAuthorizationValidContextValidAuthValidOperationValidFunctionShouldPassVerify() throws AuthorizationException {
@@ -756,23 +787,6 @@ public class DrpcEvolvedCFMTTest {
         try (MockedStatic<ThriftAccessLogger> mockedLogger = Mockito.mockStatic(ThriftAccessLogger.class)) {
             DRPC.checkAuthorization(ReqContext.context(), mockAuthOk, "execute", "try");
             mockedLogger.verify(() -> ThriftAccessLogger.logAccessFunction(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.eq("execute"), Mockito.eq("try")));
-        }
-    }
-
-    /** Test fetchRequest method with correct functionName (exists) and authorized context. Expected = access logging is executed when a request is actually fetched. */
-    @SuppressWarnings("unchecked")
-    @Test
-    public void fetchRequestCorrectFunctionNameAuthShouldPassVerify() throws AuthorizationException {
-
-        try (MockedStatic<ThriftAccessLogger> mockedLogger = Mockito.mockStatic(ThriftAccessLogger.class)) {
-            RequestFactory<OutstandingRequest> factory = Mockito.mock(RequestFactory.class);
-            DRPCRequest expectedRequest = new DRPCRequest("args", "1");
-            OutstandingRequest outstandingRequest = new DoNothingOutstandingRequest("try", expectedRequest);
-            Mockito.when(factory.mkRequest(anyString(), any(DRPCRequest.class))).thenReturn(outstandingRequest);
-            drpcAuthOk.execute("try", "args", factory);
-            DRPCRequest actualRequest = drpcAuthOk.fetchRequest("try");
-            Assert.assertEquals(expectedRequest, actualRequest);
-            mockedLogger.verify(() -> ThriftAccessLogger.logAccessFunction(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.eq("fetchRequest"), Mockito.eq("try")));
         }
     }
 

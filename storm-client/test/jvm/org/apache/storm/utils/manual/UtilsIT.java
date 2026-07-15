@@ -173,7 +173,7 @@ public class UtilsIT {
         Assert.assertThrows(RuntimeException.class, () -> Utils.deserialize(new byte[0], AccessControl.class));
     }
 
-    /** Test deserialize method with not valid byte array (not valid class), correct class. Expected = throws RuntimeException */
+    /** Test deserialize method with not valid byte array (truncated), correct class. Expected = throws RuntimeException */
     @Test
     public void deserializePartialByteArrayThrowsRuntimeException() {
 
@@ -187,7 +187,7 @@ public class UtilsIT {
         });
     }
 
-    /** Test deserialize method with valid byte array (valid class), correct class. Expected = returns the deserialized class */
+    /** Test deserialize method with valid byte array, correct class. Expected = returns the deserialized class */
     @Test
     public void deserializeValidByteArrayShouldPass() {
 
@@ -215,7 +215,7 @@ public class UtilsIT {
         Assert.assertThrows(RuntimeException.class, () -> Utils.deserializeFromString("", AccessControl.class));
     }
 
-    /** Test deserializeFromString method with not valid str (not valid class), correct class. Expected = throws RuntimeException */
+    /** Test deserializeFromString method with not valid str (truncated), correct class. Expected = throws RuntimeException */
     @Test
     public void deserializeFromStringPartialStrThrowsRuntimeException() {  //OBJECT HAS EMPTY VALUES
 
@@ -228,7 +228,7 @@ public class UtilsIT {
         });
     }
 
-    /** Test deserializeFromString method with valid str (valid class), correct class. Expected = returns the deserialized class */
+    /** Test deserializeFromString method with valid str, correct class. Expected = returns the deserialized class */
     @Test
     public void deserializeFromStringValidStrShouldPass() {
 

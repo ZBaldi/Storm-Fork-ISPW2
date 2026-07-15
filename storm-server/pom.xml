@@ -181,7 +181,7 @@
                         <param>org.apache.storm.daemon.drpc.refactored.four.DRPC</param>
                     </targetClasses>
                     <targetTests>
-                        <param>*PLUTO1</param>
+                        <param>*Test</param>
 <!--                        <param>*IT</param>-->
                     </targetTests>
                 </configuration>

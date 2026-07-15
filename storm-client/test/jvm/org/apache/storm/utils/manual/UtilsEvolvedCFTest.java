@@ -415,7 +415,7 @@ public class UtilsEvolvedCFTest {
         Assert.assertEquals(new HashMap<>(), result);
     }
 
-    /** Test reverseMap method with empty map. Expected = returns empty map */
+    /** Test reverseMap method with empty list. Expected = returns empty map */
     @Test
     public void reverseMapEmptyListShouldPass() {
 

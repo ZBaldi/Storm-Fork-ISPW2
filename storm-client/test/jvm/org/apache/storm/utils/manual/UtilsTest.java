@@ -88,7 +88,7 @@ public class UtilsTest {
         Assert.assertEquals(integer, Utils.findOne(mockPredicate, set));
     }
 
-    /** Test findOne method with correct IPredicate (second element in the collection is coherent with check) , two values Collection. Expected = second element*/
+    /** Test findOne method with correct IPredicate (second element in the collection is coherent with check) , two values Collection. Expected = second element */
     @SuppressWarnings("unchecked")
     @Test
     public void findOneValidIPredicateValidCollection2ShouldPass() {

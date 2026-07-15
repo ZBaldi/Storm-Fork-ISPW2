@@ -338,7 +338,7 @@ public class TotUtilsTest {
     /** Test uuid. Expected = valid UUID string */
     @Test
     public void uuidShouldReturnValidUuidString() {
-        Assert.assertNotNull(java.util.UUID.fromString(Utils.uuid()));
+        Assert.assertNotNull(UUID.fromString(Utils.uuid()));
     }
 
     /** Test javaSerialize/javaDeserialize with valid object and class. Expected = same value */
@@ -1008,7 +1008,7 @@ public class TotUtilsTest {
     /** Test convertToArray with empty map. Expected = NoSuchElementException */
     @Test
     public void convertToArrayEmptyMapThrowsNoSuchElementException() {
-        Assert.assertThrows(java.util.NoSuchElementException.class, () -> Utils.convertToArray(new HashMap<Integer, String>(), 0));
+        Assert.assertThrows(NoSuchElementException.class, () -> Utils.convertToArray(new HashMap<Integer, String>(), 0));
     }
 
     /** Test makeUptimeComputerImpl with valid instance. Expected = non-null UptimeComputer */

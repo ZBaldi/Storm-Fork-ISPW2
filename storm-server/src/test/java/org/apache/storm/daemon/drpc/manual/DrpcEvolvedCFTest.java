@@ -577,6 +577,8 @@ public class DrpcEvolvedCFTest {
     //EVOLVED TESTS WITH CF APPROACHES//
     //--------------------------------//
 
+    // CLOSE TESTS
+
     /** Test close method with valid state and no pending requests. Expected = false */
     @Test
     public void closeValidStateNoRequestsShouldPass() {
@@ -622,6 +624,8 @@ public class DrpcEvolvedCFTest {
             requests.put("1", new NotBlockingOutstandingRequest("try", new DRPCRequest("args", "1")));
             drpcNotValid.close();});
     }
+
+    // CONSTRUCTOR TESTS
 
     /** Test constructor with valid metric registry and valid conf (ok IAuthorizer). Expected = false */
     @Test
